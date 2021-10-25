@@ -1,0 +1,16 @@
+<div
+    *ngFor="let userWithLastMessage of usersWithLastMessage"
+    class="user-with-last-message"
+    [attr.userid]="userWithLastMessage.user.id"
+    [class.selected]="otherUser && userWithLastMessage.user.id === otherUser.id"
+    (click)="onRowClick(userWithLastMessage.user)"
+    [class.hidden]="ownUser && userWithLastMessage.user.id === ownUser.id"
+>
+    <div class="name">{{userWithLastMessage.user.id}}</div>
+    <div class="last-message-time">{{userWithLastMessage.message?.createdAt | date: 'H:mm:ss'}}</div>
+    <div class="clear"></div>
+    <ng-container *ngIf="!userWithLastMessage.message">
+        <div class="last-message none">no messages with this user</div>
+    </ng-container>
+    <div class="last-message">{{userWithLastMessage.message?.text}}</div>
+</div>

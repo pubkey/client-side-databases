@@ -1,0 +1,24 @@
+body,
+html {
+    width   : 100%;
+    height  : 100%;
+    margin  : 0;
+    padding : 0;
+    overflow: hidden;
+    font-family: 'Roboto';
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 6px!important;
+    height: 6px!important;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+}
+::-webkit-scrollbar-track {
+    background: hsla(0,0%,100%,.08);
+}

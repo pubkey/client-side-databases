@@ -1,0 +1,30 @@
+<app-own-name (submit)="onUserNameSubmit($event)"></app-own-name>
+<div id="left-bar">
+
+
+  <h3 class="username">Hi {{userName}}</h3>
+  <app-search
+    [results]="searchResults"
+    (change)="onSearchChange($event)"
+    (resultClick)="onSearchResultClick($event)"
+  ></app-search>
+
+  <mat-spinner *ngIf="!usersWithLastMessage"></mat-spinner>
+  <app-user-list
+    [usersWithLastMessage]="usersWithLastMessage"
+    [ownUser]="ownUser"
+    [otherUser]="otherUser"
+    (userListClicked)="onUserListClicked($event)"
+    #userListElement
+  ></app-user-list>
+</div>
+<div id="main-content">
+  <app-message-list
+    [messages]="messagesWithDirection"
+  ></app-message-list>
+  <app-message-input
+    #messageInputElement
+    *ngIf="otherUser && ownUser"
+    (submit)="onMessageSubmit($event)"
+  ></app-message-input>
+</div>

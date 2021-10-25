@@ -1,0 +1,26 @@
+<div class="inner">
+    <h4>Please enter your name</h4>
+    <mat-form-field>
+        <input
+            #nameInputRef
+            matInput
+            type="text"
+            placeholder="Your Name.."
+            autofocus
+            value="Maurine"
+            (keyup)="inputKeyup()"
+        >
+    </mat-form-field>
+    <button
+        mat-fab
+        id="own-name-submit"
+        color="primary"
+        [disabled]="submitDisabled"
+        (click)="this.submitClick()"
+    >Submit</button>
+    <div class="clear"></div>
+    <mat-checkbox
+        [checked]="save"
+        (click)="this.save = !this.save"
+    >Save</mat-checkbox>
+</div>

@@ -1,0 +1,10 @@
+<app-chat-layout
+    (userNameSubmit)="onUserNameSubmit($event)"
+    (userListClicked)="onUserListClicked($event)"
+    (searchChange)="onSearchChange($event)"
+    (messageSubmit)="onMessageSubmit($event)"
+    [searchResults]="showSearchResults$ | async"
+    [usersWithLastMessage]="showLeftBar$ | async"
+    [messages]="showMessages$ | async"
+    [ownUser]="ownUser$ | async"
+></app-chat-layout>

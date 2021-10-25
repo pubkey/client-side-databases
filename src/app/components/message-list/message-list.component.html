@@ -1,0 +1,13 @@
+<div
+    *ngFor="let message of messages"
+    class="message"
+>
+    <div
+        class="inner"
+        [class.recieved]="!message.send"
+    >
+        <div class="text">{{message.text}}</div>
+        <div class="time">{{message.createdAt | date: 'H:mm:ss'}}</div>
+    </div>
+    <div class="clear"></div>
+</div>

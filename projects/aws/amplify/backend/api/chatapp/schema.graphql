@@ -1,0 +1,19 @@
+type User @model @auth(rules: [
+   { allow: public, provider: iam, operations: [create, update, delete, read] }
+]) {
+  id: ID!,
+  userName: ID!,
+  createdAt: Int!
+}
+
+
+type Message @model @auth(rules: [
+   { allow: public, provider: iam, operations: [create, update, delete, read] }
+]) {
+  id: ID!,
+  text: String!,
+  createdAt: Int!,
+  read: Boolean!,
+  sender: String!,
+  reciever: String!
+}

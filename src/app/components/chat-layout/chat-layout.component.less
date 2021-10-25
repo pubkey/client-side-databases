@@ -1,0 +1,32 @@
+
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '../../../../node_modules/typeface-roboto/index.css';
+
+mat-spinner {
+    margin:0 auto;
+    width: 100%;
+}
+
+#left-bar {
+    width     : 30%;
+    height    : 100%;
+    float     : left;
+    box-shadow: 2px 0px 15px 1px rgba(0, 0, 0, 0.3);
+    background-color: white;
+
+    .username {
+        width: 100%;
+        text-align: center;
+        text-transform: capitalize;
+    }
+}
+
+#main-content {
+    width : 70%;
+    height: 100%;
+    float : right;
+
+    app-message-list {
+        height: calc(100% - 100px);
+    }
+}

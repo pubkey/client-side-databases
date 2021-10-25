@@ -1,0 +1,60 @@
+:host {
+    display: block;
+    height : 100%;
+
+    padding-left : 5%;
+    padding-right: 5%;
+    overflow-y   : scroll;
+
+
+    /*
+     * hack for background opacity
+     * @link https://css-tricks.com/snippets/css/transparent-background-images/
+     */
+    &::after {
+        content   : "";
+        background: url('/assets/email-pattern.png');
+        opacity   : 0.5;
+        top       : 0;
+        left      : 0;
+        bottom    : 0;
+        right     : 0;
+        position  : absolute;
+        z-index   : -1;
+    }
+
+    .message {
+        width        : 100%;
+        margin-top   : 10px;
+        margin-bottom: 10px;
+
+        .inner {
+            max-width       : 60%;
+            float           : left;
+            background-color: white;
+            border-radius   : 10px;
+            padding         : 10px;
+            box-shadow      : 0px 0px 9px 0px rgba(0, 0, 0, 0.3);
+            font-size       : 130%;
+            
+            
+            &.recieved {
+                background-color: #dcf8c6;
+                float           : right;
+            }
+
+            .text {
+                padding-right: 30px;
+            }
+
+            .time {
+                color     : rgba(0, 0, 0, .45);
+                float     : right;
+                font-size : 80%;
+                margin-top: 5px;
+            }
+
+        }
+
+    }
+}

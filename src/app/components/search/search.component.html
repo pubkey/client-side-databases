@@ -1,0 +1,19 @@
+<mat-form-field>
+    <input
+        matInput
+        type="search"
+        placeholder="Search.."
+        class="search-input"
+        #inputElementRef
+        (keyup)="onKeyUp()"
+        (blur)="resetValue()"
+        (focus)="focused = true"
+    >
+</mat-form-field>
+
+<app-user-list
+    *ngIf="focused && results && results.length > 0"
+    [usersWithLastMessage]="results"
+    (userListClicked)="onUserListClicked($event)"
+    class="search-results"
+></app-user-list>

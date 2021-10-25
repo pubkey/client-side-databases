@@ -1,0 +1,91 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: 16.5.0
+
+      - name: Reuse npm cache folder
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          # invalidate cache when any package-lock.json changes
+          key: ${{ runner.os }}-npm-test-x1-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-test-x1-
+
+      - name: install npm dependencies
+        run: npm install
+        
+      - name: build
+        run: npm run build
+
+      - name: test:aws
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:aws
+
+      # https://firebase.google.com/docs/emulator-suite/install_and_configure#integrate_with_your_ci_system
+      - name: Reuse firebase emulators cache folder
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.cache/firebase/emulators/
+          # invalidate cache when config changes
+          key: ${{ runner.os }}-npm-firebase-x1-${{ hashFiles('**/firebase.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-firebase-x1-
+
+      - name: setup firebase emulator
+        run: npm run server:firebase:setup
+
+
+      - name: test:firebase
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:firebase
+
+      - name: test:pouchdb
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:pouchdb
+
+      - name: test:rxdb
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:rxdb
+
+      - name: test:watermelondb
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:watermelondb
+
+      - name: measure build size
+        run: npm run measure:size
+
+      - name: aggregate metrics
+        run: npm run aggregate-metrics
+
+      - name: lint
+        run: npm run lint

@@ -1,0 +1,52 @@
+:host {
+    display      : block;
+    width        : 100%;
+    margin-left  : 0%;
+    margin-top   : 10px;
+    margin-bottom: 10px;
+    overflow-y   : scroll;
+
+    height: calc(100% - 155px);
+
+    .hidden {
+        display: none;
+    }
+
+    .user-with-last-message {
+        padding: 10px;
+        cursor : pointer;
+
+        &:hover {
+            background-color: lightgray;
+        }
+
+        &.selected {
+            background-color: #e9ebeb;
+        }
+
+        .name {
+            font-weight   : bold;
+            float         : left;
+            text-align    : left;
+            text-rendering: optimizeLegibility;
+            white-space   : nowrap;
+            font          : inherit;
+            font-size     : 130%;
+            user-select   : none;
+            text-transform: capitalize;
+        }
+
+        .last-message {
+            margin-top: 5px;
+
+            &.none {
+                color: lightgray;
+                font-style: italic;
+            }
+        }
+
+        .last-message-time {
+            float: right;
+        }
+    }
+}
