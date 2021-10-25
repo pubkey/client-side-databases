@@ -4,7 +4,7 @@ In this project I have implemented the exact same chat application with differen
 You can use it to compare metrics and learn about the differences. The chat app is web based **angular** application, with functionality similar to Whatsapp Web.
 
 <p align="center">
-  <img src="./orga/images/chat-app.png" alt="chat app" width="650" />
+  <img src="./orga/images/chat-app.png" alt="chat app" width="450" />
 </p>
 
 ## Implemented Databases:
@@ -16,8 +16,7 @@ You can use it to compare metrics and learn about the differences. The chat app 
 
 ## Metrics
 
-All metrics are measured via code in a browser test (chrome). The results heavily depend on the developers device.
-You should compare the values relative to another and not as absolute values.
+All metrics are measured automatically via code in a browser tests (chrome). The results heavily depend on the developers device. You should compare the values relative to another and not as absolute values. Also you might want to create new metrics that better represent how you would use the respective database.
 
 You can reproduce these values by running `sh measure-metrics.sh` in the root folder.
 
@@ -40,11 +39,11 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 - Page load time: How long does it take to download and parse the JavaScript bundle.
 - First angular component render: How long does it take for the first angular component to be rendered.
 - First full render: How long does it take until all relevant data is displayed for the first time.
-- Insert one one message: How long does it take to insert a single message.
+- Insert one message: How long does it take to insert a single message.
 - Inserting 20 messages one after another: How long does it take to insert 20 messages in serial.
 - Inserting 20 messages in parallel: How long does it take to insert 20 messages in serial.
-- Time from message insert to message list change: How long does it take until a new message is rendered to the dom.
-- Time from message insert to user list change: How long does it take until a new messages affects the sort order of the user list.
+- Message insert to message list change: How long does it take until a new message is rendered to the dom.
+- Message insert to user list change: How long does it take until a new messages affects the sort order of the user list.
 - Message search query time: How long does it take to search for a given message by regex/like-operator.
 - First full render with many messages: Time to first full render when many messages exist. 
 - Storage usage: Size of the stored IndexedDB database after inserting the full test dataset.

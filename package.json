@@ -50,7 +50,7 @@
     "client:rxdb": "ng serve --project rxdb --port 3000",
     "client:watermelondb": "ng serve --project watermelondb --port 3000",
     "test:wait-for-frontend": "ts-node --skip-project ./scripts/wait-for-frontend.ts",
-    "test": "testcafe chrome -e test/e2e.test.ts",
+    "test": "testcafe chrome:headless -e test/e2e.test.ts",
     "test:aws": "PROJECT_KEY=aws concurrently \"npm run start:aws\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
     "test:firebase": "PROJECT_KEY=firebase concurrently \"npm run start:firebase\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
     "test:pouchdb": "PROJECT_KEY=pouchdb concurrently \"npm run start:pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
