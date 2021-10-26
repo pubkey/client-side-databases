@@ -298,7 +298,6 @@ test
             });
 
         // measure used storage size
-        const window: any = {};
         await t.eval(() => window.storageSizeMetric());
         await wait(500);
         await waitForMetric(t, 'STORAGE_SIZE');

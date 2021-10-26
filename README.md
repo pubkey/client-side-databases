@@ -29,7 +29,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 | Inserting 20 messages one after another | 651ms            | 8012ms         | 581ms             | 1884ms            | 33ms              |
 | Inserting 20 messages in parallel       | 187ms            | 7039ms         | 126ms             | 1705ms            | 1582ms            |
 | Message insert to message list change   | 59ms             | 30ms           | 386ms             | 19ms              | 4ms               |
-| Message insert to user list change      | 13ms             | 192ms          | 311ms             | 282ms             | 6ms               |
+| User change to message list change      | 13ms             | 192ms          | 311ms             | 282ms             | 6ms               |
 | Message search query time               | 485ms            | 299ms          | 305ms             | 90ms              | 29ms              |
 | First full render with many messages    | 408ms            | 1922ms         | 1869ms            | 2287ms            | 293ms             |
 | Storage usage                           | 199kb            | 3478kb         | 1395kb            | 2311kb            | 1824kb            |
@@ -45,7 +45,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 - Inserting 20 messages one after another: How long does it take to insert 20 messages in serial.
 - Inserting 20 messages in parallel: How long does it take to insert 20 messages in parallel.
 - Message insert to message list change: How long does it take until a new message is rendered to the dom.
-- Message insert to user list change: How long does it take until a new messages affects the sort order of the user list.
+- User change to message list change: How long does it take from changing the user to the displaying of the new messages list.
 - Message search query time: How long does it take to search for a given message by regex/like-operator.
 - First full render with many messages: Time to first full render when many messages exist. 
 - Storage usage: Size of the stored IndexedDB database after inserting the full test dataset.

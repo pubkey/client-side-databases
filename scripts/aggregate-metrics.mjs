@@ -33,7 +33,7 @@ const METRIC_TITLES = {
     INSERT_20_MESSAGES_SERIAL: 'Inserting 20 messages one after another',
     INSERT_20_MESSAGES_PARALLEL: 'Inserting 20 messages in parallel',
     MESSAGE_INSERT_TO_MESSAGE_LIST_CHANGE: 'Message insert to message list change',
-    USER_PAIR_CHANGED_TO_MESSAGE_LIST: 'Message insert to user list change',
+    USER_PAIR_CHANGED_TO_MESSAGE_LIST: 'User change to message list change',
     SEARCH_RESULT_TIME: 'Message search query time',
     FIRST_FULL_RENDER_MANY_MESSAGES: 'First full render with many messages',
     STORAGE_SIZE: 'Storage usage',
