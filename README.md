@@ -10,9 +10,9 @@ You can use it to compare metrics and learn about the differences. The chat app 
 ## Implemented Databases:
   - AWS Ampflify Datastore
   - Firebase Firestore
-  - PouchDB & CouchDB
-  - RxDB & GraphQL
-  - WatermelonDB (no backend sync atm)
+  - [PouchDB](https://github.com/pouchdb/pouchdb) & CouchDB
+  - [RxDB](https://github.com/pubkey/rxdb) & GraphQL
+  - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) (no backend sync atm)
 
 ## Metrics
 
