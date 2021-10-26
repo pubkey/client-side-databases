@@ -77,10 +77,13 @@ export class ChatComponent implements OnInit {
      * so it can be triggered by testcafe
      */
     (window as any).storageSizeMetric = async () => {
-      // can happen in testcafe tests
+      /**
+       * Can happen in testcafe tests when origin not secure
+       * @link https://stackoverflow.com/a/64658460/3443137
+       */
       if (!navigator.storage) {
-        console.dir(navigator);
-        throw new Error('navigator.storage not here');
+        console.log(Object.keys(navigator));
+        throw new Error('storageSizeMetric() navigator.storage not here');
       }
       const estimate = await navigator.storage.estimate();
       // looks like indexedDB: 22377552 bytes

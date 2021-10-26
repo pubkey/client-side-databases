@@ -22,6 +22,7 @@ if (!projectKey) {
     throw new Error('project key missing');
 }
 
+const window: any = {};
 const exampleData: {
     users: User[];
     messages: Message[];
@@ -73,6 +74,15 @@ test
     ('Basic functions', async t => {
         console.log('# set own username');
         await t.click('#own-name-submit');
+
+        // ensure the storageSize handler works
+        try {
+            await t.eval(() => window.storageSizeMetric());
+        } catch (err) {
+            const consoleLogs = await t.getBrowserConsoleMessages();
+            console.dir(consoleLogs);
+            throw err;
+        }
 
         console.log('# wait until all users are replicated');
         await AsyncTestUtil.waitUntil(async () => {
