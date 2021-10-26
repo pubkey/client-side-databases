@@ -79,17 +79,20 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 
 ## Feature Map
 
-| Feature\Project          | aws                | firebase                                     | pouchdb | rxdb | watermelondb                                               |
-| ------------------------ | ------------------ | -------------------------------------------- | ------- | ---- | ---------------------------------------------------------- |
-| Offline First            | No, login required | Partially, must be online on first page load | Yes     | Yes  | Yes                                                        |
-| Realtime Replication     | Yes                | Yes                                          | Yes     | Yes  | Partially, must be implemented by hand                     |
-| Multi Tab Support        | Yes                | Yes                                          | No      | Yes  | No                                                         |
-| Observable Queries       | No                 | Yes                                          | No      | Yes  | Yes                                                        |
-| Complex Queries          | No                 | Yes                                          | Yes     | Yes  | Partially, limit/skip/sort not working with LokiJS adapter |
-| Client Side Encryption   | No                 | No                                           | Yes     | Yes  | No                                                         |
-| Schema Support           | Yes                | No                                           | No      | Yes  | Yes                                                        |
-| Custom Backend           | No                 | No                                           | No      | Yes  | Yes                                                        |
-| Custom Conflict Handling | Yes                | No                                           | Yes     | Yes  | No                                                         |
+<!-- !!! DO NOT EDIT THIS TABLE DIRECTLY, IT IS GENERATED FROM scripts/generate-feature-table.ts !!! -->
+
+| Feature \ Project        | aws                | firebase                                     | pouchdb | rxdb | watermelondb                                                                             |
+| ------------------------ | ------------------ | -------------------------------------------- | ------- | ---- | ---------------------------------------------------------------------------------------- |
+| Offline First            | No, login required | Partially, must be online on first page load | Yes     | Yes  | Yes                                                                                      |
+| Realtime Replication     | Yes                | Yes                                          | Yes     | Yes  | Partially, must be implemented by hand                                                   |
+| Multi Tab Support        | Yes                | Yes                                          | No      | Yes  | Partially, relies on online sync                                                         |
+| Observable Queries       | No                 | Yes                                          | No      | Yes  | Yes                                                                                      |
+| Complex Queries          | No                 | Yes                                          | Yes     | Yes  | Partially, limit/skip/sort not working with LokiJS adapter (fixed in latest pre-release) |
+| Client Side Encryption   | No                 | No                                           | Yes     | Yes  | No                                                                                       |
+| Schema Support           | Yes                | No                                           | No      | Yes  | Yes                                                                                      |
+| Custom Backend           | No                 | No                                           | No      | Yes  | Yes                                                                                      |
+| Custom Conflict Handling | Yes                | No                                           | Yes     | Yes  | No                                                                                       |
+
 
 
 

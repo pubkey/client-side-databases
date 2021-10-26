@@ -82,8 +82,8 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         realtimeReplication: 'Partially, must be implemented by hand',
         clientSideEncryption: false,
         schema: true,
-        complexQueries: 'Partially, limit/skip/sort not working with LokiJS adapter',
-        multiTabSupport: false,
+        complexQueries: 'Partially, limit/skip/sort not working with LokiJS adapter (fixed in latest pre-release)',
+        multiTabSupport: 'Partially, relies on online sync',
         customConflictHandling: false,
         customBackend: true
     }
