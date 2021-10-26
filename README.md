@@ -1,22 +1,22 @@
 # Offline First Database Comparison
 
 In this project I have implemented the exact same chat application with different database technologies.
-You can use it to compare metrics and learn about the differences. The chat app is web based **angular** application, with functionality similar to Whatsapp Web.
+You can use it to compare metrics and learn about the differences. The chat app is a web based **angular** application, with functionality similar to Whatsapp Web.
 
 <p align="center">
   <img src="./orga/images/chat-app.png" alt="chat app" width="450" />
 </p>
 
 ## Implemented Databases:
-  - AWS Ampflify Datastore
+  - AWS Amplify Datastore
   - Firebase Firestore
-  - PouchDB & CouchDB
-  - RxDB & GraphQL
-  - WatermelonDB (no backend sync atm)
+  - [PouchDB](https://github.com/pouchdb/pouchdb) & CouchDB
+  - [RxDB](https://github.com/pubkey/rxdb) & GraphQL
+  - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) (no backend sync atm)
 
 ## Metrics
 
-All metrics are measured automatically via code in a browser tests (chrome). The results heavily depend on the developers device. You should compare the values relative to another and not as absolute values. Also you might want to create new metrics that better represent how you would use the respective database.
+All metrics are measured automatically via code in a browser tests (chrome:headless). The results heavily depend on the developers device. You should compare the values relative to another and not as absolute values. Also you might want to create new metrics that better represent how you would use the respective database.
 
 You can reproduce these values by running `sh measure-metrics.sh` in the root folder.
 
@@ -56,26 +56,26 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 
 ### Why is WatermelonDB so much faster?
 
-WatermelonDB uses the [LokiJS](https://github.com/techfort/LokiJS) adapter which is an **in memory** database that regularly persists the data to IndexedDB either on interval, or when the browser tab is closed. Keeping and processing the data in memory has the benefit of being much master, but it also has its downsides:
+WatermelonDB uses the [LokiJS](https://github.com/techfort/LokiJS) adapter which is an **in memory** database that regularly persists the data to IndexedDB either on interval, or when the browser tab is closed. Keeping and processing the data in memory has the benefit of being much faster, but it also has its downsides:
 
 - Data can be lost when the JavaScript process is killed ungracefully like when the browser crashes or the power of the PC is terminated.
 - There is no multi-tab-support. The data is not shared between multiple browser tabs of the same origin.
 - There is no concept of conflict handling or transactions. The last write always wins.
 
 
-### Why is firebase so slow on first render?
+### Why is Firebase so slow on first render?
 
-On the first page load, firebase ensures that the local data is equal to the server side state. This means that the client has to be online at application startup which is the reason why firebase is not completely offline first. To ensure the equalness of client side data, firebase has to perform several requests to the backend, before the database will respond to queries. This makes the inital page load slow, and it becomes even more slower, the more data exists and has to be validated.
+On the first page load, Firebase ensures that the local data is equal to the server side state. This means that the client has to be online at application startup which is the reason why Firebase is not completely offline first. To ensure the equalness of client side data, Firebase has to perform several requests to the backend, before the database will respond to queries. This makes the inital page load slow, and it becomes even more slower, the more data exists and has to be validated.
 
 ### Why is PouchDB & RxDB so slow?
 
-For the PouchDB and RxDB (based on PouchDB storage) I used the [old](https://www.npmjs.com/package/pouchdb-adapter-idb) indexeddb adapter.
-It is much less optimized then the [new](https://www.npmjs.com/package/pouchdb-adapter-indexeddb) adapter, but the new one made problems with returning the correct query results.
-Theses problems have been fixed on the PouchDB master branch, but I have to wait for the next PouchDB release. I will updated the repo when this change can be done.
+For the PouchDB and RxDB (based on PouchDB storage) I used the [old](https://www.npmjs.com/package/pouchdb-adapter-idb) Indexeddb adapter.
+It is much less optimized than the [new](https://www.npmjs.com/package/pouchdb-adapter-indexeddb) adapter, but the new one made problems with returning the correct query results.
+Theses problems have been fixed on the PouchDB master branch, but I have to wait for the next PouchDB release. I will update the repo when this change can be done.
 
-### Why does AWS Datastore need so less storage space?
+### Why does AWS Datastore need so much less storage space?
 
-AWS Datastore does not save any metadata together with the documents. Instead only the plain documents are stored in IndexedDB. They can do this because they only allow simple queries and have no conflict resolution.
+AWS Datastore does not save any metadata together with the documents. Instead only the plain documents are stored in IndexedDB. They can do this because they only allow simple queries and do not keep a local version history.
 
 ## Feature Map
 
@@ -100,7 +100,7 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 
 All sub-projects use the same port and so can **not be started in parallel**.
 
-## Installation
+### Installation
 
 * You must have [installed Node.js](https://nodejs.org/en/download/)
 * Clone this project
