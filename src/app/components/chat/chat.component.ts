@@ -79,6 +79,7 @@ export class ChatComponent implements OnInit {
     (window as any).storageSizeMetric = async () => {
       /**
        * Can happen in testcafe tests when origin not secure
+       *
        * @link https://stackoverflow.com/a/64658460/3443137
        */
       if (!navigator.storage) {
