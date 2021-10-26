@@ -67,6 +67,16 @@ WatermelonDB uses the [LokiJS](https://github.com/techfort/LokiJS) adapter which
 
 On the first page load, firebase ensures that the local data is equal to the server side state. This means that the client has to be online at application startup which is the reason why firebase is not completely offline first. To ensure the equalness of client side data, firebase has to perform several requests to the backend, before the database will respond to queries. This makes the inital page load slow, and it becomes even more slower, the more data exists and has to be validated.
 
+### Why is PouchDB & RxDB so slow?
+
+For the PouchDB and RxDB (based on PouchDB storage) I used the [old](https://www.npmjs.com/package/pouchdb-adapter-idb) indexeddb adapter.
+It is much less optimized then the [new](https://www.npmjs.com/package/pouchdb-adapter-indexeddb) adapter, but the new one made problems with returning the correct query results.
+Theses problems have been fixed on the PouchDB master branch, but I have to wait for the next PouchDB release. I will updated the repo when this change can be done.
+
+### Why does AWS Datastore need so less storage space?
+
+AWS Datastore does not save any metadata together with the documents. Instead only the plain documents are stored in IndexedDB. They can do this because they only allow simple queries and have no conflict resolution.
+
 ## Feature Map
 
 | Feature\Project          | aws                | firebase                                     | pouchdb | rxdb | watermelondb                                               |
