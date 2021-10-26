@@ -97,7 +97,7 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 
 All sub-projects use the same port and so can **not be started in parallel**.
 
-## Installation
+### Installation
 
 * You must have [installed Node.js](https://nodejs.org/en/download/)
 * Clone this project
