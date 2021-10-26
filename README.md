@@ -8,7 +8,7 @@ You can use it to compare metrics and learn about the differences. The chat app 
 </p>
 
 ## Implemented Databases:
-  - AWS Ampflify Datastore
+  - AWS Amplify Datastore
   - Firebase Firestore
   - [PouchDB](https://github.com/pouchdb/pouchdb) & CouchDB
   - [RxDB](https://github.com/pubkey/rxdb) & GraphQL
