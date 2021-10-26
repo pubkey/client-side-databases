@@ -83,9 +83,10 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 | ------------------------ | ------------------ | -------------------------------------------- | ------- | ---- | ---------------------------------------------------------- |
 | Offline First            | No, login required | Partially, must be online on first page load | Yes     | Yes  | Yes                                                        |
 | Realtime Replication     | Yes                | Yes                                          | Yes     | Yes  | Partially, must be implemented by hand                     |
-| Multi Tab Support        | Yes                | Yes                                          | No      | Yes  | No                                                         |
+| Multi Tab Support        | Yes                | Yes                                          | No      | Yes  | No (relies on online sync)                                                        |
 | Observable Queries       | No                 | Yes                                          | No      | Yes  | Yes                                                        |
-| Complex Queries          | No                 | Yes                                          | Yes     | Yes  | Partially, limit/skip/sort not working with LokiJS adapter |
+| Complex Queries          | No                 | Yes                                          | Yes     | Yes  | Yes
+|
 | Client Side Encryption   | No                 | No                                           | Yes     | Yes  | No                                                         |
 | Schema Support           | Yes                | No                                           | No      | Yes  | Yes                                                        |
 | Custom Backend           | No                 | No                                           | No      | Yes  | Yes                                                        |
