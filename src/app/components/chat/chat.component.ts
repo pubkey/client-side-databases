@@ -77,10 +77,15 @@ export class ChatComponent implements OnInit {
      * so it can be triggered by testcafe
      */
     (window as any).storageSizeMetric = async () => {
+      // can happen in testcafe tests
+      if (!navigator.storage) {
+        console.dir(navigator);
+        throw new Error('navigator.storage not here');
+      }
       const estimate = await navigator.storage.estimate();
       // looks like indexedDB: 22377552 bytes
       const idbSize: number = (estimate as any).usageDetails.indexedDB;
-      const kilobytes = idbSize /1024;
+      const kilobytes = idbSize / 1024;
       logMetricMeasurement(
         'STORAGE_SIZE',
         kilobytes,

@@ -113,7 +113,8 @@ async function run() {
     Object.entries(projectMetrics).forEach(([projectKey, metricsByKey]) => {
         firstLine.push(projectKey);
         Object.entries(metricsByKey).forEach(([metricKey, metric]) => {
-            rowByMetric[metricKey].push(metric.value + ' ' + metric.unit);
+            // do not put a whitespace between value and unit, it will cause ugly linebreaks
+            rowByMetric[metricKey].push(metric.value + metric.unit);
         });
     });
 
