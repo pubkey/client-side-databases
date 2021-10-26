@@ -261,7 +261,7 @@ test
                 const firstMetric = metrics[0];
                 let total = 0;
                 metrics.forEach(m => total = total + m.value);
-                const avgValue = total / metrics.length;
+                const avgValue = Math.ceil(total / metrics.length);
 
                 allMetrics[firstMetric.key] = {
                     flag: firstMetric.flag,
@@ -311,6 +311,7 @@ test
         if (!storageSizeMetric) {
             throw new Error('storageSizeMetric missing');
         }
+        storageSizeMetric.value = Math.ceil(storageSizeMetric.value);
         allMetrics[storageSizeMetric.key] = storageSizeMetric;
 
         console.log('# allMetricsByKey:');
