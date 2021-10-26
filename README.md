@@ -8,7 +8,7 @@ You can use it to compare metrics and learn about the differences. The chat app 
 </p>
 
 ## Implemented Databases:
-  - AWS Ampflify Datastore
+  - AWS Amplify Datastore
   - Firebase Firestore
   - [PouchDB](https://github.com/pouchdb/pouchdb) & CouchDB
   - [RxDB](https://github.com/pubkey/rxdb) & GraphQL
@@ -70,8 +70,8 @@ On the first page load, Firebase ensures that the local data is equal to the ser
 ### Why is PouchDB & RxDB so slow?
 
 For the PouchDB and RxDB (based on PouchDB storage) I used the [old](https://www.npmjs.com/package/pouchdb-adapter-idb) Indexeddb adapter.
-It is much less optimized then the [new](https://www.npmjs.com/package/pouchdb-adapter-indexeddb) adapter, but the new one made problems with returning the correct query results.
-Theses problems have been fixed on the PouchDB master branch, but I have to wait for the next PouchDB release. I will updated the repo when this change can be done.
+It is much less optimized than the [new](https://www.npmjs.com/package/pouchdb-adapter-indexeddb) adapter, but the new one made problems with returning the correct query results.
+Theses problems have been fixed on the PouchDB master branch, but I have to wait for the next PouchDB release. I will update the repo when this change can be done.
 
 ### Why does AWS Datastore need so much less storage space?
 
