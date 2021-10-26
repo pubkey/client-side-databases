@@ -112,8 +112,7 @@ export class Logic implements LogicInterface {
                             otherUser = messageDoc.reciever;
                         }
                         /**
-                         * TODO finding the same user by id many times via findOne()
-                         * is somehow really slow in RxDB. This must be solved.
+                         * Deduplicate user ids for better performance.
                          */
                         let userPromise = userDocById.get(otherUser);
                         if (!userPromise) {
