@@ -16,7 +16,7 @@ You can use it to compare metrics and learn about the differences. The chat app 
 
 ## Metrics
 
-All metrics are measured automatically via code in a browser tests (chrome). The results heavily depend on the developers device. You should compare the values relative to another and not as absolute values. Also you might want to create new metrics that better represent how you would use the respective database.
+All metrics are measured automatically via code in a browser tests (chrome:headless). The results heavily depend on the developers device. You should compare the values relative to another and not as absolute values. Also you might want to create new metrics that better represent how you would use the respective database.
 
 You can reproduce these values by running `sh measure-metrics.sh` in the root folder.
 
