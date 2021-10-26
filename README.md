@@ -1,7 +1,7 @@
 # Offline First Database Comparison
 
 In this project I have implemented the exact same chat application with different database technologies.
-You can use it to compare metrics and learn about the differences. The chat app is web based **angular** application, with functionality similar to Whatsapp Web.
+You can use it to compare metrics and learn about the differences. The chat app is a web based **angular** application, with functionality similar to Whatsapp Web.
 
 <p align="center">
   <img src="./orga/images/chat-app.png" alt="chat app" width="450" />
