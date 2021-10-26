@@ -75,7 +75,7 @@ Theses problems have been fixed on the PouchDB master branch, but I have to wait
 
 ### Why does AWS Datastore need so much less storage space?
 
-AWS Datastore does not save any metadata together with the documents. Instead only the plain documents are stored in IndexedDB. They can do this because they only allow simple queries and have no conflict resolution.
+AWS Datastore does not save any metadata together with the documents. Instead only the plain documents are stored in IndexedDB. They can do this because they only allow simple queries and do not keep a local version history.
 
 ## Feature Map
 
