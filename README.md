@@ -63,9 +63,9 @@ WatermelonDB uses the [LokiJS](https://github.com/techfort/LokiJS) adapter which
 - There is no concept of conflict handling or transactions. The last write always wins.
 
 
-### Why is firebase so slow on first render?
+### Why is Firebase so slow on first render?
 
-On the first page load, firebase ensures that the local data is equal to the server side state. This means that the client has to be online at application startup which is the reason why firebase is not completely offline first. To ensure the equalness of client side data, firebase has to perform several requests to the backend, before the database will respond to queries. This makes the inital page load slow, and it becomes even more slower, the more data exists and has to be validated.
+On the first page load, Firebase ensures that the local data is equal to the server side state. This means that the client has to be online at application startup which is the reason why Firebase is not completely offline first. To ensure the equalness of client side data, Firebase has to perform several requests to the backend, before the database will respond to queries. This makes the inital page load slow, and it becomes even more slower, the more data exists and has to be validated.
 
 ### Why is PouchDB & RxDB so slow?
 
