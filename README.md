@@ -43,7 +43,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 - First full render: How long does it take until all relevant data is displayed for the first time.
 - Insert one message: How long does it take to insert a single message.
 - Inserting 20 messages one after another: How long does it take to insert 20 messages in serial.
-- Inserting 20 messages in parallel: How long does it take to insert 20 messages in serial.
+- Inserting 20 messages in parallel: How long does it take to insert 20 messages in parallel.
 - Message insert to message list change: How long does it take until a new message is rendered to the dom.
 - Message insert to user list change: How long does it take until a new messages affects the sort order of the user list.
 - Message search query time: How long does it take to search for a given message by regex/like-operator.
