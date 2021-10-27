@@ -75,7 +75,7 @@
     "@babel/runtime": "7.15.4",
     "@nozbe/watermelondb": "0.23.0",
     "@types/express": "4.17.13",
-    "aws-amplify": "4.3.2",
+    "aws-amplify": "4.3.3",
     "aws-appsync": "4.1.2",
     "buffer": "5.4.3",
     "clone": "2.1.2",
