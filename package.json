@@ -85,7 +85,7 @@
     "aws-appsync": "4.1.2",
     "buffer": "5.7.1",
     "clone": "2.1.2",
-    "core-js": "2.5.4",
+    "core-js": "2.6.12",
     "cors": "2.8.5",
     "express": "4.17.1",
     "express-graphql": "0.12.0",
