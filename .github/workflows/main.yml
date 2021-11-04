@@ -76,6 +76,11 @@ jobs:
         with:
           run: npm run test:rxdb
 
+      - name: test:rxdb-lokijs
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:rxdb-lokijs
+
       - name: test:watermelondb
         uses: GabrielBB/xvfb-action@v1
         with:
