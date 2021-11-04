@@ -5,7 +5,8 @@ import {
 
 import {
   Logic
-} from './app.logic';
+} from '../../../rxdb/src/app/app.logic';
+
 import {
   createDatabase
 } from './services/database.service';
@@ -16,7 +17,7 @@ import {
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'rxdb';
+  title = 'rxdb-lokijs';
 
   public logic: LogicInterface = new Logic(createDatabase);
 }

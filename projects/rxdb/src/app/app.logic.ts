@@ -14,9 +14,6 @@ import {
     LogicInterface
 } from '../../../../src/app/logic-interface.interface';
 import {
-    createDatabase
-} from './services/database.service';
-import {
     RxChatDatabase,
     RxMessageDocument,
     RxMessageDocumentType,
@@ -38,10 +35,14 @@ import type {
 } from 'rxdb/plugins/core';
 
 
+export type CreateDatabaseFunction = () => Promise<RxChatDatabase>;
+
 export class Logic implements LogicInterface {
-    private dbPromise: Promise<any> = createDatabase();
+    private dbPromise: Promise<any> = this.databaseCreator();
     private db: RxChatDatabase;
-    constructor() {
+    constructor(
+        private readonly databaseCreator: CreateDatabaseFunction
+    ) {
         this.dbPromise.then(db => this.db = db);
     }
 

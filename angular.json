@@ -696,6 +696,123 @@
           }
         }
       }
+    },
+    "rxdb-lokijs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/rxdb-lokijs",
+      "sourceRoot": "projects/rxdb-lokijs/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/rxdb-lokijs",
+            "index": "projects/rxdb-lokijs/src/index.html",
+            "main": "projects/rxdb-lokijs/src/main.ts",
+            "polyfills": "projects/rxdb-lokijs/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-lokijs/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/rxdb-lokijs/src/favicon.ico",
+              "projects/rxdb-lokijs/src/assets"
+            ],
+            "styles": [
+              "projects/rxdb-lokijs/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/rxdb-lokijs/src/environments/environment.ts",
+                  "with": "projects/rxdb-lokijs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "rxdb-lokijs:build:production"
+            },
+            "development": {
+              "browserTarget": "rxdb-lokijs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rxdb-lokijs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rxdb-lokijs/src/test.ts",
+            "polyfills": "projects/rxdb-lokijs/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-lokijs/tsconfig.spec.json",
+            "karmaConfig": "projects/rxdb-lokijs/karma.conf.js",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/rxdb-lokijs/src/favicon.ico",
+              "projects/rxdb-lokijs/src/assets"
+            ],
+            "styles": [
+              "projects/rxdb-lokijs/src/styles.less"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rxdb-lokijs/**/*.ts",
+              "projects/rxdb-lokijs/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "blueprint",
