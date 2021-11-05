@@ -56,7 +56,7 @@ async function run() {
 
     const projectMetrics = {};
     metricsFiles
-        .filter(fileName => fileName.startsWith('project-'))
+        .filter(fileName => fileName.endsWith('.project.json'))
         .forEach(fileName => {
             const projectKey = fileName.split('.')[0].split('-')[1];
             const filePath = path.join(metricsFolder, fileName);

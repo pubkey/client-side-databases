@@ -329,7 +329,7 @@ test
         fs.writeFileSync(
             path.join(
                 metricsFolder,
-                'project-' + projectKey + '.json'
+                projectKey + '.project.json'
             ),
             JSON.stringify(allMetrics, null, 4)
         );

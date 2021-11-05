@@ -60,7 +60,6 @@ jobs:
       - name: setup firebase emulator
         run: npm run server:firebase:setup
 
-
       - name: test:firebase
         uses: GabrielBB/xvfb-action@v1
         with:
