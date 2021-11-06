@@ -18,7 +18,7 @@ import {
     RxMessageDocument,
     RxMessageDocumentType,
     RxUserDocument,
-} from '../../../rxdb/src/app/types/rxdb.d';
+} from '../../../rxdb-pouchdb/src/app/types/rxdb.d';
 import {
     Message,
     UserWithLastMessage,

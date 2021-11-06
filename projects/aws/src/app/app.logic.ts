@@ -31,7 +31,7 @@ import {
 import {
     unixTimestampToGraphql,
     graphQLTimestampToUnix
-} from 'projects/rxdb/src/app/shared';
+} from 'projects/rxdb-pouchdb/src/app/shared';
 import {
     sortByNewestFirst,
     sortMessagesByDateNewestFirst,

@@ -9,19 +9,19 @@ import {
 import type {
     RxChatDatabase,
     RxChatCollections
-} from '../../../../rxdb/src/app/types/rxdb.d';
+} from '../../../../rxdb-pouchdb/src/app/types/rxdb.d';
 
 import {
     GRAPHQL_PORT,
     GRAPHQL_PATH,
     GRAPHQL_SUBSCRIPTION_PORT,
     GRAPHQL_SUBSCRIPTION_PATH
-} from '../../../../rxdb/src/app/shared';
+} from '../../../../rxdb-pouchdb/src/app/shared';
 export const GRAPHQL_HTTP_PATH = 'http://' + window.location.hostname + ':' + GRAPHQL_PORT + GRAPHQL_PATH;
 export const GRAPHQL_WS_PATH = 'ws://' + window.location.hostname + ':' + GRAPHQL_SUBSCRIPTION_PORT + GRAPHQL_SUBSCRIPTION_PATH;
 
-import { RxMessagesSchema } from '../../../../rxdb/src/app/schemas/message.schema';
-import { RxUsersSchema } from '../../../../rxdb/src/app/schemas/user.schema';
+import { RxMessagesSchema } from '../../../../rxdb-pouchdb/src/app/schemas/message.schema';
+import { RxUsersSchema } from '../../../../rxdb-pouchdb/src/app/schemas/user.schema';
 
 /**
  * Instead of using the default rxdb-import,

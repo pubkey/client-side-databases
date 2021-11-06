@@ -122,25 +122,25 @@
           "strict": true
         }
       },
-      "root": "projects/rxdb",
-      "sourceRoot": "projects/rxdb/src",
+      "root": "projects/rxdb-pouchdb",
+      "sourceRoot": "projects/rxdb-pouchdb/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rxdb",
-            "index": "projects/rxdb/src/index.html",
-            "main": "projects/rxdb/src/main.ts",
-            "polyfills": "projects/rxdb/src/polyfills.ts",
-            "tsConfig": "projects/rxdb/tsconfig.app.json",
+            "outputPath": "dist/rxdb-pouchdb",
+            "index": "projects/rxdb-pouchdb/src/index.html",
+            "main": "projects/rxdb-pouchdb/src/main.ts",
+            "polyfills": "projects/rxdb-pouchdb/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-pouchdb/tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": [
-              "projects/rxdb/src/favicon.ico",
-              "projects/rxdb/src/assets"
+              "projects/rxdb-pouchdb/src/favicon.ico",
+              "projects/rxdb-pouchdb/src/assets"
             ],
             "styles": [
-              "projects/rxdb/src/styles.less"
+              "projects/rxdb-pouchdb/src/styles.less"
             ],
             "scripts": []
           },
@@ -160,8 +160,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/rxdb/src/environments/environment.ts",
-                  "with": "projects/rxdb/src/environments/environment.prod.ts"
+                  "replace": "projects/rxdb-pouchdb/src/environments/environment.ts",
+                  "with": "projects/rxdb-pouchdb/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -186,10 +186,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rxdb:build:production"
+              "browserTarget": "rxdb-pouchdb:build:production"
             },
             "development": {
-              "browserTarget": "rxdb:build:development"
+              "browserTarget": "rxdb-pouchdb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -197,23 +197,23 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rxdb:build"
+            "browserTarget": "rxdb-pouchdb:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/rxdb/src/test.ts",
-            "polyfills": "projects/rxdb/src/polyfills.ts",
-            "tsConfig": "projects/rxdb/tsconfig.spec.json",
-            "karmaConfig": "projects/rxdb/karma.conf.js",
+            "main": "projects/rxdb-pouchdb/src/test.ts",
+            "polyfills": "projects/rxdb-pouchdb/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-pouchdb/tsconfig.spec.json",
+            "karmaConfig": "projects/rxdb-pouchdb/karma.conf.js",
             "inlineStyleLanguage": "less",
             "assets": [
-              "projects/rxdb/src/favicon.ico",
-              "projects/rxdb/src/assets"
+              "projects/rxdb-pouchdb/src/favicon.ico",
+              "projects/rxdb-pouchdb/src/assets"
             ],
             "styles": [
-              "projects/rxdb/src/styles.less"
+              "projects/rxdb-pouchdb/src/styles.less"
             ],
             "scripts": []
           }
@@ -222,8 +222,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/rxdb/**/*.ts",
-              "projects/rxdb/**/*.html"
+              "projects/rxdb-pouchdb/**/*.ts",
+              "projects/rxdb-pouchdb/**/*.html"
             ]
           }
         }

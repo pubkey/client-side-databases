@@ -65,7 +65,7 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: true,
         customBackend: false
     },
-    rxdb: {
+    'rxdb-pouchdb': {
         offlineFirst: true,
         observableQueries: true,
         realtimeReplication: true,
@@ -131,7 +131,7 @@ function valueToString(value: FeatureTableValue): string {
         return value;
     } else {
         if (value) {
-            return 'Yes';
+            return '**Yes**';
         } else {
             return 'No';
         }
