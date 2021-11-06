@@ -18,7 +18,7 @@ import {
     RxMessageDocument,
     RxMessageDocumentType,
     RxUserDocument,
-} from './types/rxdb';
+} from '../../../rxdb/src/app/types/rxdb.d';
 import {
     Message,
     UserWithLastMessage,
@@ -91,7 +91,10 @@ export class Logic implements LogicInterface {
                                     ]
                                 }
                             ]
-                        }
+                        },
+                        sort: [
+                            { id: 'asc' }
+                        ]
                     })
                     .$.pipe(
                         map(messages => ({
@@ -140,7 +143,10 @@ export class Logic implements LogicInterface {
                         id: {
                             $ne: ownUser.id
                         }
-                    }
+                    },
+                    sort: [
+                        { id: 'asc' }
+                    ]
                 })
                 .$
             ),
@@ -179,7 +185,8 @@ export class Logic implements LogicInterface {
             .findOne({
                 selector: matchIfUsersAreBothInMessage(userPair),
                 sort: [
-                    { createdAt: 'desc' }
+                    { createdAt: 'desc' },
+                    { id: 'asc' }
                 ]
             })
             .$.pipe(
@@ -197,7 +204,8 @@ export class Logic implements LogicInterface {
                     .find({
                         selector: matchIfUsersAreBothInMessage(userPair),
                         sort: [
-                            { createdAt: 'asc' }
+                            { createdAt: 'asc' },
+                            { id: 'asc' }
                         ]
                     })
                     .$;

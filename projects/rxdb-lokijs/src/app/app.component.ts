@@ -5,7 +5,7 @@ import {
 
 import {
   Logic
-} from '../../../rxdb/src/app/app.logic';
+} from './app.logic';
 
 import {
   createDatabase
