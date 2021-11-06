@@ -112,7 +112,7 @@
         }
       }
     },
-    "rxdb": {
+    "rxdb-pouchdb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

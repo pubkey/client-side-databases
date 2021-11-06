@@ -76,6 +76,17 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: true,
         customBackend: true
     },
+    'rxdb-lokijs': {
+        offlineFirst: true,
+        observableQueries: true,
+        realtimeReplication: true,
+        clientSideEncryption: true,
+        schema: true,
+        complexQueries: true,
+        multiTabSupport: true,
+        customConflictHandling: false,
+        customBackend: true
+    },
     watermelondb: {
         offlineFirst: true,
         observableQueries: true,
