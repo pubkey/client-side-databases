@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-npm-test-x1-
 
       - name: install npm dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps --force
         
       - name: build
         run: npm run build
