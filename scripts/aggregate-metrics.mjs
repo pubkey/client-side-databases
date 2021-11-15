@@ -92,9 +92,11 @@ async function run() {
     Object.entries(projectMetrics).forEach(([projectKey, metrics]) => {
         const metricSize = Object.keys(metrics).length;
         if (metricSize !== firstSize) {
-            console.dir(Object.keys(metrics));
+            console.log('diff metrics:');
             console.dir(Object.keys(projectMetrics)[0]);
-            throw new Error('not all projects have the same metrics ' + projectKey);
+            console.dir(Object.keys(metrics));
+            const missingMetric = Object.keys(metrics).find(k => !projectMetrics[k]);
+            throw new Error('not all projects have the same metrics ' + projectKey + ' - missingMetric: ' + missingMetric);
         }
     });
 
