@@ -56,12 +56,12 @@
     "client:watermelondb": "ng serve --project watermelondb --port 3000",
     "test:wait-for-frontend": "ts-node --skip-project ./scripts/wait-for-frontend.ts",
     "test": "testcafe chrome:headless --hostname localhost -e test/e2e.test.ts",
-    "test:aws": "PROJECT_KEY=aws concurrently \"npm run start:aws\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
-    "test:firebase": "PROJECT_KEY=firebase concurrently \"npm run start:firebase\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
-    "test:pouchdb": "PROJECT_KEY=pouchdb concurrently \"npm run start:pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
-    "test:rxdb-pouchdb": "PROJECT_KEY=rxdb-pouchdb concurrently \"npm run start:rxdb-pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
-    "test:rxdb-lokijs": "PROJECT_KEY=rxdb-lokijs concurrently \"npm run start:rxdb-lokijs\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
-    "test:watermelondb": "PROJECT_KEY=watermelondb concurrently \"npm run start:watermelondb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first"
+    "test:aws": "PROJECT_KEY=aws NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:aws\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
+    "test:firebase": "PROJECT_KEY=firebase NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:firebase\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
+    "test:pouchdb": "PROJECT_KEY=pouchdb NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
+    "test:rxdb-pouchdb": "PROJECT_KEY=rxdb-pouchdb NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:rxdb-pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
+    "test:rxdb-lokijs": "PROJECT_KEY=rxdb-lokijs NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:rxdb-lokijs\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
+    "test:watermelondb": "PROJECT_KEY=watermelondb NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:watermelondb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first"
   },
   "private": true,
   "dependencies": {
