@@ -123,7 +123,7 @@ export async function run() {
     // cache options request
     app.options('*', (req, res, done) => {
         if (req.method === 'OPTIONS') {
-            log('!OPTIONS');
+            log('OPTIONS request');
             const headers = {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
@@ -172,12 +172,14 @@ export async function run() {
             log('## feedUsers()');
             console.dir(args);
             const users = state.users;
-            return filterForFeedResult(
+            const ret = filterForFeedResult(
                 users,
                 args.createdAt,
                 args.id,
                 args.limit
             );
+            log('got ' + ret.length + ' users');
+            return ret;
         },
         feedMessages: (args: any) => {
             log('## feedMessages()');
@@ -188,7 +190,7 @@ export async function run() {
                 args.limit
             );
             console.dir(args);
-            // log(ret);
+            log('got ' + ret.length + ' messages');
             return ret;
         },
         setMessages: (args: {
