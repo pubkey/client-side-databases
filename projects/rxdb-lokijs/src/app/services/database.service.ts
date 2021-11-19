@@ -98,9 +98,6 @@ async function loadRxDBPlugins(): Promise<any> {
     }
 }
 
-delete RxUsersSchema.indexes;
-delete RxMessagesSchema.indexes;
-
 const collections: { [collectionName: string]: RxCollectionCreator } = {
     messages: {
         schema: RxMessagesSchema,
