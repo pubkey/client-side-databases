@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -14,7 +15,8 @@ import {
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.less']
+  styleUrls: ['./user-list.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent {
   @Input() usersWithLastMessage: UserWithLastMessage[];

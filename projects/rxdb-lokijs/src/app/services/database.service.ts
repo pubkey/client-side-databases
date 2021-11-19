@@ -39,7 +39,9 @@ import {
 import {
     getRxStorageLoki
 } from 'rxdb/plugins/lokijs';
-const LokiIncrementalIndexedDBAdapter = require('lokijs/src/incremental-indexeddb-adapter');
+const LokiIncrementalIndexedDBAdapter = require('rxdb/node_modules/lokijs/src/incremental-indexeddb-adapter');
+// const LokiIndexedDBAdapter = require('lokijs/src/loki-indexed-adapter');
+const useAdapter = new LokiIncrementalIndexedDBAdapter();
 
 import {
     GraphQLSchemaFromRxSchemaInputSingleCollection,
@@ -96,6 +98,9 @@ async function loadRxDBPlugins(): Promise<any> {
     }
 }
 
+delete RxUsersSchema.indexes;
+delete RxMessagesSchema.indexes;
+
 const collections: { [collectionName: string]: RxCollectionCreator } = {
     messages: {
         schema: RxMessagesSchema,
@@ -118,11 +123,13 @@ export async function createDatabase(): Promise<RxChatDatabase> {
         // name: 'chat' + new Date().getTime(),
         name: 'chat_rxdb_lokijs',
         storage: getRxStorageLoki({
-            adapter: new LokiIncrementalIndexedDBAdapter(),
-            autoload: true,
-            autosave: true,
-            autosaveInterval: 500,
-            throttledSaves: true
+            adapter: useAdapter,
+            autoloadCallback() {
+                console.log('autoload done!');
+            },
+            autosaveCallback() {
+                console.log('autosave done!');
+            }
         }),
         eventReduce: true,
         multiInstance: true
@@ -134,7 +141,6 @@ export async function createDatabase(): Promise<RxChatDatabase> {
 
     // start graphql replication
     if (doReplication()) {
-
         const replicationStates: {
             [k: string]: RxGraphQLReplicationState<any>
         } = {

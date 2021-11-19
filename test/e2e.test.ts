@@ -22,6 +22,17 @@ if (!projectKey) {
     throw new Error('project key missing');
 }
 
+let DO_REPLICATION = false;
+switch (projectKey) {
+    /**
+     * These projects do not work without replication
+     */
+    case 'aws':
+    case 'firebase':
+        DO_REPLICATION = true;
+}
+
+
 const window: any = {};
 const exampleData: {
     users: User[];
@@ -46,7 +57,7 @@ async function insertMessageToFirstUser(t: TestController, messageText: string) 
  * Waits until a given metric appears in the logs
  */
 async function waitForMetric(t: TestController, metricKey: string, runIdentifier?: string) {
-    await wait(1000);
+    await wait(100);
     console.log('# waitForMetric ' + metricKey + ' runIdentifier: ' + runIdentifier);
     await waitUntil(async () => {
         const innerLogs = await t.getBrowserConsoleMessages();
@@ -60,7 +71,7 @@ async function waitForMetric(t: TestController, metricKey: string, runIdentifier
         }
 
         return matchingLogs.length > 0;
-    }, 1000 * 200, 1000);
+    }, 1000 * 200, 100);
 }
 
 
@@ -144,7 +155,8 @@ const metricsRuns = 6;
 let metricRunsDone = 0;
 
 
-const metricsTestUrl = FRONTEND_URL + '?' + REPLICATION_FLAG + '=true&' + ADD_EXAMPLE_DATA_FLAG + '=true';
+const doReplicationString = DO_REPLICATION ? 'true' : 'false';
+const metricsTestUrl = FRONTEND_URL + '?' + REPLICATION_FLAG + '=' + doReplicationString + '&' + ADD_EXAMPLE_DATA_FLAG + '=true';
 
 test
     .page(metricsTestUrl)

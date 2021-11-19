@@ -5,7 +5,8 @@ import {
   HostBinding,
   ElementRef,
   ViewChild,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 const LOCALSTORAGE_NAME = 'name';
@@ -13,7 +14,8 @@ const LOCALSTORAGE_NAME = 'name';
 @Component({
   selector: 'app-own-name',
   templateUrl: './own-name.component.html',
-  styleUrls: ['./own-name.component.less']
+  styleUrls: ['./own-name.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OwnNameComponent implements OnInit {
   @Output() submit: EventEmitter<{

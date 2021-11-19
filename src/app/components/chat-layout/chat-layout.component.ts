@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -27,7 +28,8 @@ import { now } from 'src/shared/util-browser';
 @Component({
   selector: 'app-chat-layout',
   templateUrl: './chat-layout.component.html',
-  styleUrls: ['./chat-layout.component.less']
+  styleUrls: ['./chat-layout.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatLayoutComponent {
   public userName: string;

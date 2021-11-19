@@ -3,7 +3,8 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -14,7 +15,8 @@ import {
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
-  styleUrls: ['./message-list.component.less']
+  styleUrls: ['./message-list.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageListComponent implements OnChanges {
   @Input() messages: MessageWithDirection[];

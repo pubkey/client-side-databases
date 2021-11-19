@@ -3,13 +3,15 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
-  styleUrls: ['./message-input.component.less']
+  styleUrls: ['./message-input.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
 

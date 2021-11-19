@@ -4,7 +4,8 @@ import {
   Input,
   EventEmitter,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -15,7 +16,8 @@ import {
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.less']
+  styleUrls: ['./search.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent {
 
