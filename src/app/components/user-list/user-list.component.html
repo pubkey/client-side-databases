@@ -1,5 +1,5 @@
 <div
-    *ngFor="let userWithLastMessage of usersWithLastMessage"
+    *ngFor="let userWithLastMessage of usersWithLastMessage; trackBy: trackByUserWithLastMessage"
     class="user-with-last-message"
     [attr.userid]="userWithLastMessage.user.id"
     [class.selected]="otherUser && userWithLastMessage.user.id === otherUser.id"

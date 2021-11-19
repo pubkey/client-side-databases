@@ -39,4 +39,9 @@ export class UserListComponent {
   public scrollTop() {
     this.elRef.nativeElement.scrollTop = 0;
   }
+
+  public trackByUserWithLastMessage(index: number, userWithLastMessage: UserWithLastMessage) {
+    const messageIdString = userWithLastMessage.message ? userWithLastMessage.message.id : '';
+    return userWithLastMessage.user.id + '|' + messageIdString;
+  }
 }

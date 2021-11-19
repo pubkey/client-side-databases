@@ -8,8 +8,7 @@ import {
 } from '@angular/core';
 
 import {
-  MessageWithDirection,
-  User
+  MessageWithDirection
 } from '../../../shared/types';
 
 @Component({
@@ -27,10 +26,20 @@ export class MessageListComponent implements OnChanges {
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.messages) {
-      // scroll to button when new messages come
+      // scroll to bottom when new messages come
       await new Promise(res => setTimeout(res, 0));
       const hostDiv = this.elRef.nativeElement;
       hostDiv.scrollTop = hostDiv.scrollHeight;
     }
   }
+
+  public trackByMessageId(index: number, message?: MessageWithDirection) {
+    if (!message) {
+      return null;
+    } else {
+      return message.id;
+    }
+  }
+
+
 }

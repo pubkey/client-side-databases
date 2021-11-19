@@ -1,5 +1,5 @@
 <div
-    *ngFor="let message of messages"
+    *ngFor="let message of messages; trackBy: trackByMessageId"
     class="message"
 >
     <div
