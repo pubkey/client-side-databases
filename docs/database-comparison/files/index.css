@@ -1,0 +1,38 @@
+html {
+  font-family: Helvetica Neue, Helvetica, Arial;
+}
+
+button {
+  font-size: 24px;
+  padding  : 10px;
+  margin   : 20px 5px;
+}
+
+#cpu-spinner {
+  margin-left     : 100px;
+  width           : 30px;
+  height          : 30px;
+  background-color: grey;
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  button {
+    font-size: 18px;
+  }
+
+  #kirby {
+    max-height: 60px;
+  }
+}

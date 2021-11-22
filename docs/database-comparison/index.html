@@ -1,0 +1,278 @@
+<html>
+<head>
+  <meta
+    http-equiv="Content-Type"
+    content="text/html; charset=UTF-8"
+  >
+  <title>Browser database comparison - One Transaction per Write</title>
+  <link
+    rel="stylesheet"
+    href="./files/index.css"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+</head>
+
+<body>
+  <h1>Browser database comparison - One Transaction per Write</h1>
+  <p>
+    This is a fork of Nolan Lawsons
+    <a
+      href="http://nolanlawson.github.io/database-comparison/"
+      target="_blank"
+    >Database Comparison</a>.
+    This fork behaves equally, but it uses a new transaction for each database write.
+  </p>
+
+  <br />
+  <p>This is a spinner that is rotated via JavaScript and indicates when the JavaScript process is blocked:</p>
+  <div id="cpu-spinner"></div>
+
+  <br />
+  <br />
+
+  <div>
+    <h4>Database</h4>
+
+    <div style="display:inline-block;">
+      <input
+        type="radio"
+        name="db"
+        id="dbMemory"
+        value="regularObject"
+        checked="checked"
+      >
+      <label for="dbMemory">Regular object</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbMemMap"
+        value="map"
+        checked="checked"
+      >
+      <label for="dbMemMap">ES6 Map</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbMemSet"
+        value="set"
+        checked="checked"
+      >
+      <label for="dbMemSet">ES6 Set</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="imMemMap"
+        value="immap"
+        checked="checked"
+      >
+      <label for="imMemMap">Immutable Map</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="imMemSet"
+        value="imset"
+        checked="checked"
+      >
+      <label for="imMemSet">Immutable Set</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="imMemList"
+        value="imlist"
+        checked="checked"
+      >
+      <label for="imMemList">Immutable List</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="imMemFromJS"
+        value="imfromjs"
+      >
+      <label for="imMemFromJS">Immutable#FromJS</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="imMapMergeDeep"
+        value="immergedeep"
+      >
+      <label for="imMapMergeDeep">Immutable Map#mergeDeep</label>
+    </div>
+    <div style="display:inline-block;">
+
+      <input
+        type="radio"
+        name="db"
+        id="dbLocalStorage"
+        value="localStorage"
+      >
+      <label for="dbLocalStorage">LocalStorage</label>
+      <br>
+
+      <input
+        type="radio"
+        name="db"
+        id="webSQL"
+        value="webSQL"
+      >
+      <label for="webSQL">WebSQL</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="idb"
+        value="idb"
+      >
+      <label for="idb">IndexedDB</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbLoki"
+        value="loki"
+      >
+      <label for="dbLoki">LokiJS</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbPouch"
+        value="pouch"
+      >
+      <label for="dbPouch">PouchDB</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbPouchWebSQL"
+        value="pouchWebSQL"
+      >
+      <label for="dbPouchWebSQL">PouchDB (WebSQL)</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbLocalForage"
+        value="localForage"
+      >
+      <label for="dbLocalForage">LocalForage</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbLocalForageWebSQL"
+        value="localForageWebSQL"
+      >
+      <label for="dbLocalForageWebSQL">LocalForage (WebSQL)</label>
+      <br>
+      <input
+        type="radio"
+        name="db"
+        id="dbDexie"
+        value="dexie"
+      >
+      <label for="dbDexie">Dexie</label>
+
+    </div>
+  </div>
+
+  <div>
+    <div style="display:inline-block;vertical-align:top;">
+      <h4>Number of docs</h4>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_1"
+        value="1"
+      >
+      <label for="docs_1">1</label>
+      <br>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_10"
+        value="10"
+      >
+      <label for="docs_10">10</label>
+      <br>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_100"
+        value="100"
+        checked="checked"
+      >
+      <label for="docs_100">100</label>
+      <br>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_1000"
+        value="1000"
+      >
+      <label for="docs_1000">1000</label>
+      <br>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_10000"
+        value="10000"
+      >
+      <label for="docs_10000">10000</label>
+      <br>
+      <input
+        type="radio"
+        name="numDocs"
+        id="docs_100000"
+        value="100000"
+      >
+      <label for="docs_100000">100000</label>
+    </div>
+    <div style="display:inline-block;vertical-align:top;margin-left:20px;">
+      <h4>Environment</h4>
+      <input
+        type="radio"
+        name="worker"
+        id="workerNo"
+        value="false"
+        checked="checked"
+      >
+      <label for="workerNo">Normal</label>
+    </div>
+  </div>
+
+  <div>
+    <button
+      type="button"
+      id="insertButton"
+    >Insert docs</button>
+    <button
+      type="button"
+      id="deleteButton"
+    >Clear all</button>
+  </div>
+
+  <pre id="display"></pre>
+
+  <script src="./files/lie.polyfill.min.js"></script>
+  <script src="./files/Dexie.min.js"></script>
+  <script src="./files/pouchdb.min.js"></script>
+  <script src="./files/localforage.min.js"></script>
+  <script src="./files/lokijs.min.js"></script>
+  <script src="./files/immutable.min.js"></script>
+  <script src="./files/tester.js"></script>
+  <script src="./files/index.js"></script>
+
+
+</body>
+
+</html>
