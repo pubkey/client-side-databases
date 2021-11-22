@@ -92,7 +92,7 @@ function createTester() {
   }
 
   function pouchTest(docs) {
-    const t = new Date().getTime();
+    var t = new Date().getTime();
     var promise = Promise.resolve();
     function addDoc(i) {
       return doAddDoc;
@@ -109,7 +109,7 @@ function createTester() {
   }
 
   function pouchWebSQLTest(docs) {
-    const t = new Date().getTime();
+    var t = new Date().getTime();
     var promise = Promise.resolve();
     function addDoc(i) {
       return doAddDoc;
@@ -169,13 +169,13 @@ function createTester() {
       return doAddDoc;
       function doAddDoc() {
         var doc = docs[i];
-        return new Promise(res => {
-          dexieDB.transaction('rw', dexieDB.docs, function () {
-            doc.id = 'doc_' + i;
-            dexieDB.docs.add(doc);
-            res();
-          });
-        })
+        // Use the "!" postfix to ensure we work with our own transaction and never
+        // reuse any ongoing transaction.
+        // @link https://dexie.org/docs/Dexie/Dexie.transaction()
+        return dexieDB.transaction('rw!', dexieDB.docs, function () {
+          doc.id = 'doc_' + i;
+          dexieDB.docs.add(doc);
+        });
       }
     }
     for (var i = 0; i < docs.length; i++) {
@@ -191,6 +191,7 @@ function createTester() {
         return openIndexedDBReq.result;
       }
       return new Promise(function (resolve, reject) {
+        console.log('Create new idb instance');
         var req = openIndexedDBReq = indexedDB.open('test_idb', 1);
         req.onblocked = reject;
         req.onerror = reject;
@@ -209,7 +210,7 @@ function createTester() {
         return doAddDoc;
         function doAddDoc() {
           var doc = docs[i];
-          return new Promise((resolve, reject) => {
+          return new Promise(function (resolve, reject) {
             var txn = db.transaction('docs', 'readwrite');
             var oStore = txn.objectStore('docs');
             doc.id = 'doc_' + i;
@@ -247,7 +248,7 @@ function createTester() {
         return doAddDoc;
         function doAddDoc() {
           var doc = docs[i];
-          return new Promise((resolve, reject) => {
+          return new Promise(function (resolve, reject) {
             webSQLDB.transaction(function (txn) {
               var id = 'doc_' + i;
               txn.executeSql(
@@ -255,7 +256,7 @@ function createTester() {
                 id, JSON.stringify(doc)
               ]);
             }, reject, resolve);
-          })
+          });
         }
       }
       for (var i = 0; i < docs.length; i++) {
