@@ -24,13 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var spinnerDivAngle = 0;
-  setInterval(() => {
+  setInterval(function () {
     var cpuSpinnerDiv = document.querySelector('#cpu-spinner');
     spinnerDivAngle = spinnerDivAngle + 1;
     spinnerDivAngle = spinnerDivAngle % 360;
     cpuSpinnerDiv.style.webkitTransform = 'rotate(' + spinnerDivAngle + 'deg)';
-  }, 0)
-
+  }, 0);
 
   function waitForUI() {
     return new Promise(function (resolve) {
@@ -73,10 +72,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('insertButton').addEventListener('click', function () {
     disableButtons(true);
     var dbTypeChoice = getChoice('db');
+    var docSizeChoice = getChoice('docSize').value;
     var numDocsChoice = getChoice('numDocs');
     var numDocs = parseInt(numDocsChoice.value, 10);
-    var useWorker = getChoice('worker').value === 'true';
-    var cloneWorker = getChoice('worker').value === 'clone';
+    var useWorker = false;
+    var cloneWorker = false;
     display.innerHTML = 'Inserting ' + numDocs + ' docs using ' +
       dbTypeChoice.label + (useWorker ? ' in a worker' : '') + '...';
 
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return workerPromise({
           action: 'test',
           dbType: dbTypeChoice.value,
-          numDocs: tester.createDocs(numDocs)
+          numDocs: tester.createDocs(numDocs, docSizeChoice)
         }).then(function (e) {
           if (!e.data.success) {
             throw new Error('did not work');
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return Date.now() - startTime;
         });
       }
-      var fun = tester.getTest(dbTypeChoice.value);
+      var fun = tester.getTest(dbTypeChoice.value, docSizeChoice);
 
       return Promise.resolve().then(function () {
         return fun(numDocs);

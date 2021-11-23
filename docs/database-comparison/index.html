@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta
     http-equiv="Content-Type"
@@ -238,15 +239,23 @@
       <label for="docs_100000">100000</label>
     </div>
     <div style="display:inline-block;vertical-align:top;margin-left:20px;">
-      <h4>Environment</h4>
+      <h4>Document Size</h4>
       <input
         type="radio"
-        name="worker"
-        id="workerNo"
-        value="false"
+        name="docSize"
+        id="docSize_small"
+        value="small"
         checked="checked"
       >
-      <label for="workerNo">Normal</label>
+      <label for="docSize_small">Small (1 property per document)</label>
+      <br />
+      <input
+        type="radio"
+        name="docSize"
+        id="docSize_big"
+        value="big"
+      >
+      <label for="docSize_big">Big (100 properties per document)</label>
     </div>
   </div>
 

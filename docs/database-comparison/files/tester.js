@@ -22,15 +22,30 @@ function createTester() {
     });
   }
 
-  function createDoc() {
-    return {
-      data: Math.random()
-    };
+  function createDoc(docSize) {
+    var fieldsPerDoc = 0;
+    switch (docSize) {
+      case 'small':
+        fieldsPerDoc = 1;
+        break;
+      case 'big':
+        fieldsPerDoc = 100;
+        break;
+      default:
+        throw new Error('docSize not set ' + docSize);
+    }
+    var doc = {};
+    new Array(fieldsPerDoc)
+      .fill(0)
+      .forEach(function (_v, idx) {
+        doc['field_' + idx] = Math.random() + '';
+      });
+    return doc;
   }
-  function createDocs(numDocs) {
+  function createDocs(numDocs, docSize) {
     var docs = new Array(numDocs);
     for (var i = 0; i < numDocs; i++) {
-      docs[i] = createDoc();
+      docs[i] = createDoc(docSize);
     }
     return docs;
   }
@@ -265,12 +280,12 @@ function createTester() {
       return promise;
     });
   }
-  function getTest(db) {
+  function getTest(db, docSize) {
     var fun = _getTest(db);
     return test;
     function test(arg) {
       if (typeof arg === 'number') {
-        var docs = createDocs(arg);
+        var docs = createDocs(arg, docSize);
         return fun(docs);
       } else {
         return fun(arg);
