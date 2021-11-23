@@ -92,7 +92,7 @@
     "faker": "5.5.3",
     "firebase": "9.3.0",
     "firebase-tools": "9.22.0",
-    "got": "11.8.2",
+    "got": "11.8.3",
     "graphql": "14.7.0",
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.6",
