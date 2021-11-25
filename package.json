@@ -126,7 +126,7 @@
     "@angular/language-service": "12.2.10",
     "@types/faker": "5.5.9",
     "@types/lokijs": "1.5.7",
-    "@types/node": "16.11.9",
+    "@types/node": "16.11.10",
     "@types/pouchdb": "6.4.0",
     "@types/pouchdb-find": "6.3.7",
     "@types/ws": "8.2.0",
