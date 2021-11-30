@@ -97,7 +97,7 @@
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.6",
     "horizon": "2.0.0",
-    "http-server": "0.13.0",
+    "http-server": "14.0.0",
     "jsonwebtoken": "8.5.1",
     "mock-amplify-auth": "2.1.1",
     "pouchdb-adapter-http": "7.2.2",
