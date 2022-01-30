@@ -46,7 +46,6 @@ import {
     pushQueryBuilderFromRxSchema,
     RxGraphQLReplicationState
 } from 'rxdb/plugins/replication-graphql';
-import { RxDBNoValidatePlugin } from 'rxdb/plugins/no-validate';
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
 
 import { RxDBReplicationGraphQLPlugin } from 'rxdb/plugins/replication-graphql';
@@ -89,9 +88,8 @@ async function loadRxDBPlugins(): Promise<any> {
             )
         ]);
     } else {
-        // in production we use the no-validate module instead of the schema-validation
+        // in production we do not use any validation plugin
         // to reduce the build-size
-        addRxPlugin(RxDBNoValidatePlugin);
     }
 }
 
