@@ -813,6 +813,123 @@
           }
         }
       }
+    },
+    "rxdb-dexie": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/rxdb-dexie",
+      "sourceRoot": "projects/rxdb-dexie/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/rxdb-dexie",
+            "index": "projects/rxdb-dexie/src/index.html",
+            "main": "projects/rxdb-dexie/src/main.ts",
+            "polyfills": "projects/rxdb-dexie/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-dexie/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/rxdb-dexie/src/favicon.ico",
+              "projects/rxdb-dexie/src/assets"
+            ],
+            "styles": [
+              "projects/rxdb-dexie/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/rxdb-dexie/src/environments/environment.ts",
+                  "with": "projects/rxdb-dexie/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "rxdb-dexie:build:production"
+            },
+            "development": {
+              "browserTarget": "rxdb-dexie:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rxdb-dexie:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rxdb-dexie/src/test.ts",
+            "polyfills": "projects/rxdb-dexie/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-dexie/tsconfig.spec.json",
+            "karmaConfig": "projects/rxdb-dexie/karma.conf.js",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/rxdb-dexie/src/favicon.ico",
+              "projects/rxdb-dexie/src/assets"
+            ],
+            "styles": [
+              "projects/rxdb-dexie/src/styles.less"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rxdb-dexie/**/*.ts",
+              "projects/rxdb-dexie/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "blueprint",

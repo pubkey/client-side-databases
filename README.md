@@ -13,6 +13,7 @@ You can use it to compare metrics and learn about the differences. The chat app 
   - [PouchDB](https://github.com/pouchdb/pouchdb) with IndexedDB adapter & CouchDB replication
   - [RxDB](https://github.com/pubkey/rxdb) with PouchDB Storage & GraphQL replication
   - [RxDB](https://github.com/pubkey/rxdb) with LokiJS Storage & GraphQL replication
+  - [RxDB](https://github.com/pubkey/rxdb) with Dexie.js Storage & GraphQL replication
   - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) with LokiJS adapter (no backend sync atm)
 
 ## Metrics
@@ -129,10 +130,24 @@ The official AWS mock does [not allow a live replication](https://github.com/aws
 
 * Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
-### RxDB
+### RxDB PouchDB
 
-* Run `npm run start:rxdb` to start the mock server and the production build frontend.
-* Or run `npm run dev:rxdb` to start the mock server and the development frontend server.
+* Run `npm run start:rxdb-pouchdb` to start the mock server and the production build frontend.
+* Or run `npm run dev:rxdb-pouchdb` to start the mock server and the development frontend server.
+
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+
+### RxDB LokiJS
+
+* Run `npm run start:rxdb-lokijs` to start the mock server and the production build frontend.
+* Or run `npm run dev:rxdb-lokijs` to start the mock server and the development frontend server.
+
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+
+### RxDB Dexie.js
+
+* Run `npm run start:rxdb-dexie` to start the mock server and the production build frontend.
+* Or run `npm run dev:rxdb-dexie` to start the mock server and the development frontend server.
 
 * Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 

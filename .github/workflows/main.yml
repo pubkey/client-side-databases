@@ -80,6 +80,11 @@ jobs:
         with:
           run: npm run test:rxdb-lokijs
 
+      - name: test:rxdb-dexie
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:rxdb-dexie
+
       - name: test:watermelondb
         uses: GabrielBB/xvfb-action@v1
         with:

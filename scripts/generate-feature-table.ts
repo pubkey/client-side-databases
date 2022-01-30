@@ -87,6 +87,17 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: false,
         customBackend: true
     },
+    'rxdb-dexie': {
+        offlineFirst: true,
+        observableQueries: true,
+        realtimeReplication: true,
+        clientSideEncryption: true,
+        schema: true,
+        complexQueries: true,
+        multiTabSupport: true,
+        customConflictHandling: false,
+        customBackend: true
+    },
     watermelondb: {
         offlineFirst: true,
         observableQueries: true,
