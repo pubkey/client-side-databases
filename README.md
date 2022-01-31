@@ -60,7 +60,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 
 ### Why is LokiJS so much faster?
 
-WatermelonDB and the RxDB-LokiJS project use the [LokiJS](https://github.com/techfort/LokiJS) database as storage, which is an **in memory** database that regularly persists the data to IndexedDB either on interval, or when the browser tab is closed. Keeping and processing the data in memory has the benefit of being much faster, but it also has its downsides:
+WatermelonDB and the RxDB-LokiJS project use the [LokiJS](https://github.com/techfort/LokiJS) database as storage, which is an **in memory** database that regularly persists the data to IndexedDB either on interval, or when the browser tab is closed. By doing so, [less slow IndexedDB transaction are used](https://rxdb.info/slow-indexeddb.html). Keeping and processing the data in memory has the benefit of being much faster, but it also has its downsides:
 
 - Data can be lost when the JavaScript process is killed ungracefully like when the browser crashes or the power of the PC is terminated.
 - There is no multi-tab-support with plain LokiJS. The data is not shared between multiple browser tabs of the same origin. RxDB handles that by adding [its own](https://rxdb.info/rx-storage-lokijs.html) multi tab handling.
