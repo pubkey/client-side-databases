@@ -230,7 +230,8 @@ function startGraphQLReplication<RxDocType>(
             queryBuilder: pushQueryBuilder
         },
         pull: {
-            queryBuilder: pullQueryBuilder
+            queryBuilder: pullQueryBuilder,
+            batchSize: 10
         },
         live: true,
         liveInterval: 1000 * 60 * 10,
