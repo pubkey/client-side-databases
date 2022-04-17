@@ -89,7 +89,7 @@ export function filterForFeedResult(
     return limited;
 }
 
-declare type WithDeleted<T> = T & {deleted: boolean};
+declare type WithDeleted<T> = T & { deleted: boolean };
 
 export async function run() {
     const startData = exampleData;
@@ -98,7 +98,7 @@ export async function run() {
         messages: WithDeleted<Message>[]
     } = {
         users: startData.users.map(user => {
-            const userWithDeleted = Object.assign({deleted: false}, user);
+            const userWithDeleted = Object.assign({ deleted: false }, user);
             return userWithDeleted;
         }),
         messages: []
@@ -113,7 +113,7 @@ export async function run() {
         return messagesByUser[userId];
     };
     const addMessageToState = (message: Message) => {
-        const messageWithDeleted = Object.assign({deleted: false}, message);
+        const messageWithDeleted = Object.assign({ deleted: false }, message);
         state.messages.push(messageWithDeleted);
         getMessageArrayOfUser(message.sender).push(message);
         getMessageArrayOfUser(message.reciever).push(message);
@@ -194,23 +194,25 @@ export async function run() {
             return ret;
         },
         setMessages: (args: {
-            messages: Message
+            messages: Message[]
         }) => {
-            const message: Message = args.messages;
-            log('## addMessage() ' + message.id + ' from ' + message.sender);
+            const messages: Message[] = args.messages;
+            messages.forEach(message => {
+                log('## addMessage() ' + message.id + ' from ' + message.sender);
 
-            // overwrite timestamp
-            message.createdAt = unixInSeconds();
+                // overwrite timestamp
+                message.createdAt = unixInSeconds();
 
-            // log(message);
-            addMessageToState(message);
+                // log(message);
+                addMessageToState(message);
 
-            pubsub.publish(
-                'changedMessages',
-                {
-                    changedMessages: message
-                }
-            );
+                pubsub.publish(
+                    'changedMessages',
+                    {
+                        changedMessages: message
+                    }
+                );
+            });
         },
         setUsers: (args: any) => {
             log('## registerUser()');
@@ -236,12 +238,9 @@ export async function run() {
     };
 
     // add start-messages to state
-    startData.messages.forEach(message => {
-        root.setMessages({
-            messages: message
-        });
+    root.setMessages({
+        messages: startData.messages
     });
-
 
 
     // server graphql-endpoint

@@ -220,7 +220,7 @@ function startGraphQLReplication<RxDocType>(
     const pullQueryBuilder = pullQueryBuilderFromRxSchema(
         collection.name,
         input,
-        20
+        10
     );
     const pushQueryBuilder = pushQueryBuilderFromRxSchema(
         collection.name,
@@ -234,6 +234,7 @@ function startGraphQLReplication<RxDocType>(
             queryBuilder: pushQueryBuilder
         },
         pull: {
+            batchSize: 10,
             queryBuilder: pullQueryBuilder
         },
         live: true,
