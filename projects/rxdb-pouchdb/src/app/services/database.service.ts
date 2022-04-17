@@ -34,7 +34,7 @@ import {
     RxCollectionCreator,
     RxCollection,
     ucfirst
-} from 'rxdb/plugins/core';
+} from 'rxdb';
 
 import {
     addPouchPlugin,

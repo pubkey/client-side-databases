@@ -7,7 +7,7 @@ import type {
     RxDocument,
     RxCollection,
     RxDatabase
-} from 'rxdb/plugins/core';
+} from 'rxdb';
 import type {
     Message,
     User

@@ -32,7 +32,7 @@ import {
 } from 'src/shared/util-server';
 import type {
     MangoQuerySelector
-} from 'rxdb/plugins/core';
+} from 'rxdb';
 
 
 export type CreateDatabaseFunction = () => Promise<RxChatDatabase>;
