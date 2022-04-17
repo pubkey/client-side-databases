@@ -1,7 +1,7 @@
 // because pouchdb is missing good typings, we use the ones from RxDB
-import {
-    PouchDBInstance,
-} from 'rxdb';
+import type {
+    PouchDBInstance
+} from 'rxdb/plugins/pouchdb';
 
 import * as PouchDBModule from 'pouchdb-core';
 import * as PouchDbFindModule from 'pouchdb-find';

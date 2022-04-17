@@ -106,7 +106,7 @@ export class Logic implements LogicInterface {
                         ]
                     }
                 });
-                const messages: Message[] = docs.docs.map(doc => pouchDocToNormal(doc));
+                const messages: Message[] = docs.docs.map((doc: any) => pouchDocToNormal(doc));
                 return {
                     search,
                     messages
@@ -155,8 +155,8 @@ export class Logic implements LogicInterface {
                     }
                 })
             ),
-            map(docs => docs.docs),
-            map(docs => docs.map(doc => pouchDocToNormal(doc))),
+            map((docs: any) => docs.docs),
+            map(docs => docs.map((doc: any) => pouchDocToNormal(doc))),
             shareReplay(1)
         );
 
@@ -166,7 +166,7 @@ export class Logic implements LogicInterface {
         ]).pipe(
             map(([ownUser, usersNotOwn]) => {
                 return usersNotOwn
-                    .map(user => {
+                    .map((user: any) => {
                         return this.getLastMessageOfUserPair({
                             user1: ownUser,
                             user2: user
