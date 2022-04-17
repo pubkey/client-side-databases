@@ -29,9 +29,9 @@ jobs:
             ~/.npm
             ./node_modules
           # invalidate cache when any package-lock.json changes
-          key: ${{ runner.os }}-npm-test-x1-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-npm-test-x2-${{ hashFiles('**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-test-x1-
+            ${{ runner.os }}-npm-test-x2-
 
       - name: install npm dependencies
         run: npm install --legacy-peer-deps --force

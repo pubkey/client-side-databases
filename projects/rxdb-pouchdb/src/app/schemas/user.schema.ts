@@ -12,7 +12,8 @@ export const RxUsersSchema: RxJsonSchema<RxUserDocumentType> = {
     properties: {
         id: {
             description: 'the id is also the displayName',
-            type: 'string'
+            type: 'string',
+            maxLength: 40
         },
         createdAt: {
             type: 'number'

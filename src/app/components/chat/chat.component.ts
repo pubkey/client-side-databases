@@ -29,6 +29,7 @@ import {
 } from '../../logic-interface.interface';
 import { addExampleData, logMetricMeasurement, now } from 'src/shared/util-browser';
 import { getExampleDataset } from 'src/shared/data-generator';
+import { wait } from 'async-test-util';
 
 @Component({
   selector: 'app-chat',
@@ -302,6 +303,12 @@ export class ChatComponent implements OnInit {
           reciever: message.reciever,
           sender: message.sender
         });
+
+        /**
+         * Wait at least one tick to simulate
+         * real world behavior.
+         */
+        await wait(0);
       }
       const endTime = performance.now() - startTime;
       logMetricMeasurement(

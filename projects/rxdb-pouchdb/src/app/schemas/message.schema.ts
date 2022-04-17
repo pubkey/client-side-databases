@@ -11,13 +11,17 @@ export const RxMessagesSchema: RxJsonSchema<RxMessageDocumentType> = {
     type: 'object',
     properties: {
         id: {
-            type: 'string'
+            type: 'string',
+            maxLength: 40
         },
         text: {
             type: 'string'
         },
         createdAt: {
-            type: 'number'
+            type: 'number',
+            minimum: 0,
+            maximum: 100000000000000,
+            multipleOf: 1
         },
         read: {
             description: 'true if was read by the reciever',
@@ -25,11 +29,13 @@ export const RxMessagesSchema: RxJsonSchema<RxMessageDocumentType> = {
         },
         sender: {
             type: 'string',
-            ref: 'users'
+            ref: 'users',
+            maxLength: 40
         },
         reciever: {
             type: 'string',
-            ref: 'users'
+            ref: 'users',
+            maxLength: 40
         }
     },
     indexes: [
