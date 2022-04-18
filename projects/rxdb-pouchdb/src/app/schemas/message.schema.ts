@@ -1,4 +1,4 @@
-import {
+import type {
     RxJsonSchema
 } from 'rxdb';
 import type { RxMessageDocumentType } from '../types/rxdb';
