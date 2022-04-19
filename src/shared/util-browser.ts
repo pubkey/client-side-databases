@@ -69,14 +69,30 @@ export function getRunIdentifier(): string | null {
 
 /**
  * Measure the page load time.
- * Must be done one tick after window.load emitted,
- * otherwise we get a negative value.
  *
  * @link https://webmasters.stackexchange.com/a/87765
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API#calculate_the_total_page_load_time
  */
 export function logPageLoadTime() {
-    window.addEventListener('load', () => {
+
+    const windowLoadPromise = new Promise<void>(res => {
+        window.addEventListener('load', () => {
+            res();
+        });
+    });
+
+    /**
+     * The window.onload might be overwritten by some lib (like firebase),
+     * so we have to ensure the metric is still logged in all cases.
+     */
+    Promise.race([
+        windowLoadPromise,
+        new Promise(res => setTimeout(res, 5000))
+    ]).then(() => {
+        /**
+         * Must be done one tick after window.load emitted,
+         * otherwise we get a negative value.
+         */
         setTimeout(() => {
             const perfData = window.performance.timing;
             const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
