@@ -87,7 +87,7 @@ export function logPageLoadTime() {
      */
     Promise.race([
         windowLoadPromise,
-        new Promise(res => setTimeout(res, 5000))
+        new Promise(res => setTimeout(res, 1000))
     ]).then(() => {
         /**
          * Must be done one tick after window.load emitted,

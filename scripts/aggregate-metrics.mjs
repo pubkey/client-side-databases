@@ -13,6 +13,7 @@ import {
 import { markdownTable } from 'markdown-table';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import * as assert from 'assert';
 
 // eslint-disable-next-line
 const __filename = fileURLToPath(import.meta.url);
@@ -88,15 +89,19 @@ async function run() {
 
     // ensure all projects have the same metrics
     const metricsOfFirstProject = Object.values(projectMetrics)[0];
-    const firstSize = Object.keys(metricsOfFirstProject).length;
     Object.entries(projectMetrics).forEach(([projectKey, metrics]) => {
-        const metricSize = Object.keys(metrics).length;
-        if (metricSize !== firstSize) {
-            console.log('diff metrics:');
-            console.dir(Object.keys(projectMetrics)[0]);
-            console.dir(Object.keys(metrics));
-            const missingMetric = Object.keys(metrics).find(k => !projectMetrics[k]);
-            throw new Error('not all projects have the same metrics ' + projectKey + ' - missingMetric: ' + missingMetric);
+        const firstProjectName = Object.keys(projectMetrics)[0];
+
+        const mustBeKeys = Object.keys(projectMetrics[firstProjectName]).sort();
+        const isKeys = Object.keys(metrics).sort();
+
+        try {
+            assert.deepStrictEqual(mustBeKeys, isKeys);
+        } catch (err) {
+            console.log('Metric is missing: ' + projectKey);
+            console.dir(mustBeKeys);
+            console.dir(isKeys);
+            throw err;
         }
     });
 

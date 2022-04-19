@@ -34,7 +34,9 @@ jobs:
             ${{ runner.os }}-npm-test-x2-
 
       - name: install npm dependencies
-        run: npm install --legacy-peer-deps --force
+        run: |
+          rm -f node_modules/__ngcc_entry_points__.json
+          npm install --legacy-peer-deps --force
         
       - name: build
         run: npm run build
