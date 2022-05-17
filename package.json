@@ -113,7 +113,7 @@
     "pouchdb-server": "4.2.0",
     "rxdb": "12.4.1",
     "rxfire": "6.0.3",
-    "rxjs": "7.4.0",
+    "rxjs": "7.5.5",
     "subscriptions-transport-ws": "0.11.0",
     "testcafe": "1.17.1",
     "tslib": "2.3.1",
