@@ -21,7 +21,7 @@ jobs:
           node-version: 16.5.0
 
       - name: Reuse npm cache folder
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -48,7 +48,7 @@ jobs:
 
       # https://firebase.google.com/docs/emulator-suite/install_and_configure#integrate_with_your_ci_system
       - name: Reuse firebase emulators cache folder
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
