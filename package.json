@@ -111,7 +111,7 @@
     "pouchdb-adapter-memory": "7.3.0",
     "pouchdb-find": "7.3.0",
     "pouchdb-server": "4.2.0",
-    "rxdb": "12.4.1",
+    "rxdb": "12.4.3",
     "rxfire": "6.0.3",
     "rxjs": "7.5.5",
     "subscriptions-transport-ws": "0.11.0",
