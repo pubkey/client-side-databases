@@ -149,7 +149,7 @@
     "markdown-table": "3.0.2",
     "npm-run-all": "4.1.5",
     "pouchdb-debug": "7.2.1",
-    "ts-node": "10.8.0",
+    "ts-node": "10.8.1",
     "typescript": "4.6.4",
     "webpack-bundle-analyzer": "4.5.0"
   },
