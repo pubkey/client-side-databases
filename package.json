@@ -137,7 +137,7 @@
     "@types/pouchdb-find": "6.3.7",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
-    "@typescript-eslint/eslint-plugin-tslint": "5.27.0",
+    "@typescript-eslint/eslint-plugin-tslint": "5.27.1",
     "@typescript-eslint/parser": "4.33.0",
     "async-test-util": "2.0.0",
     "concurrently": "6.5.1",
