@@ -143,7 +143,7 @@
     "concurrently": "7.2.2",
     "eslint": "8.18.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsdoc": "39.3.2",
+    "eslint-plugin-jsdoc": "39.3.3",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "gzip-size": "6.0.0",
     "markdown-table": "3.0.2",
