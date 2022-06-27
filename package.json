@@ -88,7 +88,7 @@
     "@nozbe/watermelondb": "0.24.0",
     "@types/express": "4.17.13",
     "aws-amplify": "4.3.26",
-    "aws-appsync": "4.1.6",
+    "aws-appsync": "4.1.7",
     "buffer": "6.0.3",
     "clone": "2.1.2",
     "core-js": "3.23.3",
