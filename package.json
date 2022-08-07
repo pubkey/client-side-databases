@@ -118,7 +118,7 @@
     "testcafe": "1.19.0",
     "tslib": "2.4.0",
     "typeface-roboto": "1.1.13",
-    "zone.js": "0.11.6"
+    "zone.js": "0.11.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.2.18",
