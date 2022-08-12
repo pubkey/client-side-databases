@@ -96,7 +96,7 @@
     "express": "4.18.1",
     "express-graphql": "0.12.0",
     "faker": "5.5.3",
-    "firebase": "9.9.0",
+    "firebase": "9.9.2",
     "firebase-tools": "9.23.3",
     "got": "11.8.5",
     "graphql": "16.5.0",
