@@ -82,7 +82,7 @@
     "@angular/platform-browser-dynamic": "12.2.16",
     "@angular/router": "12.2.16",
     "@aws-amplify/cli": "9.2.1",
-    "@aws-amplify/datastore": "3.12.6",
+    "@aws-amplify/datastore": "3.12.8",
     "@aws-amplify/ui-angular": "2.4.18",
     "@babel/runtime": "7.18.9",
     "@nozbe/watermelondb": "0.24.0",
