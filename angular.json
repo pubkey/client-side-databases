@@ -793,6 +793,9 @@
     "schematicCollections": [
       "@angular-eslint/schematics"
     ],
-    "analytics": false
+    "analytics": false,
+    "cache": {
+      "enabled": false
+    }
   }
 }
