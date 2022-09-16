@@ -37,6 +37,7 @@ import {
     sortMessagesByDateNewestFirst,
     doesMessageMapUserPair
 } from 'src/shared/util-server';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export class Logic implements LogicInterface {
     public userChanged$: Observable<any>;
@@ -147,7 +148,7 @@ export class Logic implements LogicInterface {
                 return docs;
             }),
             map(docs => docs.map(doc => awsUserToNormal(doc))),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
 
         const usersWithLastMessage$: Observable<
@@ -169,7 +170,7 @@ export class Logic implements LogicInterface {
                                 message: message ? message : undefined
                             };
                         }),
-                        shareReplay(1)
+                        shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
                     );
                     return ret2;
                 });

@@ -37,6 +37,7 @@ import {
 import {
     logTime
 } from 'src/shared/util-browser';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export class Logic implements LogicInterface {
     private dbPromise: Promise<any> = createDatabase();
@@ -157,7 +158,7 @@ export class Logic implements LogicInterface {
             ),
             map((docs: any) => docs.docs),
             map(docs => docs.map((doc: any) => pouchDocToNormal(doc))),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
 
         const usersWithLastMessage$: Observable<UserWithLastMessage[]> = combineLatest([
@@ -175,7 +176,7 @@ export class Logic implements LogicInterface {
                                 user,
                                 message
                             })),
-                            shareReplay(1)
+                            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
                         );
                     });
             }),
@@ -211,7 +212,7 @@ export class Logic implements LogicInterface {
                 return docs.docs[0];
             }),
             map(doc => pouchDocToNormal(doc)),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
     }
 

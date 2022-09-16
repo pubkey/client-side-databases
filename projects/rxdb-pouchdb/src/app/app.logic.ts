@@ -30,8 +30,8 @@ import {
 import {
     sortByNewestFirst
 } from 'src/shared/util-server';
-import type {
-    MangoQuerySelector
+import {
+    MangoQuerySelector, RXJS_SHARE_REPLAY_DEFAULTS
 } from 'rxdb';
 
 
@@ -144,7 +144,7 @@ export class Logic implements LogicInterface {
                 })
                 .$
             ),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
         const usersWithLastMessage$: Observable<UserWithLastMessage[]> = combineLatest([
             ownUser$,
@@ -160,7 +160,7 @@ export class Logic implements LogicInterface {
                             user: user.toJSON(false),
                             message: message ? message.toJSON(false) : null
                         })),
-                        shareReplay(1)
+                        shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
                     );
                 })
             ),
@@ -183,7 +183,7 @@ export class Logic implements LogicInterface {
                 ]
             })
             .$.pipe(
-                shareReplay(1)
+                shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
             );
     }
 

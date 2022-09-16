@@ -28,6 +28,7 @@ import { Message, User } from '../../../src/shared/types';
 import { graphQLSchemaFromRxSchema } from 'rxdb/plugins/replication-graphql';
 import { RxUsersSchema } from './app/schemas/user.schema';
 import { RxMessagesSchema } from './app/schemas/message.schema';
+import { lastOfArray } from 'rxdb';
 
 const exampleData: {
     users: User[];
@@ -101,7 +102,10 @@ export async function run() {
             const userWithDeleted = Object.assign({ deleted: false }, user);
             return userWithDeleted;
         }),
-        messages: []
+        messages: startData.messages.map(user => {
+            const userWithDeleted = Object.assign({ deleted: false }, user);
+            return userWithDeleted;
+        })
     };
     // to faster access all messages for a specific user,
     // we index the message by user-id here
@@ -143,19 +147,19 @@ export async function run() {
     const generatedSchema = graphQLSchemaFromRxSchema({
         users: {
             schema: RxUsersSchema,
-            feedKeys: [
+            checkpointFields: [
                 'id',
                 'createdAt'
             ],
-            deletedFlag: 'deleted'
+            deletedField: 'deleted'
         },
         messages: {
             schema: RxMessagesSchema,
-            feedKeys: [
+            checkpointFields: [
                 'id',
                 'createdAt'
             ],
-            deletedFlag: 'deleted'
+            deletedField: 'deleted'
         }
     });
     const graphQLSchema = generatedSchema.asString;
@@ -168,80 +172,172 @@ export async function run() {
     // The root provides a resolver function for each API endpoint
     const root = {
         info: () => 1,
-        feedUsers: (args: any) => {
-            log('## feedUsers()');
+        pullUsers: (args: any) => {
+            log('## PullUsers()');
             console.dir(args);
             const users = state.users;
-            const ret = filterForFeedResult(
+            const lastId = args.checkpoint ? args.checkpoint.id : '';
+            const minCreatedAt = args.checkpoint ? args.checkpoint.createdAt : 0;
+
+
+            const retDocs = filterForFeedResult(
                 users,
-                args.createdAt,
-                args.id,
+                minCreatedAt,
+                lastId,
                 args.limit
             );
-            log('got ' + ret.length + ' users');
+            log('got ' + retDocs.length + ' users');
+
+            const last = lastOfArray(retDocs);
+            const ret = {
+                documents: retDocs,
+                checkpoint: last ? {
+                    id: last.id,
+                    createdAt: last.createdAt
+                } : {
+                    id: lastId,
+                    createdAt: minCreatedAt
+                }
+            };
+            console.log('pullUsers() ret:');
+            console.log(JSON.stringify(ret, null, 4));
             return ret;
         },
-        feedMessages: (args: any) => {
-            log('## feedMessages()');
-            const ret = filterForFeedResult(
+        pullMessages: (args: any) => {
+            log('## PullMessages()');
+
+            const lastId = args.checkpoint ? args.checkpoint.id : '';
+            const minCreatedAt = args.checkpoint ? args.checkpoint.createdAt : 0;
+            const retDocs = filterForFeedResult(
                 state.messages,
-                args.createdAt,
-                args.id,
+                minCreatedAt,
+                lastId,
                 args.limit
             );
             console.dir(args);
-            log('got ' + ret.length + ' messages');
+            log('got ' + retDocs.length + ' messages');
+            const last = lastOfArray(retDocs);
+            const ret = {
+                documents: retDocs,
+                checkpoint: last ? {
+                    id: last.id,
+                    createdAt: last.createdAt
+                } : {
+                    id: lastId,
+                    createdAt: minCreatedAt
+                }
+            };
+            console.log('pullMessages() ret:');
+            console.log(JSON.stringify(ret, null, 4));
             return ret;
         },
-        setMessages: (args: {
-            messages: Message[]
-        }) => {
-            const messages: Message[] = args.messages;
-            messages.forEach(message => {
-                log('## addMessage() ' + message.id + ' from ' + message.sender);
+        pushUsers: (args: any) => {
+            log('## pushUsers()');
 
-                // overwrite timestamp
-                message.createdAt = unixInSeconds();
-
-                // log(message);
-                addMessageToState(message);
-
-                pubsub.publish(
-                    'changedMessages',
-                    {
-                        changedMessages: message
-                    }
-                );
-            });
-        },
-        setUsers: (args: any) => {
-            log('## registerUser()');
-            const time = (new Date().getTime() / 1000);
-            const user = {
-                id: 'u' + time,
-                name: args.name,
-                createdAt: time,
-                deleted: false
+            const rows: any[] = args.usersPushRow;
+            let lastCheckpoint = {
+                id: '',
+                createdAt: 0
             };
 
-            state.users.push(user);
+            const conflicts: any[] = [];
+            const writtenDocs: any[] = [];
+            rows.forEach(row => {
+                const docId = row.newDocumentState.id;
+                const docCurrentMaster = state.users.find(d => d.id === docId);
+
+                /**
+                 * Detect conflicts.
+                 */
+                if (
+                    docCurrentMaster &&
+                    row.assumedMasterState &&
+                    docCurrentMaster.createdAt !== row.assumedMasterState.createdAt
+                ) {
+                    conflicts.push(docCurrentMaster);
+                    return;
+                }
+
+                const doc = row.newDocumentState;
+                state.users = state.users.filter(d => d.id !== doc.id);
+                state.users.push(doc);
+
+                lastCheckpoint.id = doc.id;
+                lastCheckpoint.createdAt = doc.createdAt;
+                writtenDocs.push(doc);
+            });
+
             pubsub.publish(
-                'changedUsers',
+                'pushUser',
                 {
-                    changedUsers: user
+                    streamUser: {
+                        documents: writtenDocs,
+                        checkpoint: lastCheckpoint
+                    }
                 }
             );
-            return user;
+            console.log('## current documents:');
+            console.log(JSON.stringify(state.users, null, 4));
+            console.log('## conflicts:');
+            console.log(JSON.stringify(conflicts, null, 4));
+
+            return conflicts;
+        },
+        pushMessages: (args: any) => {
+            log('## pushMessages()');
+
+            const rows: any[] = args.messagesPushRow;
+            let lastCheckpoint = {
+                id: '',
+                createdAt: 0
+            };
+
+            const conflicts: any[] = [];
+            const writtenDocs: any[] = [];
+            rows.forEach(row => {
+                const docId = row.newDocumentState.id;
+                const docCurrentMaster = state.messages.find(d => d.id === docId);
+
+                /**
+                 * Detect conflicts.
+                 */
+                if (
+                    docCurrentMaster &&
+                    row.assumedMasterState &&
+                    docCurrentMaster.createdAt !== row.assumedMasterState.createdAt
+                ) {
+                    conflicts.push(docCurrentMaster);
+                    return;
+                }
+
+                const doc = row.newDocumentState;
+                state.messages = state.messages.filter(d => d.id !== doc.id);
+                state.messages.push(doc);
+
+                lastCheckpoint.id = doc.id;
+                lastCheckpoint.createdAt = doc.createdAt;
+                writtenDocs.push(doc);
+            });
+
+            pubsub.publish(
+                'pushMessage',
+                {
+                    streamMessage: {
+                        documents: writtenDocs,
+                        checkpoint: lastCheckpoint
+                    }
+                }
+            );
+            console.log('## current documents:');
+            console.log(JSON.stringify(state.messages, null, 4));
+            console.log('## conflicts:');
+            console.log(JSON.stringify(conflicts, null, 4));
+
+            return conflicts;
         },
         changedUsers: () => pubsub.asyncIterator('changedUsers'),
         changedMessages: () => pubsub.asyncIterator('changedMessages')
     };
-
-    // add start-messages to state
-    root.setMessages({
-        messages: startData.messages
-    });
-
 
     // server graphql-endpoint
     app.use(GRAPHQL_PATH, graphqlHTTP({

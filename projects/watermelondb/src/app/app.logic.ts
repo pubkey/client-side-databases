@@ -30,6 +30,7 @@ import {
     sortByNewestFirst
 } from 'src/shared/util-server';
 import { MessageModel, UserModel } from './models';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 
 export class Logic implements LogicInterface {
@@ -133,7 +134,7 @@ export class Logic implements LogicInterface {
                 ).observe();
                 return query as any;
             }) as any,
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
 
         const usersWithLastMessage$: Observable<UserWithLastMessage[]> = combineLatest([
@@ -150,7 +151,7 @@ export class Logic implements LogicInterface {
                             user: userModelToUser(user),
                             message: message ? message : undefined
                         })),
-                        shareReplay(1)
+                        shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
                     );
                     return ret;
                 });

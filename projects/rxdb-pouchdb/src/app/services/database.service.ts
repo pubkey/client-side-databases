@@ -1,9 +1,6 @@
 import {
     isDevMode
 } from '@angular/core';
-import {
-    SubscriptionClient
-} from 'subscriptions-transport-ws';
 
 // import typings
 import type {
@@ -33,14 +30,8 @@ import {
     addRxPlugin,
     RxCollectionCreator,
     RxCollection,
-    ucfirst
+    RxStorage
 } from 'rxdb';
-
-import {
-    addPouchPlugin,
-    PouchDB,
-    getRxStoragePouch
-} from 'rxdb/plugins/pouchdb';
 
 import {
     GraphQLSchemaFromRxSchemaInputSingleCollection,
@@ -49,14 +40,16 @@ import {
     RxGraphQLReplicationState
 } from 'rxdb/plugins/replication-graphql';
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
-import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
 
 import { RxDBReplicationGraphQLPlugin } from 'rxdb/plugins/replication-graphql';
 import { RxDBLocalDocumentsPlugin } from 'rxdb/plugins/local-documents';
-import { RxDBKeyCompressionPlugin } from 'rxdb/plugins/key-compression';
+import { wrappedKeyCompressionStorage } from 'rxdb/plugins/key-compression';
 import { doReplication, logTime } from 'src/shared/util-browser';
 
-async function loadRxDBPlugins(): Promise<any> {
+
+async function loadRxDBPlugins(
+    baseStorage: RxStorage<any, any>
+): Promise<RxStorage<any, any>> {
 
     addRxPlugin(RxDBLocalDocumentsPlugin);
 
@@ -66,14 +59,11 @@ async function loadRxDBPlugins(): Promise<any> {
     addRxPlugin(RxDBReplicationGraphQLPlugin);
 
     /**
-     * indexed-db adapter
-     */
-    addPouchPlugin(PouchdbAdapterIdb);
-
-    /**
      * key-compression
      */
-    addRxPlugin(RxDBKeyCompressionPlugin);
+    let storage = wrappedKeyCompressionStorage({
+        storage: baseStorage
+    });
 
     /**
      * to reduce the build-size,
@@ -81,30 +71,32 @@ async function loadRxDBPlugins(): Promise<any> {
      */
     if (isDevMode()) {
         await Promise.all([
-
             /**
              * Enable the dev mode plugin
              */
-            import('rxdb/plugins/dev-mode').then(
-                module => addRxPlugin(module.RxDBDevModePlugin)
+            await import('rxdb/plugins/dev-mode').then(
+                module => {
+                    addRxPlugin(module.RxDBDevModePlugin);
+                }
             ),
 
             // we use the schema-validation only in dev-mode
             // this validates each document if it is matching the jsonschema
-            import('rxdb/plugins/validate').then(
-                module => addRxPlugin(module.RxDBValidatePlugin)
-            ),
-
-            // enable debug to detect slow queries
-            import('pouchdb-debug' + '').then(
-                module => addPouchPlugin(module['default'])
+            await import('rxdb/plugins/validate-ajv').then(
+                module => {
+                    const wrappedValidateAjvStorage = module.wrappedValidateAjvStorage;
+                    storage = wrappedValidateAjvStorage({
+                        storage
+                    });
+                }
             )
         ]);
-        PouchDB.debug.enable('pouchdb:find');
     } else {
         // in production we do not use any validation plugin
         // to reduce the build-size
     }
+
+    return storage;
 }
 
 const collections: { [collectionName: string]: RxCollectionCreator } = {
@@ -121,14 +113,15 @@ const collections: { [collectionName: string]: RxCollectionCreator } = {
 /**
  * creates the database
  */
-export async function createDatabase(): Promise<RxChatDatabase> {
+export async function createDatabase(baseStorage: RxStorage<any, any>): Promise<RxChatDatabase> {
     logTime('createDatabase()');
-    await loadRxDBPlugins();
+
+    const storage = await loadRxDBPlugins(baseStorage);
 
     const db = await createRxDatabase<RxChatCollections>({
         // name: 'chat' + new Date().getTime(),
-        name: 'chat',
-        storage: getRxStoragePouch('idb'),
+        name: baseStorage.name + '-chat',
+        storage: storage,
         eventReduce: true,
         multiInstance: true
         //        password: 'myLongAndStupidPassword'
@@ -137,73 +130,40 @@ export async function createDatabase(): Promise<RxChatDatabase> {
     // create collections
     await db.addCollections(collections);
 
+    console.log('# database created');
+    db.messages.$.subscribe(ev => {
+        console.log('messages$ emitted:');
+        console.dir(ev);
+    });
+
     // start graphql replication
     if (doReplication()) {
-
         const replicationStates: {
-            [k: string]: RxGraphQLReplicationState<any>
+            [k: string]: RxGraphQLReplicationState<any, any>
         } = {
             user: startGraphQLReplication(
                 db.users,
                 {
                     schema: RxUsersSchema,
-                    feedKeys: [
+                    checkpointFields: [
                         'id',
                         'createdAt'
                     ],
-                    deletedFlag: 'deleted'
+                    deletedField: 'deleted'
                 }
             ),
             message: startGraphQLReplication(
                 db.messages,
                 {
                     schema: RxMessagesSchema,
-                    feedKeys: [
+                    checkpointFields: [
                         'id',
                         'createdAt'
                     ],
-                    deletedFlag: 'deleted'
+                    deletedField: 'deleted'
                 }
             )
         };
-
-        // listen to websocket to trigger replication on server changes
-        const wsClient = new SubscriptionClient(
-            GRAPHQL_WS_PATH,
-            {
-                reconnect: true,
-                timeout: 1000 * 60,
-                connectionCallback: () => {
-                    // console.log('SubscriptionClient.connectionCallback:');
-                },
-                reconnectionAttempts: 10000,
-                inactivityTimeout: 10 * 1000,
-                lazy: true
-            }
-        );
-        Object.entries(replicationStates).forEach(([entityName, replicationState]) => {
-            const typeName = ucfirst(entityName);
-            const subscriptionQuery = `
-        subscription onChanged${typeName}s {
-            changed${typeName}s {
-                deleted
-            }
-        }`;
-            const ret = wsClient.request({
-                query: subscriptionQuery
-            });
-            ret.subscribe({
-                next(data) {
-                    // console.log('subscription(' + typeName + ') emitted => trigger run');
-                    // console.dir(data);
-                    replicationState.run();
-                },
-                error(error) {
-                    console.error('got error(' + typeName + '): on subscription');
-                    console.dir(error);
-                }
-            });
-        });
     }
 
 
@@ -216,19 +176,21 @@ export async function createDatabase(): Promise<RxChatDatabase> {
 function startGraphQLReplication<RxDocType>(
     collection: RxCollection<RxDocType>,
     input: GraphQLSchemaFromRxSchemaInputSingleCollection
-): RxGraphQLReplicationState<RxDocType> {
+): RxGraphQLReplicationState<RxDocType, any> {
     const pullQueryBuilder = pullQueryBuilderFromRxSchema(
         collection.name,
-        input,
-        10
+        input
     );
     const pushQueryBuilder = pushQueryBuilderFromRxSchema(
         collection.name,
         input
     );
 
-    const replicationState: RxGraphQLReplicationState<RxDocType> = collection.syncGraphQL({
-        url: GRAPHQL_HTTP_PATH,
+    const replicationState: RxGraphQLReplicationState<RxDocType, any> = collection.syncGraphQL({
+        url: {
+            http: GRAPHQL_HTTP_PATH,
+            ws: GRAPHQL_WS_PATH
+        },
         push: {
             batchSize: 10,
             queryBuilder: pushQueryBuilder
@@ -238,8 +200,7 @@ function startGraphQLReplication<RxDocType>(
             queryBuilder: pullQueryBuilder
         },
         live: true,
-        liveInterval: 1000 * 60 * 10,
-        deletedFlag: 'deleted'
+        deletedField: input.deletedField
     });
 
     return replicationState;

@@ -30,6 +30,7 @@ import {
 import { addExampleData, logMetricMeasurement, now } from 'src/shared/util-browser';
 import { getExampleDataset } from 'src/shared/data-generator';
 import { wait } from 'async-test-util';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 @Component({
   selector: 'app-chat',
@@ -107,7 +108,7 @@ export class ChatComponent implements OnInit {
     this.ownUser$ = this.logic.getUserByName(
       this.userName$
     ).pipe(
-      shareReplay(1)
+      shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
     );
 
     // when ownUser changes, get items for the left bar
@@ -134,7 +135,7 @@ export class ChatComponent implements OnInit {
         user1,
         user2
       })),
-      shareReplay(1)
+      shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
     );
     this.showMessages$ = this.logic.getMessagesForUserPair(userChanged$).pipe(
       tap((messages) => {
