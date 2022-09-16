@@ -74,7 +74,7 @@ async function loadRxDBPlugins(
             /**
              * Enable the dev mode plugin
              */
-            await import('rxdb/plugins/dev-mode').then(
+            import('rxdb/plugins/dev-mode').then(
                 module => {
                     addRxPlugin(module.RxDBDevModePlugin);
                 }
@@ -82,7 +82,7 @@ async function loadRxDBPlugins(
 
             // we use the schema-validation only in dev-mode
             // this validates each document if it is matching the jsonschema
-            await import('rxdb/plugins/validate-ajv').then(
+            import('rxdb/plugins/validate-ajv').then(
                 module => {
                     const wrappedValidateAjvStorage = module.wrappedValidateAjvStorage;
                     storage = wrappedValidateAjvStorage({
@@ -131,10 +131,6 @@ export async function createDatabase(baseStorage: RxStorage<any, any>): Promise<
     await db.addCollections(collections);
 
     console.log('# database created');
-    db.messages.$.subscribe(ev => {
-        console.log('messages$ emitted:');
-        console.dir(ev);
-    });
 
     // start graphql replication
     if (doReplication()) {
