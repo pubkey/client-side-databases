@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/pouchdb/tsconfig.app.json",
-          "projects/pouchdb/tsconfig.spec.json"
+          "projects/pouchdb/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },

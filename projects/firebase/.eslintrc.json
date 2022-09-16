@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/firebase/tsconfig.app.json",
-          "projects/firebase/tsconfig.spec.json"
+          "projects/firebase/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },
