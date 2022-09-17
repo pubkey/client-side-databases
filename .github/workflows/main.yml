@@ -12,13 +12,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
         with:
-          node-version: 16.5.0
+          node-version-file: '.nvmrc'
 
       - name: Reuse npm cache folder
         uses: actions/cache@v3

@@ -84,23 +84,6 @@
             "browserTarget": "blueprint:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.less"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -198,24 +181,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "rxdb-pouchdb:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/rxdb-pouchdb/src/test.ts",
-            "polyfills": "projects/rxdb-pouchdb/src/polyfills.ts",
-            "tsConfig": "projects/rxdb-pouchdb/tsconfig.spec.json",
-            "karmaConfig": "projects/rxdb-pouchdb/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/rxdb-pouchdb/src/favicon.ico",
-              "projects/rxdb-pouchdb/src/assets"
-            ],
-            "styles": [
-              "projects/rxdb-pouchdb/src/styles.less"
-            ],
-            "scripts": []
           }
         },
         "lint": {
@@ -317,24 +282,6 @@
             "browserTarget": "firebase:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/firebase/src/test.ts",
-            "polyfills": "projects/firebase/src/polyfills.ts",
-            "tsConfig": "projects/firebase/tsconfig.spec.json",
-            "karmaConfig": "projects/firebase/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/firebase/src/favicon.ico",
-              "projects/firebase/src/assets"
-            ],
-            "styles": [
-              "projects/firebase/src/styles.less"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -432,24 +379,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "pouchdb:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/pouchdb/src/test.ts",
-            "polyfills": "projects/pouchdb/src/polyfills.ts",
-            "tsConfig": "projects/pouchdb/tsconfig.spec.json",
-            "karmaConfig": "projects/pouchdb/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/pouchdb/src/favicon.ico",
-              "projects/pouchdb/src/assets"
-            ],
-            "styles": [
-              "projects/pouchdb/src/styles.less"
-            ],
-            "scripts": []
           }
         },
         "lint": {
@@ -551,24 +480,6 @@
             "browserTarget": "aws:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/aws/src/test.ts",
-            "polyfills": "projects/aws/src/polyfills.ts",
-            "tsConfig": "projects/aws/tsconfig.spec.json",
-            "karmaConfig": "projects/aws/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/aws/src/favicon.ico",
-              "projects/aws/src/assets"
-            ],
-            "styles": [
-              "projects/aws/src/styles.less"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -666,24 +577,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "watermelondb:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/watermelondb/src/test.ts",
-            "polyfills": "projects/watermelondb/src/polyfills.ts",
-            "tsConfig": "projects/watermelondb/tsconfig.spec.json",
-            "karmaConfig": "projects/watermelondb/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/watermelondb/src/favicon.ico",
-              "projects/watermelondb/src/assets"
-            ],
-            "styles": [
-              "projects/watermelondb/src/styles.less"
-            ],
-            "scripts": []
           }
         },
         "lint": {
@@ -785,24 +678,6 @@
             "browserTarget": "rxdb-lokijs:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/rxdb-lokijs/src/test.ts",
-            "polyfills": "projects/rxdb-lokijs/src/polyfills.ts",
-            "tsConfig": "projects/rxdb-lokijs/tsconfig.spec.json",
-            "karmaConfig": "projects/rxdb-lokijs/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/rxdb-lokijs/src/favicon.ico",
-              "projects/rxdb-lokijs/src/assets"
-            ],
-            "styles": [
-              "projects/rxdb-lokijs/src/styles.less"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -902,24 +777,6 @@
             "browserTarget": "rxdb-dexie:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/rxdb-dexie/src/test.ts",
-            "polyfills": "projects/rxdb-dexie/src/polyfills.ts",
-            "tsConfig": "projects/rxdb-dexie/tsconfig.spec.json",
-            "karmaConfig": "projects/rxdb-dexie/karma.conf.js",
-            "inlineStyleLanguage": "less",
-            "assets": [
-              "projects/rxdb-dexie/src/favicon.ico",
-              "projects/rxdb-dexie/src/assets"
-            ],
-            "styles": [
-              "projects/rxdb-dexie/src/styles.less"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -932,8 +789,13 @@
       }
     }
   },
-  "defaultProject": "blueprint",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": false,
+    "cache": {
+      "enabled": false
+    }
   }
 }

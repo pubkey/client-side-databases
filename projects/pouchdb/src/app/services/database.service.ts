@@ -28,6 +28,7 @@ import {
 } from '../shared';
 import { doReplication, logTime } from 'src/shared/util-browser';
 import { Observable, Subject } from 'rxjs';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export interface DatabaseType {
     users: PouchDBInstance;
@@ -108,6 +109,6 @@ export function getChangeFeed(pouchdb: PouchDBInstance): Observable<any> {
         subject.error(err);
     });
     return subject.asObservable().pipe(
-        shareReplay(1)
+        shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
     );
 }

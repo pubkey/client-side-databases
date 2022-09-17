@@ -45,6 +45,7 @@ import {
     sortByNewestFirst,
     sortMessagesByDateNewestFirst
 } from 'src/shared/util-server';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export class Logic implements LogicInterface {
     private users: Collection = getUsersCollection();
@@ -124,7 +125,7 @@ export class Logic implements LogicInterface {
                     }) as any // TODO fix typings
                 );
             }),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
 
         const usersWithLastMessage$: Observable<
@@ -146,7 +147,7 @@ export class Logic implements LogicInterface {
                                 message: message ? message : undefined
                             };
                         }),
-                        shareReplay(1)
+                        shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
                     );
                     return ret2;
                 });
@@ -197,7 +198,7 @@ export class Logic implements LogicInterface {
                 return newest[0];
             }),
             distinctUntilChanged((m1, m2) => m1.id === m2.id),
-            shareReplay(1)
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
         );
     }
     getMessagesForUserPair(

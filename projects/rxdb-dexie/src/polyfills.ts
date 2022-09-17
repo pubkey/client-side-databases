@@ -28,18 +28,6 @@ logPageLoadTime();
  */
 
 /**
- * IE11 requires the following for NgClass support on SVG elements
- */
-// import 'classlist.js';  // Run `npm install --save classlist.js`.
-
-/**
- * Web Animations `@angular/platform-browser/animations`
- * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
- * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
- */
-// import 'web-animations-js';  // Run `npm install --save web-animations-js`.
-
-/**
  * By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
  * because those flags need to be set before `zone.js` being loaded, and webpack
@@ -72,10 +60,3 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
-/**
- * IMPORTANT: RxDB creates rxjs observables outside of angulars zone
- * So you have to import the rxjs patch to ensure changedetection works correctly.
- * @link https://www.bennadel.com/blog/3448-binding-rxjs-observable-sources-outside-of-the-ngzone-in-angular-6-0-2.htm
- */
-import 'zone.js/dist/zone-patch-rxjs';

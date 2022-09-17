@@ -1,15 +1,17 @@
-import { AfterViewChecked, ChangeDetectionStrategy, Component, DoCheck } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { getRxStorageDexie } from 'rxdb/plugins/dexie';
 import {
   LogicInterface
 } from '../../../../src/app/logic-interface.interface';
+import {
+  createDatabase
+} from '../../../rxdb-pouchdb/src/app/services/database.service';
 
 import {
   Logic
-} from './app.logic';
+} from '../../../rxdb-pouchdb/src/app/app.logic';
 
-import {
-  createDatabase
-} from './services/database.service';
+const baseStorage = getRxStorageDexie();
 
 @Component({
   selector: 'app-root',
@@ -20,5 +22,5 @@ import {
 export class AppComponent {
   title = 'rxdb-dexie';
 
-  public logic: LogicInterface = new Logic(createDatabase);
+  public logic: LogicInterface = new Logic(() => createDatabase(baseStorage));
 }

@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/watermelondb/tsconfig.app.json",
-          "projects/watermelondb/tsconfig.spec.json"
+          "projects/watermelondb/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },

@@ -10,6 +10,20 @@ import {
   createDatabase
 } from './services/database.service';
 
+import {
+  addPouchPlugin,
+  PouchDB,
+  getRxStoragePouch
+} from 'rxdb/plugins/pouchdb';
+
+/**
+ * indexed-db adapter
+ */
+import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
+addPouchPlugin(PouchdbAdapterIdb);
+const baseStorage = getRxStoragePouch('idb');
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,5 +33,5 @@ import {
 export class AppComponent {
   title = 'rxdb';
 
-  public logic: LogicInterface = new Logic(createDatabase);
+  public logic: LogicInterface = new Logic(() => createDatabase(baseStorage));
 }

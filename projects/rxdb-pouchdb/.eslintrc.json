@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/rxdb/tsconfig.app.json",
-          "projects/rxdb/tsconfig.spec.json"
+          "projects/rxdb/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },
