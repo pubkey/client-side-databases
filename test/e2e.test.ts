@@ -158,6 +158,8 @@ let metricRunsDone = 0;
 const doReplicationString = DO_REPLICATION ? 'true' : 'false';
 const metricsTestUrl = FRONTEND_URL + '?' + REPLICATION_FLAG + '=' + doReplicationString + '&' + ADD_EXAMPLE_DATA_FLAG + '=true';
 
+console.log('metricsTestUrl: ' + metricsTestUrl);
+
 test
     .page(metricsTestUrl)
     ('Measure metrics', async t => {

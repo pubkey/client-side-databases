@@ -60,7 +60,7 @@
     "client:rxdb-dexie": "ng serve --project rxdb-dexie --port 3000",
     "client:watermelondb": "ng serve --project watermelondb --port 3000",
     "test:wait-for-frontend": "ts-node --skip-project ./scripts/wait-for-frontend.ts",
-    "test": "testcafe chrome --hostname localhost -e test/e2e.test.ts",
+    "test": "testcafe chrome:headless --hostname localhost -e test/e2e.test.ts",
     "test:aws": "PROJECT_KEY=aws NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:aws\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
     "test:firebase": "PROJECT_KEY=firebase NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:firebase\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
     "test:pouchdb": "PROJECT_KEY=pouchdb NODE_OPTIONS=--max_old_space_size=4096 concurrently \"npm run start:pouchdb\" \"npm run test:wait-for-frontend && npm run test\" --kill-others --success first",
