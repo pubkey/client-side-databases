@@ -276,8 +276,7 @@ export async function run() {
                     }
                 }
             );
-            console.log('## current documents:');
-            console.log(JSON.stringify(state.users, null, 4));
+            console.log('## current documents: ' + state.users.length);
             console.log('## conflicts:');
             console.log(JSON.stringify(conflicts, null, 4));
 
@@ -328,8 +327,7 @@ export async function run() {
                     }
                 }
             );
-            console.log('## current documents:');
-            console.log(JSON.stringify(state.messages, null, 4));
+            console.log('## current documents: ' + state.messages.length);
             console.log('## conflicts:');
             console.log(JSON.stringify(conflicts, null, 4));
 
@@ -340,11 +338,15 @@ export async function run() {
     };
 
     // server graphql-endpoint
-    app.use(GRAPHQL_PATH, graphqlHTTP({
-        schema,
-        rootValue: root,
-        graphiql: true,
-    }));
+    app.use(
+        GRAPHQL_PATH,
+        // TODO remove 'as any'
+        (graphqlHTTP as any)({
+            schema,
+            rootValue: root,
+            graphiql: true,
+        })
+    );
 
     app.listen(GRAPHQL_PORT, () => {
         log('Started graphql-endpoint at http://localhost:' +
