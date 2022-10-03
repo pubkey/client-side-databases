@@ -210,22 +210,12 @@ export class Logic implements LogicInterface {
 
     async addMessage(message: AddMessage): Promise<any> {
         await this.dbPromise;
-        try {
-            await this.db.messages.insert(message.message);
-        } catch (err) {
-            console.error('could not insert message ' + JSON.stringify(message));
-            throw err;
-        }
+        await this.db.messages.insert(message.message);
     }
 
     async addUser(user: User): Promise<any> {
         await this.dbPromise;
-        try {
-            this.db.users.insert(user);
-        } catch (err) {
-            console.error('could not insert user ' + JSON.stringify(user));
-            throw err;
-        }
+        this.db.users.insert(user);
     }
 
     async hasData(): Promise<boolean> {
