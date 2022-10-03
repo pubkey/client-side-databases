@@ -151,7 +151,7 @@ test
     });
 
 
-const metricsRuns = 6;
+const metricsRuns = 8;
 let metricRunsDone = 0;
 
 
@@ -275,8 +275,10 @@ test
                 const firstMetric = metrics[0];
                 let total = 0;
                 metrics.forEach(m => total = total + m.value);
-                const avgValue = Math.ceil(total / metrics.length);
-
+                const avgValue = averageOfTimeValues(
+                    metrics.map(metric => metric.value),
+                    50
+                );
                 allMetrics[firstMetric.key] = {
                     flag: firstMetric.flag,
                     key: firstMetric.key,
@@ -349,3 +351,20 @@ test
         );
     });
 
+
+export function averageOfTimeValues(
+    times: number[],
+    /**
+     * To better account for anomalies
+     * during time measurements,
+     * we strip the heighest x percent.
+     */
+    stripHeighestXPercent: number
+): number {
+    times = times.sort((a, b) => a - b);
+    const stripAmount = Math.floor(times.length * (stripHeighestXPercent * 0.01));
+    const useNumbers = times.slice(0, times.length - stripAmount);
+    let total = 0;
+    useNumbers.forEach(nr => total = total + nr);
+    return total / useNumbers.length;
+}
