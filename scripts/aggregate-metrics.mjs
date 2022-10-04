@@ -121,7 +121,7 @@ async function run() {
         firstLine.push(projectKey);
         Object.entries(metricsByKey).forEach(([metricKey, metric]) => {
             // do not put a whitespace between value and unit, it will cause ugly linebreaks
-            rowByMetric[metricKey].push(metric.value + metric.unit);
+            rowByMetric[metricKey].push(Math.ceil(metric.value) + metric.unit);
         });
     });
 

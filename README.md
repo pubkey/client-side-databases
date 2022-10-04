@@ -26,19 +26,19 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 
 | Metric \ Project                        | aws    | firebase | pouchdb | rxdb-dexie | rxdb-lokijs | rxdb-pouchdb | watermelondb |
 | --------------------------------------- | ------ | -------- | ------- | ---------- | ----------- | ------------ | ------------ |
-| First angular component render          | 219ms  | 265ms    | 187ms   | 219ms      | 204ms       | 201ms        | 232ms        |
-| Page load time                          | 299ms  | 201ms    | 259ms   | 307ms      | 285ms       | 291ms        | 303ms        |
-| First full render                       | 399ms  | 1343ms   | 832ms   | 623ms      | 615ms       | 919ms        | 329ms        |
-| Insert one message                      | 17ms   | 330ms    | 19ms    | 38ms       | 15ms        | 29ms         | 8ms          |
-| Inserting 20 messages one after another | 465ms  | 5919ms   | 275ms   | 243ms      | 186ms       | 300ms        | 122ms        |
-| Inserting 20 messages in parallel       | 133ms  | 4521ms   | 102ms   | 237ms      | 52ms        | 293ms        | 111ms        |
-| Message insert to message list change   | 43ms   | 14ms     | 158ms   | 19ms       | 8ms         | 21ms         | 3ms          |
-| User change to message list change      | 14ms   | 95ms     | 138ms   | 44ms       | 4ms         | 126ms        | 2ms          |
-| Message search query time               | 410ms  | 252ms    | 226ms   | 53ms       | 21ms        | 58ms         | 20ms         |
-| First full render with many messages    | 382ms  | 1431ms   | 1305ms  | 766ms      | 539ms       | 1415ms       | 248ms        |
-| Storage usage                           | 202kb  | 1094kb   | 1275kb  | 879kb      | 1981kb      | 1562kb       | 1730kb       |
-| Bundle size, plain JavaScript           | 1627kb | 952kb    | 792kb   | 1136kb     | 1107kb      | 1142kb       | 956kb        |
-| Bundle size, minified+gzip              | 374kb  | 235kb    | 190kb   | 279kb      | 263kb       | 283kb        | 217kb        |
+| First angular component render          | 204ms  | 248ms    | 179ms   | 193ms      | 187ms       | 197ms        | 179ms        |
+| Page load time                          | 278ms  | 178ms    | 242ms   | 270ms      | 264ms       | 270ms        | 253ms        |
+| First full render                       | 391ms  | 1282ms   | 836ms   | 617ms      | 603ms       | 887ms        | 280ms        |
+| Insert one message                      | 16ms   | 291ms    | 16ms    | 21ms       | 12ms        | 24ms         | 7ms          |
+| Inserting 20 messages one after another | 443ms  | 5184ms   | 295ms   | 252ms      | 172ms       | 280ms        | 116ms        |
+| Inserting 20 messages in parallel       | 112ms  | 3830ms   | 99ms    | 233ms      | 38ms        | 280ms        | 109ms        |
+| Message insert to message list change   | 40ms   | 14ms     | 132ms   | 20ms       | 8ms         | 19ms         | 3ms          |
+| User change to message list change      | 12ms   | 74ms     | 124ms   | 41ms       | 3ms         | 118ms        | 2ms          |
+| Message search query time               | 368ms  | 226ms    | 195ms   | 52ms       | 23ms        | 53ms         | 19ms         |
+| First full render with many messages    | 405ms  | 1449ms   | 1437ms  | 806ms      | 538ms       | 1612ms       | 277ms        |
+| Storage usage                           | 239kb  | 1164kb   | 1961kb  | 1080kb     | 2585kb      | 2101kb       | 2506kb       |
+| Bundle size, plain JavaScript           | 1761kb | 952kb    | 792kb   | 1119kb     | 1090kb      | 1123kb       | 956kb        |
+| Bundle size, minified+gzip              | 406kb  | 235kb    | 190kb   | 274kb      | 258kb       | 278kb        | 217kb        |
 
 
 
