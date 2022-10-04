@@ -173,7 +173,6 @@ export async function run() {
     const root = {
         info: () => 1,
         pullUsers: (args: any) => {
-            log('## PullUsers()');
             console.dir(args);
             const users = state.users;
             const lastId = args.checkpoint ? args.checkpoint.id : '';
@@ -186,7 +185,6 @@ export async function run() {
                 lastId,
                 args.limit
             );
-            log('got ' + retDocs.length + ' users');
 
             const last = lastOfArray(retDocs);
             const ret = {
@@ -199,13 +197,9 @@ export async function run() {
                     createdAt: minCreatedAt
                 }
             };
-            console.log('pullUsers() ret:');
-            console.log(JSON.stringify(ret, null, 4));
             return ret;
         },
         pullMessages: (args: any) => {
-            log('## PullMessages()');
-
             const lastId = args.checkpoint ? args.checkpoint.id : '';
             const minCreatedAt = args.checkpoint ? args.checkpoint.createdAt : 0;
             const retDocs = filterForFeedResult(
@@ -215,7 +209,6 @@ export async function run() {
                 args.limit
             );
             console.dir(args);
-            log('got ' + retDocs.length + ' messages');
             const last = lastOfArray(retDocs);
             const ret = {
                 documents: retDocs,
@@ -227,8 +220,6 @@ export async function run() {
                     createdAt: minCreatedAt
                 }
             };
-            console.log('pullMessages() ret:');
-            console.log(JSON.stringify(ret, null, 4));
             return ret;
         },
         pushUsers: (args: any) => {
