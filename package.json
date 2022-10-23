@@ -141,7 +141,7 @@
     "@typescript-eslint/eslint-plugin-tslint": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
     "async-test-util": "2.0.0",
-    "concurrently": "7.4.0",
+    "concurrently": "7.5.0",
     "eslint": "8.26.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsdoc": "39.3.14",
