@@ -144,7 +144,7 @@
     "concurrently": "7.5.0",
     "eslint": "8.26.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsdoc": "39.3.25",
+    "eslint-plugin-jsdoc": "39.6.2",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "gzip-size": "6.0.0",
     "markdown-table": "3.0.2",
