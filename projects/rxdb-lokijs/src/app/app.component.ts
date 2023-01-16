@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getRxStorageLoki } from 'rxdb/plugins/lokijs';
+import { getRxStorageLoki } from 'rxdb/plugins/storage-lokijs';
 import {
   LogicInterface
 } from '../../../../src/app/logic-interface.interface';
 
 import {
   Logic
-} from '../../../rxdb-pouchdb/src/app/app.logic';
+} from '../../../rxdb-base/src/app/app.logic';
 
 import {
   createDatabase
-} from '../../../rxdb-pouchdb/src/app/services/database.service';
+} from '../../../rxdb-base/src/app/services/database.service';
 
 const LokiIncrementalIndexedDBAdapter = require('rxdb/node_modules/lokijs/src/incremental-indexeddb-adapter');
 // const LokiIndexedDBAdapter = require('lokijs/src/loki-indexed-adapter');
