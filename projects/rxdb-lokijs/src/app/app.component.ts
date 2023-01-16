@@ -12,7 +12,7 @@ import {
   createDatabase
 } from '../../../rxdb-base/src/app/services/database.service';
 
-const LokiIncrementalIndexedDBAdapter = require('rxdb/node_modules/lokijs/src/incremental-indexeddb-adapter');
+const LokiIncrementalIndexedDBAdapter = require('lokijs/src/incremental-indexeddb-adapter.js');
 // const LokiIndexedDBAdapter = require('lokijs/src/loki-indexed-adapter');
 const useAdapter = new LokiIncrementalIndexedDBAdapter();
 const baseStorage = getRxStorageLoki({
