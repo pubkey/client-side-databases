@@ -95,7 +95,8 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 | Client Side Encryption   | No                 | No                                           | **Yes** | **Yes**     | **Yes**    | No                                     |
 | Schema Support           | **Yes**            | No                                           | No      | **Yes**     | **Yes**    | **Yes**                                |
 | Custom Backend           | No                 | No                                           | No      | **Yes**     | **Yes**    | **Yes**                                |
-| Custom Conflict Handling | **Yes**            | No                                           | **Yes** | No          | No         | No                                     |
+| Custom Conflict Handling | **Yes**            | No                                           | **Yes** | **Yes**     | **Yes**    | No                                     |
+
 
 ## Starting the projects
 

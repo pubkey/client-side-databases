@@ -73,7 +73,7 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         schema: true,
         complexQueries: true,
         multiTabSupport: true,
-        customConflictHandling: false,
+        customConflictHandling: true,
         customBackend: true
     },
     'rxdb-dexie': {
@@ -84,7 +84,7 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         schema: true,
         complexQueries: true,
         multiTabSupport: true,
-        customConflictHandling: false,
+        customConflictHandling: true,
         customBackend: true
     },
     watermelondb: {
