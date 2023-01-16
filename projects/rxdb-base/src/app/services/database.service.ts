@@ -37,11 +37,11 @@ import {
     GraphQLSchemaFromRxSchemaInputSingleCollection,
     pullQueryBuilderFromRxSchema,
     pushQueryBuilderFromRxSchema,
-    RxGraphQLReplicationState
+    RxGraphQLReplicationState,
+    replicateGraphQL
 } from 'rxdb/plugins/replication-graphql';
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
 
-import { RxDBReplicationGraphQLPlugin } from 'rxdb/plugins/replication-graphql';
 import { RxDBLocalDocumentsPlugin } from 'rxdb/plugins/local-documents';
 import { wrappedKeyCompressionStorage } from 'rxdb/plugins/key-compression';
 import { doReplication, logTime } from 'src/shared/util-browser';
@@ -54,9 +54,6 @@ async function loadRxDBPlugins(
     addRxPlugin(RxDBLocalDocumentsPlugin);
 
     addRxPlugin(RxDBLeaderElectionPlugin);
-
-    // enable replication via graphql
-    addRxPlugin(RxDBReplicationGraphQLPlugin);
 
     /**
      * key-compression
@@ -182,7 +179,8 @@ function startGraphQLReplication<RxDocType>(
         input
     );
 
-    const replicationState: RxGraphQLReplicationState<RxDocType, any> = collection.syncGraphQL({
+    const replicationState: RxGraphQLReplicationState<RxDocType, any> = replicateGraphQL({
+        collection,
         url: {
             http: GRAPHQL_HTTP_PATH,
             ws: GRAPHQL_WS_PATH
