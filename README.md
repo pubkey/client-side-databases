@@ -11,7 +11,6 @@ You can use it to compare metrics and learn about the differences. The chat app 
   - AWS Amplify Datastore
   - Firebase Firestore
   - [PouchDB](https://github.com/pouchdb/pouchdb) with IndexedDB adapter & CouchDB replication
-  - [RxDB PouchDB](https://github.com/pubkey/rxdb) with PouchDB Storage & GraphQL replication
   - [RxDB LokiJS](https://rxdb.info/rx-storage-lokijs.html) with LokiJS Storage & GraphQL replication
   - [RxDB Dexie.js](https://rxdb.info/rx-storage-dexie.html) with Dexie.js Storage & GraphQL replication
   - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) with LokiJS adapter (no backend sync atm)
@@ -132,13 +131,6 @@ The official AWS mock does [not allow a live replication](https://github.com/aws
 
 * Run `npm run start:pouchdb` to start the mock server and the production build frontend.
 * Or run `npm run dev:pouchdb` to start the mock server and the development frontend server.
-
-* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
-
-### RxDB PouchDB
-
-* Run `npm run start:rxdb-pouchdb` to start the mock server and the production build frontend.
-* Or run `npm run dev:rxdb-pouchdb` to start the mock server and the development frontend server.
 
 * Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
