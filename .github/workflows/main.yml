@@ -72,11 +72,6 @@ jobs:
         with:
           run: npm run test:pouchdb
 
-      - name: test:rxdb-pouchdb
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: npm run test:rxdb-pouchdb
-
       - name: test:rxdb-lokijs
         uses: GabrielBB/xvfb-action@v1
         with:

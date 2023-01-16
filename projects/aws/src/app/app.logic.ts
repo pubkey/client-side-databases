@@ -29,15 +29,12 @@ import {
     Message as AWSMessage
 } from '../models';
 import {
-    unixTimestampToGraphql,
-    graphQLTimestampToUnix
-} from 'projects/rxdb-pouchdb/src/app/shared';
-import {
     sortByNewestFirst,
     sortMessagesByDateNewestFirst,
     doesMessageMapUserPair
 } from 'src/shared/util-server';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
+import { graphQLTimestampToUnix, unixTimestampToGraphql } from 'src/shared/util-graphql';
 
 export class Logic implements LogicInterface {
     public userChanged$: Observable<any>;

@@ -233,7 +233,7 @@ export class Logic implements LogicInterface {
                 });
                 return docs.docs;
             }),
-            map(docs => docs.map(doc => pouchDocToNormal(doc)))
+            map(docs => docs.map((doc: any) => pouchDocToNormal(doc)))
         );
     }
 

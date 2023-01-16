@@ -1,8 +1,3 @@
-// because pouchdb is missing good typings, we use the ones from RxDB
-import type {
-    PouchDBInstance
-} from 'rxdb/plugins/pouchdb';
-
 import * as PouchDBModule from 'pouchdb-core';
 import * as PouchDbFindModule from 'pouchdb-find';
 import * as PouchDbAdapterIndexedDb from 'pouchdb-adapter-idb';
@@ -31,8 +26,8 @@ import { Observable, Subject } from 'rxjs';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export interface DatabaseType {
-    users: PouchDBInstance;
-    messages: PouchDBInstance;
+    users: any;
+    messages: any;
     users$: Observable<any>;
     messages$: Observable<any>;
 }
@@ -43,13 +38,13 @@ export interface DatabaseType {
 export async function createDatabase(): Promise<DatabaseType> {
     logTime('createDatabase()');
 
-    const pouchDbUsers: PouchDBInstance = new PouchDB(
+    const pouchDbUsers: any = new PouchDB(
         'users',
         {
             adapter: 'idb'
         }
     );
-    const pouchDbMessages: PouchDBInstance = new PouchDB(
+    const pouchDbMessages: any = new PouchDB(
         'messages',
         {
             adapter: 'idb'
@@ -93,7 +88,7 @@ export async function createDatabase(): Promise<DatabaseType> {
     };
 }
 
-export function getChangeFeed(pouchdb: PouchDBInstance): Observable<any> {
+export function getChangeFeed(pouchdb: any): Observable<any> {
     const subject = new Subject();
     const changes = pouchdb.changes({
         since: 'now',
