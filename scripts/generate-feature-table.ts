@@ -65,17 +65,6 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: true,
         customBackend: false
     },
-    'rxdb-pouchdb': {
-        offlineFirst: true,
-        observableQueries: true,
-        realtimeReplication: true,
-        clientSideEncryption: true,
-        schema: true,
-        complexQueries: true,
-        multiTabSupport: true,
-        customConflictHandling: true,
-        customBackend: true
-    },
     'rxdb-lokijs': {
         offlineFirst: true,
         observableQueries: true,
