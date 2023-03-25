@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <script>
+
+        var worker = new Worker("./files/file-system-access-api.worker.js");
+        worker.postMessage("start");
+    </script>
+
+</body>
+
+</html>

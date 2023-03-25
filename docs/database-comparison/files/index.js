@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var tester = createTester();
   var buttons = document.getElementsByTagName('button');
   var display = document.getElementById('display');
-  var worker = new Worker('worker.js');
 
   function disableButtons(bool) {
     for (var i = 0; i < buttons.length; i++) {
@@ -81,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dbTypeChoice.label + (useWorker ? ' in a worker' : '') + '...';
 
     waitForUI().then(function () {
-      var startTime = Date.now();
+      var startTime = performance.now();
       if (useWorker) {
         return workerPromise({
           action: 'test',
@@ -91,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!e.data.success) {
             throw new Error('did not work');
           }
-          return Date.now() - startTime;
+          return performance.now() - startTime;
         });
       } else if (cloneWorker) {
         return workerPromise({
@@ -102,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!e.data.success) {
             throw new Error('did not work');
           }
-          return Date.now() - startTime;
+          return performance.now() - startTime;
         });
       }
       var fun = tester.getTest(dbTypeChoice.value, docSizeChoice);
@@ -110,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return Promise.resolve().then(function () {
         return fun(numDocs);
       }).then(function () {
-        return Date.now() - startTime;
+        return performance.now() - startTime;
       });
     }).then(function (timeSpent) {
       display.innerHTML += "\nTook " + timeSpent + "ms";

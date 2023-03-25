@@ -1,5 +1,4 @@
 function createTester() {
-  'use strict';
 
   var pouch = new PouchDB('pouch_test');
   var pouchWebSQL = new PouchDB('pouch_test_websql', { adapter: 'websql' });
@@ -7,9 +6,13 @@ function createTester() {
   var dexieDB = new Dexie('dexie_test');
   dexieDB.version(1).stores({ docs: '++,id' });
   dexieDB.open();
+
+  var fileSystemAccessApiWorker = new Worker("./files/file-system-access-api.worker.js");
+
   var openIndexedDBReq;
   var webSQLDB;
   var localForageDB;
+  var inc = 0;
   var localForageWebSQLDB;
   var obj, map, set, imMap, imSet;
   if (typeof localforage !== 'undefined') {
@@ -93,6 +96,33 @@ function createTester() {
       obj['doc_' + i] = docs[i]
     }
     imMap.mergeDeep(obj);
+  }
+  /**
+   * @link https://webkit.org/blog/12257/the-file-system-access-api-with-origin-private-file-system/
+   */
+  function fileSystemAccessTest(docs) {
+    var promise = Promise.resolve();
+    docs.forEach(function (doc) {
+      var counter = inc++;
+      var ret = new Promise(function (res) {
+        var fn = function (event) {
+          if (event.data.counter === counter) {
+            // console.log('Received message from worker: ' + event.data + '');
+            res();
+            fileSystemAccessApiWorker.removeEventListener("message", fn);
+          }
+        }
+        fileSystemAccessApiWorker.addEventListener("message", fn);
+      });
+      fileSystemAccessApiWorker.postMessage({
+        counter: counter,
+        doc: doc
+      });
+      promise = promise.then(function () {
+        return ret;
+      });
+    });
+    return promise;
   }
   function imSetTest(docs) {
     imSet = new Immutable.Set();
@@ -328,6 +358,9 @@ function createTester() {
         return imFromJSTest;
       case 'immergedeep':
         return imMapMergeDeepTest;
+      case 'file-system-access-api':
+        return fileSystemAccessTest;
+
     }
   }
 
