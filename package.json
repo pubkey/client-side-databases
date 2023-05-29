@@ -77,7 +77,7 @@
     "@angular/router": "14.2.12",
     "@aws-amplify/cli": "10.5.1",
     "@aws-amplify/datastore": "3.12.12",
-    "@aws-amplify/ui-angular": "2.4.26",
+    "@aws-amplify/ui-angular": "2.4.27",
     "@babel/runtime": "7.20.1",
     "@nozbe/watermelondb": "0.24.0",
     "@types/express": "4.17.14",
