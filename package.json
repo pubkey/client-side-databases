@@ -128,7 +128,7 @@
     "@types/faker": "5.5.9",
     "@types/lokijs": "1.5.12",
     "@types/node": "16.18.61",
-    "@types/pouchdb": "6.4.1",
+    "@types/pouchdb": "6.4.2",
     "@types/pouchdb-find": "7.3.2",
     "@types/ws": "8.5.8",
     "@typescript-eslint/eslint-plugin": "5.43.0",
