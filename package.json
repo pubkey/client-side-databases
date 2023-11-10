@@ -130,7 +130,7 @@
     "@types/node": "16.18.61",
     "@types/pouchdb": "6.4.2",
     "@types/pouchdb-find": "7.3.3",
-    "@types/ws": "8.5.8",
+    "@types/ws": "8.5.9",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/eslint-plugin-tslint": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",
