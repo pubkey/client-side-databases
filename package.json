@@ -111,7 +111,7 @@
     "rxjs": "7.8.1",
     "subscriptions-transport-ws": "0.11.0",
     "testcafe": "2.6.2",
-    "tslib": "2.4.1",
+    "tslib": "2.6.2",
     "typeface-roboto": "1.1.13",
     "zone.js": "0.13.1"
   },
