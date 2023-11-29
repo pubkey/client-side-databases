@@ -1,6 +1,6 @@
-# Offline First Database Comparison
+# Local First Database Comparison
 
-In this project I have implemented the exact same chat application with different database technologies.
+In this project I have implemented the exact same chat application with different local first database technologies.
 You can use it to compare metrics and learn about the differences. The chat app is a web based **angular** application, with functionality similar to Whatsapp Web.
 
 <p align="center">
