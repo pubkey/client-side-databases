@@ -44,8 +44,7 @@ jobs:
           rm -f node_modules/__ngcc_entry_points__.json
           npm install --legacy-peer-deps --force
         
-      - name: build
-        run: npm run build
+      - run: npm run build
 
       - name: test:aws
         uses: GabrielBB/xvfb-action@v1
@@ -107,6 +106,8 @@ jobs:
         run: |
           rm -f node_modules/__ngcc_entry_points__.json
           npm install --legacy-peer-deps --force
+
+      - run: npm run build
 
       - name: test:pouchdb
         uses: GabrielBB/xvfb-action@v1
