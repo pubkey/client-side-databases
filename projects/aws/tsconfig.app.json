@@ -4,7 +4,8 @@
     "outDir": "../../out-tsc/app",
     "types": [
       "node"
-    ]
+    ],
+    "resolveJsonModule": true,
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": false
