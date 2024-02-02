@@ -21,9 +21,6 @@ import {
     GRAPHQL_SUBSCRIPTION_PORT,
     GRAPHQL_SUBSCRIPTION_PATH
 } from '../src/app/shared';
-import {
-    unixInSeconds
-} from '../../../src/shared/util-server';
 import { Message, User } from '../../../src/shared/types';
 import { graphQLSchemaFromRxSchema } from 'rxdb/plugins/replication-graphql';
 import { RxUsersSchema } from './app/schemas/user.schema';
