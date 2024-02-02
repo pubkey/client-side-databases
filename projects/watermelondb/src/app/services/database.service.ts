@@ -21,10 +21,10 @@ const adapter = new LokiJSAdapter({
 
     // --- Optional, but recommended event handlers:
 
-    onQuotaExceededError: (error) => {
+    onQuotaExceededError: () => {
         // Browser ran out of disk space -- offer the user to reload the app or log out
     },
-    onSetUpError: (error) => {
+    onSetUpError: () => {
         // Database failed to load -- offer the user to reload the app or log out
     },
     extraIncrementalIDBOptions: {

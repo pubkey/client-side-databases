@@ -279,7 +279,7 @@ export class Logic implements LogicInterface {
                 )
             })
         );
-    };
+    }
 
     async hasData(): Promise<boolean> {
         const userDocs: AWSUser[] = await DataStore.query(

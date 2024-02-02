@@ -120,4 +120,4 @@ export function sortArrayByKey<T>(array: T[], key: string): T[] {
     const y = (b as any)[key];
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   });
-};
+}

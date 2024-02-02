@@ -9,8 +9,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class MessageBoxComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }
