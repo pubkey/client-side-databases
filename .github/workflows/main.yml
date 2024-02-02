@@ -72,6 +72,40 @@ jobs:
         with:
           run: npm run test:firebase
 
+      - run: npm run measure:size
+      - run: npm run aggregate-metrics
+
+      - name: lint
+        run: npm run lint
+
+
+  test-some:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Reuse npm cache folder
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          # invalidate cache when any package-lock.json changes
+          key: ${{ runner.os }}-npm-test-x2-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-test-x2-
+
+      - name: install npm dependencies
+        run: |
+          rm -f node_modules/__ngcc_entry_points__.json
+          npm install --legacy-peer-deps --force
+
       - name: test:pouchdb
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -91,12 +125,3 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: npm run test:watermelondb
-
-      - name: measure build size
-        run: npm run measure:size
-
-      - name: aggregate metrics
-        run: npm run aggregate-metrics
-
-      - name: lint
-        run: npm run lint
