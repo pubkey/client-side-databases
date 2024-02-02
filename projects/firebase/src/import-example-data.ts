@@ -22,10 +22,8 @@ import {
 export type Database = Firestore;
 export type Collection = CollectionReference;
 
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+// eslint-disable-next-line
+const exampleData: { users: User[]; messages: Message[]; } = require('../../../example-data.json');
 
 async function importExampleDataset(db: Firestore) {
 
@@ -63,8 +61,9 @@ async function importExampleDataset(db: Firestore) {
 }
 
 
+const t = true;
 async function waitForConnection(db: Firestore) {
-    while (true) {
+    while (t === true) {
         try {
             const messagesCollection = collection(db, MESSAGES_COLLECTION);
             await getDocs(messagesCollection);

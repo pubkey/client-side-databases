@@ -12,8 +12,6 @@
     "src/**/*.d.ts"
   ],
   "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts",
     "node_modules/aws-amplify-angular/dist/src/components/authenticator/"
   ]
 }
