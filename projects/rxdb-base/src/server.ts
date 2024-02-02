@@ -30,10 +30,7 @@ import { RxUsersSchema } from './app/schemas/user.schema';
 import { RxMessagesSchema } from './app/schemas/message.schema';
 import { lastOfArray } from 'rxdb';
 
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+import exampleData from '../../../example-data.json';
 
 function log(msg: any) {
     const prefix = '# GraphQL Server: ';

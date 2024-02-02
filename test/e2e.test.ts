@@ -3,10 +3,8 @@ import {
 } from 'testcafe';
 import AsyncTestUtil, { wait, randomString, waitUntil } from 'async-test-util';
 import {
-    Message,
     Metric,
-    MetricByKey,
-    User
+    MetricByKey
 } from '../src/shared/types';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -34,10 +32,7 @@ switch (projectKey) {
 
 
 const window: any = {};
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../example-data.json');
+import exampleData from '../example-data.json';
 fixture`Example page`.page(FRONTEND_URL);
 
 async function insertMessageToFirstUser(t: TestController, messageText: string) {

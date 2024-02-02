@@ -10,10 +10,6 @@ import {
     setDoc
 } from 'firebase/firestore';
 import {
-    Message,
-    User
-} from '../../../src/shared/types';
-import {
     FIREBASE_CREDENTIALS,
     MESSAGES_COLLECTION,
     USERS_COLLECTION
@@ -22,8 +18,7 @@ import {
 export type Database = Firestore;
 export type Collection = CollectionReference;
 
-// eslint-disable-next-line
-const exampleData: { users: User[]; messages: Message[]; } = require('../../../example-data.json');
+import exampleData from '../../../example-data.json';
 
 async function importExampleDataset(db: Firestore) {
 

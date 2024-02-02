@@ -9,10 +9,7 @@ import PouchReplicationPlugin from 'pouchdb-replication';
 import PouchdbAdapterHttp from 'pouchdb-adapter-http';
 import { COUCHDB_PATH, normalToPouchDoc } from './app/shared';
 
-import { Message, User } from '../../../src/shared/types';
-
-// eslint-disable-next-line
-const exampleData: { users: User[]; messages: Message[]; } = require('../../../example-data.json');
+import exampleData from '../../../example-data.json';
 
 const PouchDB: any = PouchDBModule;
 PouchDB.plugin(PouchDbFindModule);
