@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-message-box',
@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./message-box.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageBoxComponent implements OnInit {
+export class MessageBoxComponent {
 
   constructor() { }
 }

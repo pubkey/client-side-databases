@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  OnInit
+  Component
 } from '@angular/core';
 
 import {
@@ -21,7 +20,7 @@ export function simulateAsync(): Promise<void> {
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'blueprint';
 
   public logic: LogicInterface = new Logic();
