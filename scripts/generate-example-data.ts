@@ -22,7 +22,7 @@ import * as path from 'path';
 const EXAMPLE_DATA_PATH = path.join(
     __dirname,
     '../',
-    'example-data.json'
+    'example-data.ts'
 );
 
 /**
@@ -54,7 +54,7 @@ let lastUserId = 0;
 function randUser(): User {
     lastUserId++;
     return {
-        id: FakerName.firstName().toLowerCase(),
+        id: FakerName.firstName().toLowerCase() + lastUserId,
         createdAt: unixInSeconds()
     };
 }
@@ -114,7 +114,7 @@ async function run() {
     const data = getExampleDataset();
     fs.writeFileSync(
         EXAMPLE_DATA_PATH,
-        JSON.stringify(data, null, 4)
+        'export const exampleData = ' + JSON.stringify(data, null, 4) + ' as const;'
     );
 }
 run();

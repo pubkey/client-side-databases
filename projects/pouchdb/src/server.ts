@@ -9,7 +9,7 @@ import PouchReplicationPlugin from 'pouchdb-replication';
 import PouchdbAdapterHttp from 'pouchdb-adapter-http';
 import { COUCHDB_PATH, normalToPouchDoc } from './app/shared';
 
-import exampleData from '../../../example-data.json';
+import { exampleData } from '../../../example-data';
 
 const PouchDB: any = PouchDBModule;
 PouchDB.plugin(PouchDbFindModule);

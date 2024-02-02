@@ -27,7 +27,7 @@ import { RxUsersSchema } from './app/schemas/user.schema';
 import { RxMessagesSchema } from './app/schemas/message.schema';
 import { lastOfArray } from 'rxdb';
 
-import exampleData from '../../../example-data.json';
+import { exampleData } from '../../../example-data';
 
 function log(msg: any) {
     const prefix = '# GraphQL Server: ';

@@ -18,7 +18,7 @@ import {
 export type Database = Firestore;
 export type Collection = CollectionReference;
 
-import exampleData from '../../../example-data.json';
+import { exampleData } from '../../../example-data';
 
 async function importExampleDataset(db: Firestore) {
 
