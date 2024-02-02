@@ -83,7 +83,7 @@
     "@types/express": "4.17.21",
     "@types/express-serve-static-core": "4.17.42",
     "aws-amplify": "4.3.46",
-    "aws-appsync": "4.1.9",
+    "aws-appsync": "4.1.10",
     "buffer": "6.0.3",
     "clone": "2.1.2",
     "core-js": "3.33.2",
