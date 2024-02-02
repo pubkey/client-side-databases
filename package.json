@@ -137,7 +137,7 @@
     "async-test-util": "2.2.1",
     "concurrently": "7.6.0",
     "eslint": "8.53.0",
-    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "39.9.1",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "gzip-size": "6.0.0",
