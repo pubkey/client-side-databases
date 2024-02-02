@@ -10,10 +10,6 @@ import {
     setDoc
 } from 'firebase/firestore';
 import {
-    Message,
-    User
-} from '../../../src/shared/types';
-import {
     FIREBASE_CREDENTIALS,
     MESSAGES_COLLECTION,
     USERS_COLLECTION
@@ -22,10 +18,7 @@ import {
 export type Database = Firestore;
 export type Collection = CollectionReference;
 
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+import { exampleData } from '../../../example-data';
 
 async function importExampleDataset(db: Firestore) {
 
@@ -63,8 +56,9 @@ async function importExampleDataset(db: Firestore) {
 }
 
 
+const t = true;
 async function waitForConnection(db: Firestore) {
-    while (true) {
+    while (t === true) {
         try {
             const messagesCollection = collection(db, MESSAGES_COLLECTION);
             await getDocs(messagesCollection);

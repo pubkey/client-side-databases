@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "blueprint:build"
+            "buildTarget": "blueprint:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "blueprint:build:production"
+              "buildTarget": "blueprint:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "blueprint:build"
+            "buildTarget": "blueprint:build"
           }
         },
         "lint": {
@@ -169,10 +169,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "firebase:build:production"
+              "buildTarget": "firebase:build:production"
             },
             "development": {
-              "browserTarget": "firebase:build:development"
+              "buildTarget": "firebase:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -180,7 +180,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "firebase:build"
+            "buildTarget": "firebase:build"
           }
         },
         "lint": {
@@ -268,10 +268,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pouchdb:build:production"
+              "buildTarget": "pouchdb:build:production"
             },
             "development": {
-              "browserTarget": "pouchdb:build:development"
+              "buildTarget": "pouchdb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -279,7 +279,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pouchdb:build"
+            "buildTarget": "pouchdb:build"
           }
         },
         "lint": {
@@ -367,10 +367,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "aws:build:production"
+              "buildTarget": "aws:build:production"
             },
             "development": {
-              "browserTarget": "aws:build:development"
+              "buildTarget": "aws:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -378,7 +378,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "aws:build"
+            "buildTarget": "aws:build"
           }
         },
         "lint": {
@@ -466,10 +466,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "watermelondb:build:production"
+              "buildTarget": "watermelondb:build:production"
             },
             "development": {
-              "browserTarget": "watermelondb:build:development"
+              "buildTarget": "watermelondb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -477,7 +477,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "watermelondb:build"
+            "buildTarget": "watermelondb:build"
           }
         },
         "lint": {
@@ -565,10 +565,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rxdb-lokijs:build:production"
+              "buildTarget": "rxdb-lokijs:build:production"
             },
             "development": {
-              "browserTarget": "rxdb-lokijs:build:development"
+              "buildTarget": "rxdb-lokijs:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -576,7 +576,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rxdb-lokijs:build"
+            "buildTarget": "rxdb-lokijs:build"
           }
         },
         "lint": {
@@ -664,10 +664,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rxdb-dexie:build:production"
+              "buildTarget": "rxdb-dexie:build:production"
             },
             "development": {
-              "browserTarget": "rxdb-dexie:build:development"
+              "buildTarget": "rxdb-dexie:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -675,7 +675,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rxdb-dexie:build"
+            "buildTarget": "rxdb-dexie:build"
           }
         },
         "lint": {

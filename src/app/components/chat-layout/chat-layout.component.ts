@@ -22,7 +22,6 @@ import {
 import {
   UserListComponent
 } from '../user-list/user-list.component';
-import { unixInSeconds } from 'src/shared/util-server';
 import { now } from 'src/shared/util-browser';
 
 @Component({

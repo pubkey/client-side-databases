@@ -34,9 +34,6 @@ import {
     doesMessageMapUserPair,
     sortByNewestFirst
 } from 'src/shared/util-server';
-import {
-    logTime
-} from 'src/shared/util-browser';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 export class Logic implements LogicInterface {
@@ -67,7 +64,7 @@ export class Logic implements LogicInterface {
                 });
                 const first: User = docs.docs[0] as any;
                 if (!first) {
-                    console.log('# user document not found ' + userName);
+                    console.log('# user document not found on getUserByName()' + userName);
                     return null;
                 }
                 return first;

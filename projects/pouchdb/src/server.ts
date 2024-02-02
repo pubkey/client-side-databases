@@ -7,14 +7,9 @@ import PouchDbFindModule from 'pouchdb-find';
 import PouchDbAdapterMemory from 'pouchdb-adapter-memory';
 import PouchReplicationPlugin from 'pouchdb-replication';
 import PouchdbAdapterHttp from 'pouchdb-adapter-http';
-import { PouchDBInstance } from 'rxdb';
 import { COUCHDB_PATH, normalToPouchDoc } from './app/shared';
 
-import { Message, User } from '../../../src/shared/types';
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+import { exampleData } from '../../../example-data';
 
 const PouchDB: any = PouchDBModule;
 PouchDB.plugin(PouchDbFindModule);
@@ -22,13 +17,13 @@ PouchDB.plugin(PouchDbAdapterMemory);
 PouchDB.plugin(PouchReplicationPlugin);
 PouchDB.plugin(PouchdbAdapterHttp);
 
-const pouchdbUsers: PouchDBInstance = new PouchDB(
+const pouchdbUsers = new PouchDB(
     'users',
     {
         adapter: 'memory'
     }
 );
-const pouchdbMessages: PouchDBInstance = new PouchDB(
+const pouchdbMessages = new PouchDB(
     'messages',
     {
         adapter: 'memory'

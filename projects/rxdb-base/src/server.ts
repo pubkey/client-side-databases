@@ -21,19 +21,13 @@ import {
     GRAPHQL_SUBSCRIPTION_PORT,
     GRAPHQL_SUBSCRIPTION_PATH
 } from '../src/app/shared';
-import {
-    unixInSeconds
-} from '../../../src/shared/util-server';
 import { Message, User } from '../../../src/shared/types';
 import { graphQLSchemaFromRxSchema } from 'rxdb/plugins/replication-graphql';
 import { RxUsersSchema } from './app/schemas/user.schema';
 import { RxMessagesSchema } from './app/schemas/message.schema';
 import { lastOfArray } from 'rxdb';
 
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+import { exampleData } from '../../../example-data';
 
 function log(msg: any) {
     const prefix = '# GraphQL Server: ';

@@ -9,7 +9,7 @@
 /bazel-out
 
 # generated files
-example-data.json
+example-data.ts
 /metrics
 feature-table.json
 

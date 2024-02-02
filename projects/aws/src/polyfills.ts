@@ -9,6 +9,8 @@ logPageLoadTime();
 (window as any).process = {
     env: { DEBUG: undefined },
 };
+
+// eslint-disable-next-line
 global.Buffer = global.Buffer || require('buffer').Buffer;
 
 

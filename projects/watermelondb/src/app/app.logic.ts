@@ -7,8 +7,7 @@ import {
     map,
     shareReplay,
     mergeMap,
-    filter,
-    tap
+    filter
 } from 'rxjs/operators';
 import {
     LogicInterface

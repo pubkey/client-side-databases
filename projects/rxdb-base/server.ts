@@ -26,10 +26,7 @@ import { Message, User } from 'src/shared/types';
 import { RxUsersSchema } from './src/app/schemas/user.schema';
 import { RxMessagesSchema } from './src/app/schemas/message.schema';
 
-const exampleData: {
-    users: User[];
-    messages: Message[];
-} = require('../../../example-data.json');
+import { exampleData } from '../../example-data';
 
 function log(msg: any) {
     const prefix = '# GraphQL Server: ';

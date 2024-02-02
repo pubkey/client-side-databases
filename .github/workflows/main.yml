@@ -10,9 +10,15 @@ on:
 
   workflow_dispatch:
 
+# https://stackoverflow.com/a/72408109/3443137
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js environment
@@ -38,8 +44,7 @@ jobs:
           rm -f node_modules/__ngcc_entry_points__.json
           npm install --legacy-peer-deps --force
         
-      - name: build
-        run: npm run build
+      - run: npm run build
 
       - name: test:aws
         uses: GabrielBB/xvfb-action@v1
@@ -67,6 +72,43 @@ jobs:
         with:
           run: npm run test:firebase
 
+      - run: npm run measure:size
+      - run: npm run aggregate-metrics
+
+      - name: lint
+        run: npm run lint
+
+
+  test-some:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Reuse npm cache folder
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          # invalidate cache when any package-lock.json changes
+          key: ${{ runner.os }}-npm-test-x2-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-test-x2-
+
+      - name: install npm dependencies
+        run: |
+          rm -f node_modules/__ngcc_entry_points__.json
+          npm install --legacy-peer-deps --force
+
+      - run: npm run build
+
       - name: test:pouchdb
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -86,12 +128,3 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: npm run test:watermelondb
-
-      - name: measure build size
-        run: npm run measure:size
-
-      - name: aggregate metrics
-        run: npm run aggregate-metrics
-
-      - name: lint
-        run: npm run lint

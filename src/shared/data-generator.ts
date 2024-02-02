@@ -4,7 +4,7 @@ import {
 } from './types';
 
 
-import * as EXAMPLE_DATA from '../../example-data.json';
+import { exampleData } from '../../example-data';
 
 /**
  * returns a complete set of users with messages
@@ -13,5 +13,5 @@ export function getExampleDataset(): {
   messages: Message[];
   users: User[];
 } {
-  return EXAMPLE_DATA;
+  return exampleData as any;
 }
