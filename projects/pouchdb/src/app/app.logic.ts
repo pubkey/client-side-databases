@@ -64,7 +64,7 @@ export class Logic implements LogicInterface {
                 });
                 const first: User = docs.docs[0] as any;
                 if (!first) {
-                    console.log('# user document not found ' + userName);
+                    console.log('# user document not found on getUserByName()' + userName);
                     return null;
                 }
                 return first;

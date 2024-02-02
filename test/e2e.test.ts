@@ -35,6 +35,10 @@ const window: any = {};
 import { exampleData } from '../example-data';
 fixture`Example page`.page(FRONTEND_URL);
 
+
+console.log('aaaa');
+console.dir(exampleData);
+
 async function insertMessageToFirstUser(t: TestController, messageText: string) {
     // click on the first user
     const firstUserDiv = Selector('.user-with-last-message').nth(0);

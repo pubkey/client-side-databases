@@ -50,11 +50,9 @@ function randMessage(
     };
 }
 
-let lastUserId = 0;
 function randUser(): User {
-    lastUserId++;
     return {
-        id: FakerName.firstName().toLowerCase() + lastUserId,
+        id: FakerName.firstName().toLowerCase(),
         createdAt: unixInSeconds()
     };
 }
