@@ -126,6 +126,7 @@
     "@angular/compiler-cli": "17.1.2",
     "@angular/language-service": "17.1.2",
     "@types/faker": "5.5.9",
+    "@types/jsonwebtoken": "9.0.5",
     "@types/lokijs": "1.5.12",
     "@types/node": "20.11.16",
     "@types/pouchdb": "6.4.2",

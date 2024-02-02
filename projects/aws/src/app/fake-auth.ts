@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 const STORAGE_KEY = 'mock-amplify-auth.state';
 const USER_ID_PREFIX = 'mock-auth-';
 
-let authState;
+let authState: any;
 
 try {
-  authState = JSON.parse(window.localStorage.getItem(STORAGE_KEY)) || {};
+  authState = JSON.parse(window.localStorage.getItem(STORAGE_KEY) as any) || {};
 } catch (err) {
   authState = {};
 }
@@ -21,12 +21,12 @@ export const Auth = {
   extractEmail
 };
 
-function signUp(email) {
+function signUp(email: string) {
   updateState({ email, loggedIn: false });
   return timerPromise(1200);
 }
 
-function signIn(email) {
+function signIn(email: string) {
   updateState({ email, session: createSession({ email }), loggedIn: true });
   return timerPromise(700);
 }
@@ -48,12 +48,12 @@ function resendSignUp() {
   return timerPromise(100);
 }
 
-function updateState(newState) {
+function updateState(newState: any) {
   Object.assign(authState, newState);
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(authState));
 }
 
-function timerPromise(ms, success = true, arg = {}) {
+function timerPromise(ms: number, success = true, arg = {}) {
   if (!success && !arg) {
     arg = new Error();
   }
@@ -62,16 +62,16 @@ function timerPromise(ms, success = true, arg = {}) {
   );
 }
 
-function extractEmail(userId) {
+function extractEmail(userId: string) {
   return Buffer.from(
     userId.substring(USER_ID_PREFIX.length),
     "base64"
   ).toString();
 }
 
-function createSession({ email }) {
+function createSession(args: { email: string }) {
   const timeS = Math.floor(Date.now() / 1000);
-  const cognitoUsername = `${USER_ID_PREFIX}${Buffer.from(email).toString(
+  const cognitoUsername = `${USER_ID_PREFIX}${Buffer.from(args.email).toString(
     "base64"
   )}`;
   const idTokenPayload = {
@@ -84,7 +84,7 @@ function createSession({ email }) {
     exp: timeS + 100000,
     iss: "https://cognito-idp.local.amazonaws.com/local_mock-auth",
     "cognito:username": cognitoUsername,
-    email
+    email: args.email
   };
   const idToken = {
     jwtToken: jwt.sign(idTokenPayload, "mock-auth-secret"),
