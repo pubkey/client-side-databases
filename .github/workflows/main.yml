@@ -27,7 +27,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Reuse npm cache folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -53,7 +53,7 @@ jobs:
 
       # https://firebase.google.com/docs/emulator-suite/install_and_configure#integrate_with_your_ci_system
       - name: Reuse firebase emulators cache folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -90,7 +90,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Reuse npm cache folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
