@@ -92,7 +92,7 @@
     "express-graphql": "0.12.0",
     "faker": "5.5.3",
     "firebase": "10.8.0",
-    "firebase-tools": "13.2.1",
+    "firebase-tools": "13.3.0",
     "got": "11.8.6",
     "graphql": "16.8.1",
     "graphql-subscriptions": "2.0.0",
