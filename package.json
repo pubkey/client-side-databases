@@ -47,6 +47,7 @@
     "server:pouchdb:couchdb": "sh ./projects/pouchdb/src/server.sh",
     "server:pouchdb:data": "ts-node --skip-project ./projects/pouchdb/src/server.ts",
     "server:rxdb": "ts-node --skip-project ./projects/rxdb-base/src/server.ts",
+    "server:electric:db:migrate": "npx electric-sql with-config \"npx pg-migrations apply --database {{ELECTRIC_PROXY}} --directory projects/electric-sql/db/migrations\"",
     "client": "ng serve",
     "client:aws": "ng serve --project aws --port 3000",
     "client:firebase": "ng serve --project firebase --port 3000",
@@ -88,6 +89,7 @@
     "clone": "2.1.2",
     "core-js": "3.33.2",
     "cors": "2.8.5",
+    "electric-sql": "^0.9.0",
     "express": "4.18.2",
     "express-graphql": "0.12.0",
     "faker": "5.5.3",
@@ -113,6 +115,7 @@
     "testcafe": "2.6.2",
     "tslib": "2.6.2",
     "typeface-roboto": "1.1.13",
+    "wa-sqlite": "rhashimoto/wa-sqlite#semver:^0.9.8",
     "zone.js": "0.14.3"
   },
   "devDependencies": {
@@ -125,6 +128,7 @@
     "@angular/cli": "17.1.2",
     "@angular/compiler-cli": "17.1.2",
     "@angular/language-service": "17.1.2",
+    "@databases/pg-migrations": "^5.0.2",
     "@types/faker": "5.5.9",
     "@types/jsonwebtoken": "9.0.5",
     "@types/node": "20.11.16",
