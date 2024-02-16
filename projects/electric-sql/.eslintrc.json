@@ -9,7 +9,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/firebase/tsconfig.app.json"
+          "projects/electric-sql/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },
