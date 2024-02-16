@@ -10,7 +10,7 @@
  */
 
 CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR(40) PRIMARY KEY,
+    id VARCHAR PRIMARY KEY,
     created_at BIGINT
 );
 
@@ -21,10 +21,10 @@ ALTER TABLE users ENABLE ELECTRIC;
 CREATE TABLE IF NOT EXISTS messages (
     id UUID PRIMARY KEY,
     text TEXT NOT NULL,
-    created_at BIGINT NOT NULL CHECK (created_at >= 0 AND created_at <= 100000000000000),
+    created_at BIGINT NOT NULL,
     read BOOLEAN NOT NULL,
-    sender VARCHAR(40) NOT NULL,
-    receiver VARCHAR(40) NOT NULL,
+    sender VARCHAR NOT NULL,
+    receiver VARCHAR NOT NULL,
     FOREIGN KEY (sender) REFERENCES users(id),
     FOREIGN KEY (receiver) REFERENCES users(id)
 );
