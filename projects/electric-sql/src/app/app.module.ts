@@ -12,7 +12,10 @@ import { ElectricService } from './services/electric.service';
 
 export function initializeApp(electricService: ElectricService) {
   return (): Promise<any> => {
-    return electricService.initElectricDB();
+    return Promise.all([
+      electricService.initElectricDB(),
+      electricService.syncDb(),
+    ]);
   };
 }
 
