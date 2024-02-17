@@ -8,22 +8,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ChatModule } from '../../../../src/app/chat.module';
 import { AppComponent } from './app.component';
+import { ElectricService } from './services/electric.service';
 
-import { DatabaseService, initDatabase } from './services/database.service';
+export function initializeApp(electricService: ElectricService) {
+  return (): Promise<any> => {
+    return electricService.initElectricDB();
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, ChatModule],
   providers: [
+    ElectricService,
     {
       provide: APP_INITIALIZER,
-      useFactory: () => initDatabase,
+      useFactory: initializeApp,
+      deps: [ElectricService],
       multi: true,
-      deps: [
-        /* your dependencies */
-      ],
     },
-    DatabaseService,
     { provide: APP_BASE_HREF, useValue: '/' },
     {
       provide: LocationStrategy,
