@@ -29,5 +29,16 @@ export class ElectricService {
     this.electric = await electrify(conn, schema, config);
   }
 
-  // Provide methods to interact with the electric database
+  getDb() {
+    return this.electric.db;
+  }
+
+  async syncDb() {
+    // Resolves when the shape subscription has been established.
+    const usersShape = await this.electric.db.users.sync();
+    // Resolves when the data has been synced into the local database.
+    await usersShape.synced;
+    const messagesShape = await this.electric.db.messages.sync();
+    await messagesShape.synced;
+  }
 }
