@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS messages (
     created_at BIGINT NOT NULL,
     read BOOLEAN NOT NULL,
     sender VARCHAR NOT NULL,
-    receiver VARCHAR NOT NULL,
+    reciever VARCHAR NOT NULL,
     FOREIGN KEY (sender) REFERENCES users(id),
     FOREIGN KEY (receiver) REFERENCES users(id)
 );
