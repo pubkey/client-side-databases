@@ -30,7 +30,7 @@ export class ElectricService {
   }
 
   getDb() {
-    return this.electric.db;
+    return this.electric;
   }
 
   async syncDb() {
