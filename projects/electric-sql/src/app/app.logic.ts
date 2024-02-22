@@ -18,15 +18,7 @@ import {
   UserWithLastMessage,
 } from '../../../../src/shared/types';
 
-import {
-  doc,
-  getDoc,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
+import { doc, getDoc, orderBy, query, where } from 'firebase/firestore';
 
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import { sortByNewestFirst } from 'src/shared/util-server';
@@ -295,7 +287,7 @@ export class Logic implements LogicInterface {
    * @returns
    */
   async hasData(): Promise<boolean> {
-    const docs = await getDocs(query(this.users, limit(1)));
-    return docs.size > 0;
+    const user = await this.electric.db.users.findFirst();
+    return !!user;
   }
 }
