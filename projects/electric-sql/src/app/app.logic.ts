@@ -1,5 +1,5 @@
 import { collectionData } from 'rxfire/firestore';
-import { Observable, combineLatest, from } from 'rxjs';
+import { Observable, combineLatest, forkJoin, from } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -30,31 +30,15 @@ import {
 } from 'firebase/firestore';
 
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
-import {
-  sortByNewestFirst,
-  sortMessagesByDateNewestFirst,
-} from 'src/shared/util-server';
+import { sortByNewestFirst } from 'src/shared/util-server';
 import { Electric } from './generated/client';
 import { ElectricService } from './services/electric.service';
+import { convertMessageType } from './util/convertMessageType';
 
 export class Logic implements LogicInterface {
   private electric: Electric;
   constructor(private electricService: ElectricService) {
     this.init();
-  }
-  getMessagesForUserPair(
-    userPair$: Observable<UserPair>
-  ): Observable<Message[]> {
-    throw new Error('Method not implemented.');
-  }
-  addMessage(message: AddMessage): Promise<any> {
-    throw new Error('Method not implemented.');
-  }
-  addUser(user: User): Promise<any> {
-    throw new Error('Method not implemented.');
-  }
-  hasData(): Promise<boolean> {
-    throw new Error('Method not implemented.');
   }
 
   async init() {
@@ -225,11 +209,7 @@ export class Logic implements LogicInterface {
       })
     ).pipe(
       map((result) => {
-        if (result) {
-          const { created_at, ...rest } = result;
-          return { ...rest, createdAt: Number(created_at) };
-        }
-        return undefined;
+        return result ? convertMessageType(result) : undefined;
       })
     );
   }
@@ -244,29 +224,42 @@ export class Logic implements LogicInterface {
   ): Observable<Message[]> {
     return userPair$.pipe(
       switchMap((userPair) =>
-        combineLatest([
-          collectionData(
-            query(
-              this.messages,
-              where('sender', '==', userPair.user1.id),
-              where('reciever', '==', userPair.user2.id),
-              orderBy('createdAt', 'desc')
-            )
+        forkJoin({
+          messagesFromUser1ToUser2: from(
+            this.electric.db.messages.findMany({
+              where: {
+                AND: [
+                  { sender: userPair.user1.id },
+                  { reciever: userPair.user2.id },
+                ],
+              },
+              orderBy: {
+                created_at: 'desc',
+              },
+            })
           ),
-          collectionData(
-            query(
-              this.messages,
-              where('sender', '==', userPair.user2.id),
-              where('reciever', '==', userPair.user1.id),
-              orderBy('createdAt', 'desc')
-            )
+          messagesFromUser2ToUser1: from(
+            this.electric.db.messages.findMany({
+              where: {
+                AND: [
+                  { sender: userPair.user2.id },
+                  { reciever: userPair.user1.id },
+                ],
+              },
+              orderBy: {
+                created_at: 'desc',
+              },
+            })
           ),
-        ])
+        })
       ),
-      map(([ar1, ar2]: any) => {
-        const all = ar1.concat(ar2);
-        const sorted = sortMessagesByDateNewestFirst(all);
-        return sorted.reverse();
+      map(({ messagesFromUser1ToUser2, messagesFromUser2ToUser1 }) => {
+        const allMessages = [
+          ...messagesFromUser1ToUser2,
+          ...messagesFromUser2ToUser1,
+        ];
+        const convertedMessages = allMessages.map(convertMessageType);
+        return convertedMessages.sort((a, b) => b.createdAt - a.createdAt);
       })
     );
   }
