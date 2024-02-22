@@ -11,7 +11,7 @@
 
 CREATE TABLE IF NOT EXISTS users (
     id VARCHAR PRIMARY KEY,
-    created_at BIGINT
+    created_at BIGINT NOT NULL
 );
 
 -- ⚡

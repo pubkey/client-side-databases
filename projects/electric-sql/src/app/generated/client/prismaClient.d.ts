@@ -34,7 +34,7 @@ export type Messages = {
  */
 export type Users = {
   id: string
-  created_at: bigint | null
+  created_at: bigint
 }
 
 
@@ -2082,7 +2082,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersGroupByOutputType = {
     id: string
-    created_at: bigint | null
+    created_at: bigint
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -3033,14 +3033,6 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   /**
    * Field references 
    */
@@ -3182,14 +3174,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     OR?: Enumerable<UsersWhereInput>
     NOT?: Enumerable<UsersWhereInput>
     id?: StringFilter<"Users"> | string
-    created_at?: BigIntNullableFilter<"Users"> | bigint | number | null
+    created_at?: BigIntFilter<"Users"> | bigint | number
     messages_messages_recieverTousers?: MessagesListRelationFilter
     messages_messages_senderTousers?: MessagesListRelationFilter
   }
 
   export type UsersOrderByWithRelationInput = {
     id?: SortOrder
-    created_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
     messages_messages_recieverTousers?: MessagesOrderByRelationAggregateInput
     messages_messages_senderTousers?: MessagesOrderByRelationAggregateInput
   }
@@ -3199,14 +3191,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     AND?: Enumerable<UsersWhereInput>
     OR?: Enumerable<UsersWhereInput>
     NOT?: Enumerable<UsersWhereInput>
-    created_at?: BigIntNullableFilter<"Users"> | bigint | number | null
+    created_at?: BigIntFilter<"Users"> | bigint | number
     messages_messages_recieverTousers?: MessagesListRelationFilter
     messages_messages_senderTousers?: MessagesListRelationFilter
   }, "id">
 
   export type UsersOrderByWithAggregationInput = {
     id?: SortOrder
-    created_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -3219,7 +3211,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     OR?: Enumerable<UsersScalarWhereWithAggregatesInput>
     NOT?: Enumerable<UsersScalarWhereWithAggregatesInput>
     id?: StringWithAggregatesFilter<"Users"> | string
-    created_at?: BigIntNullableWithAggregatesFilter<"Users"> | bigint | number | null
+    created_at?: BigIntWithAggregatesFilter<"Users"> | bigint | number
   }
 
   export type MessagesCreateInput = {
@@ -3285,45 +3277,45 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersCreateInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_recieverTousers?: MessagesCreateNestedManyWithoutUsers_messages_recieverTousersInput
     messages_messages_senderTousers?: MessagesCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
   export type UsersUncheckedCreateInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_recieverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_recieverTousersInput
     messages_messages_senderTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
   export type UsersUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_recieverTousers?: MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput
     messages_messages_senderTousers?: MessagesUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
   export type UsersUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_recieverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersNestedInput
     messages_messages_senderTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
   export type UsersCreateManyInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
   }
 
   export type UsersUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type UsersUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -3466,26 +3458,10 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type BigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
   export type MessagesListRelationFilter = {
     every?: MessagesWhereInput
     some?: MessagesWhereInput
     none?: MessagesWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type MessagesOrderByRelationAggregateInput = {
@@ -3513,22 +3489,6 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersSumOrderByAggregateInput = {
     created_at?: SortOrder
-  }
-
-  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type UsersCreateNestedOneWithoutMessages_messages_recieverTousersInput = {
@@ -3601,14 +3561,6 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_senderTousersInput>
     createMany?: MessagesCreateManyUsers_messages_senderTousersInputEnvelope
     connect?: Enumerable<MessagesWhereUniqueInput>
-  }
-
-  export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: bigint | number | null
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
   }
 
   export type MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput = {
@@ -3785,64 +3737,15 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
-  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<bigint> | Enumerable<number> | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<number> | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<number> | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: Enumerable<number> | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: Enumerable<number> | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type UsersCreateWithoutMessages_messages_recieverTousersInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_senderTousers?: MessagesCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
   export type UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_senderTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
@@ -3853,13 +3756,13 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersCreateWithoutMessages_messages_senderTousersInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_recieverTousers?: MessagesCreateNestedManyWithoutUsers_messages_recieverTousersInput
   }
 
   export type UsersUncheckedCreateWithoutMessages_messages_senderTousersInput = {
     id: string
-    created_at?: bigint | number | null
+    created_at: bigint | number
     messages_messages_recieverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_recieverTousersInput
   }
 
@@ -3881,13 +3784,13 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersUpdateWithoutMessages_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_senderTousers?: MessagesUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutMessages_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_senderTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
@@ -3904,13 +3807,13 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
   export type UsersUpdateWithoutMessages_messages_senderTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_recieverTousers?: MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutMessages_messages_senderTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     messages_messages_recieverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersNestedInput
   }
 

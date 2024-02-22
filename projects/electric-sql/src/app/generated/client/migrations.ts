@@ -1,7 +1,7 @@
 export default [
   {
     "statements": [
-      "CREATE TABLE \"users\" (\n  \"id\" TEXT NOT NULL,\n  \"created_at\" INTEGER,\n  CONSTRAINT \"users_pkey\" PRIMARY KEY (\"id\")\n) WITHOUT ROWID;\n",
+      "CREATE TABLE \"users\" (\n  \"id\" TEXT NOT NULL,\n  \"created_at\" INTEGER NOT NULL,\n  CONSTRAINT \"users_pkey\" PRIMARY KEY (\"id\")\n) WITHOUT ROWID;\n",
       "CREATE TABLE \"messages\" (\n  \"id\" TEXT NOT NULL,\n  \"text\" TEXT NOT NULL,\n  \"created_at\" INTEGER NOT NULL,\n  \"read\" INTEGER NOT NULL,\n  \"sender\" TEXT NOT NULL,\n  \"reciever\" TEXT NOT NULL,\n  CONSTRAINT \"messages_reciever_fkey\" FOREIGN KEY (\"reciever\") REFERENCES \"users\" (\"id\"),\n  CONSTRAINT \"messages_sender_fkey\" FOREIGN KEY (\"sender\") REFERENCES \"users\" (\"id\"),\n  CONSTRAINT \"messages_pkey\" PRIMARY KEY (\"id\")\n) WITHOUT ROWID;\n",
       "CREATE INDEX \"idx_messages_created_at\" ON \"messages\" (\"created_at\" ASC);\n",
       "-- Toggles for turning the triggers on and off\nINSERT OR IGNORE INTO _electric_trigger_settings(tablename,flag) VALUES ('main.users', 1);",
