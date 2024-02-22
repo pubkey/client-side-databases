@@ -29,7 +29,6 @@ import {
   where,
 } from 'firebase/firestore';
 
-import async, { any } from 'async';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import {
   sortByNewestFirst,
@@ -43,7 +42,9 @@ export class Logic implements LogicInterface {
   constructor(private electricService: ElectricService) {
     this.init();
   }
-  getMessagesForUserPair(userPair$: Observable<UserPair>): Observable<Message[]> {
+  getMessagesForUserPair(
+    userPair$: Observable<UserPair>
+  ): Observable<Message[]> {
     throw new Error('Method not implemented.');
   }
   addMessage(message: AddMessage): Promise<any> {
@@ -154,67 +155,84 @@ export class Logic implements LogicInterface {
    * @param ownUser$
    * @returns
    */
-  getUsersWithLastMessages(ownUser$: Observable<User>): Observable<UserWithLastMessage[]> {
+  getUsersWithLastMessages(
+    ownUser$: Observable<User>
+  ): Observable<UserWithLastMessage[]> {
     const usersNotOwn$ = ownUser$.pipe(
-      switchMap(ownUser =>
-        from(this.electric.db.users.findMany({
-          where: {
-            id: { not: ownUser.id }
-          }
-        })).pipe(
-          map(users => users.map(user => ({
-            id: user.id,
-            createdAt: Number(user.created_at),
-          })) as User[])
+      switchMap((ownUser) =>
+        from(
+          this.electric.db.users.findMany({
+            where: {
+              id: { not: ownUser.id },
+            },
+          })
+        ).pipe(
+          map(
+            (users) =>
+              users.map((user) => ({
+                id: user.id,
+                createdAt: Number(user.created_at),
+              })) as User[]
+          )
         )
       ),
       shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
     );
 
-    const usersWithLastMessage$: Observable<Observable<UserWithLastMessage>[]> = combineLatest([ownUser$, usersNotOwn$]).pipe(
-      map(([ownUser, usersNotOwn]) => {
-        return usersNotOwn.map(user => {
-          const ret2 = this.getLastMessageOfUserPair(ownUser.id, user.id).pipe(
-            map(message => ({
-              user,
-              message: message ? message : undefined,
-            })),
-            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
-          );
-          return ret2;
-        });
-      })
-    );
+    const usersWithLastMessage$: Observable<Observable<UserWithLastMessage>[]> =
+      combineLatest([ownUser$, usersNotOwn$]).pipe(
+        map(([ownUser, usersNotOwn]) => {
+          return usersNotOwn.map((user) => {
+            const ret2 = this.getLastMessageOfUserPair(
+              ownUser.id,
+              user.id
+            ).pipe(
+              map((message) => ({
+                user,
+                message: message ? message : undefined,
+              })),
+              shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
+            );
+            return ret2;
+          });
+        })
+      );
 
     const ret: Observable<UserWithLastMessage[]> = usersWithLastMessage$.pipe(
-      switchMap(usersWithLastMessage => combineLatest(usersWithLastMessage)),
-      map(usersWithLastMessage => sortByNewestFirst(usersWithLastMessage))
+      switchMap((usersWithLastMessage) => combineLatest(usersWithLastMessage)),
+      map((usersWithLastMessage) => sortByNewestFirst(usersWithLastMessage))
     );
 
     return ret;
   }
 
-  private getLastMessageOfUserPair(userId1: string, userId2: string): Observable<Message | undefined> {
-    return from(this.electric.db.messages.findFirst({
-      where: {
-        OR: [
-          { sender: userId1, reciever: userId2 },
-          { sender: userId2, reciever: userId1 }
-        ]
-      },
-      orderBy: {
-        created_at: 'desc'
-      },
-      take: 1
-    })).pipe(
-      map(result => result ? {
-        ...result,
-        createdAt: Number(result.created_at), // Convert bigint to Number and rename the property
-        created_at: undefined // Optionally remove the original created_at property
-      } : undefined)
+  private getLastMessageOfUserPair(
+    userId1: string,
+    userId2: string
+  ): Observable<Message | undefined> {
+    return from(
+      this.electric.db.messages.findFirst({
+        where: {
+          OR: [
+            { sender: userId1, reciever: userId2 },
+            { sender: userId2, reciever: userId1 },
+          ],
+        },
+        orderBy: {
+          created_at: 'desc',
+        },
+        take: 1,
+      })
+    ).pipe(
+      map((result) => {
+        if (result) {
+          const { created_at, ...rest } = result;
+          return { ...rest, createdAt: Number(created_at) };
+        }
+        return undefined;
+      })
     );
   }
-}
 
   /**
    *
