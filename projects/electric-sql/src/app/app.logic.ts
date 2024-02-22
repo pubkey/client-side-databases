@@ -203,7 +203,7 @@ export class Logic implements LogicInterface {
       })
     ).pipe(
       map((result) => {
-        return result ? convertTypeSqlToNosql(result) : undefined;
+        return result ? convertTypeSqlToNosql<Message>(result) : undefined;
       })
     );
   }
@@ -252,7 +252,9 @@ export class Logic implements LogicInterface {
           ...messagesFromUser1ToUser2,
           ...messagesFromUser2ToUser1,
         ];
-        const convertedMessages = allMessages.map(convertTypeSqlToNosql);
+        const convertedMessages = allMessages.map(
+          convertTypeSqlToNosql<Message>
+        );
         return convertedMessages.sort((a, b) => b.createdAt - a.createdAt);
       })
     );
