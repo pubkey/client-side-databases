@@ -33,7 +33,10 @@ import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import { sortByNewestFirst } from 'src/shared/util-server';
 import { Electric } from './generated/client';
 import { ElectricService } from './services/electric.service';
-import { convertMessageType } from './util/convertMessageType';
+import {
+  convertMessageNosqlToSql,
+  convertMessageSqlToNosql,
+} from './util/convertMessageType';
 
 export class Logic implements LogicInterface {
   private electric: Electric;
@@ -209,7 +212,7 @@ export class Logic implements LogicInterface {
       })
     ).pipe(
       map((result) => {
-        return result ? convertMessageType(result) : undefined;
+        return result ? convertMessageSqlToNosql(result) : undefined;
       })
     );
   }
@@ -258,7 +261,7 @@ export class Logic implements LogicInterface {
           ...messagesFromUser1ToUser2,
           ...messagesFromUser2ToUser1,
         ];
-        const convertedMessages = allMessages.map(convertMessageType);
+        const convertedMessages = allMessages.map(convertMessageSqlToNosql);
         return convertedMessages.sort((a, b) => b.createdAt - a.createdAt);
       })
     );
@@ -270,9 +273,10 @@ export class Logic implements LogicInterface {
    * @returns
    */
   async addMessage(message: AddMessage): Promise<void> {
-    const docRef = doc(this.messages, message.message.id);
-    const insert = await setDoc(docRef, message.message);
-    return insert;
+    const convertedMessage = convertMessageNosqlToSql(message.message);
+    await this.electric.db.messages.create({
+      data: convertedMessage,
+    });
   }
 
   /**
