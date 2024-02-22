@@ -25,18 +25,17 @@ import {
   limit,
   orderBy,
   query,
-  setDoc,
   where,
 } from 'firebase/firestore';
 
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import { sortByNewestFirst } from 'src/shared/util-server';
-import { Electric } from './generated/client';
+import { Electric, Messages, Users } from './generated/client';
 import { ElectricService } from './services/electric.service';
 import {
-  convertMessageNosqlToSql,
-  convertMessageSqlToNosql,
-} from './util/convertMessageType';
+  convertTypeNosqlToSql,
+  convertTypeSqlToNosql,
+} from './util/convertSqlTypes';
 
 export class Logic implements LogicInterface {
   private electric: Electric;
@@ -212,7 +211,7 @@ export class Logic implements LogicInterface {
       })
     ).pipe(
       map((result) => {
-        return result ? convertMessageSqlToNosql(result) : undefined;
+        return result ? convertTypeSqlToNosql(result) : undefined;
       })
     );
   }
@@ -261,7 +260,7 @@ export class Logic implements LogicInterface {
           ...messagesFromUser1ToUser2,
           ...messagesFromUser2ToUser1,
         ];
-        const convertedMessages = allMessages.map(convertMessageSqlToNosql);
+        const convertedMessages = allMessages.map(convertTypeSqlToNosql);
         return convertedMessages.sort((a, b) => b.createdAt - a.createdAt);
       })
     );
@@ -273,7 +272,7 @@ export class Logic implements LogicInterface {
    * @returns
    */
   async addMessage(message: AddMessage): Promise<void> {
-    const convertedMessage = convertMessageNosqlToSql(message.message);
+    const convertedMessage = convertTypeNosqlToSql<Messages>(message.message);
     await this.electric.db.messages.create({
       data: convertedMessage,
     });
@@ -284,10 +283,11 @@ export class Logic implements LogicInterface {
    * @param user
    * @returns
    */
-  async addUser(user: User): Promise<any> {
-    const docRef = doc(this.users, user.id);
-    const insert = await setDoc(docRef, user);
-    return insert;
+  async addUser(user: User): Promise<void> {
+    const convertedUser = convertTypeNosqlToSql<Users>(user);
+    await this.electric.db.users.create({
+      data: convertedUser,
+    });
   }
 
   /**
