@@ -25,7 +25,7 @@ export type Messages = {
   created_at: bigint
   read: boolean
   sender: string
-  receiver: string
+  reciever: string
 }
 
 /**
@@ -830,12 +830,12 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
 
   export type UsersCountOutputType = {
-    messages_messages_receiverTousers: number
+    messages_messages_recieverTousers: number
     messages_messages_senderTousers: number
   }
 
   export type UsersCountOutputTypeSelect = {
-    messages_messages_receiverTousers?: boolean | UsersCountOutputTypeCountMessages_messages_receiverTousersArgs
+    messages_messages_recieverTousers?: boolean | UsersCountOutputTypeCountMessages_messages_recieverTousersArgs
     messages_messages_senderTousers?: boolean | UsersCountOutputTypeCountMessages_messages_senderTousersArgs
   }
 
@@ -872,7 +872,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
   /**
    * UsersCountOutputType without action
    */
-  export type UsersCountOutputTypeCountMessages_messages_receiverTousersArgs = {
+  export type UsersCountOutputTypeCountMessages_messages_recieverTousersArgs = {
     where?: MessagesWhereInput
   }
 
@@ -917,7 +917,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: bigint | null
     read: boolean | null
     sender: string | null
-    receiver: string | null
+    reciever: string | null
   }
 
   export type MessagesMaxAggregateOutputType = {
@@ -926,7 +926,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: bigint | null
     read: boolean | null
     sender: string | null
-    receiver: string | null
+    reciever: string | null
   }
 
   export type MessagesCountAggregateOutputType = {
@@ -935,7 +935,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: number
     read: number
     sender: number
-    receiver: number
+    reciever: number
     _all: number
   }
 
@@ -954,7 +954,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: true
     read?: true
     sender?: true
-    receiver?: true
+    reciever?: true
   }
 
   export type MessagesMaxAggregateInputType = {
@@ -963,7 +963,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: true
     read?: true
     sender?: true
-    receiver?: true
+    reciever?: true
   }
 
   export type MessagesCountAggregateInputType = {
@@ -972,7 +972,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: true
     read?: true
     sender?: true
-    receiver?: true
+    reciever?: true
     _all?: true
   }
 
@@ -1074,7 +1074,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: bigint
     read: boolean
     sender: string
-    receiver: string
+    reciever: string
     _count: MessagesCountAggregateOutputType | null
     _avg: MessagesAvgAggregateOutputType | null
     _sum: MessagesSumAggregateOutputType | null
@@ -1102,14 +1102,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: boolean
     read?: boolean
     sender?: boolean
-    receiver?: boolean
-    users_messages_receiverTousers?: boolean | UsersArgs
+    reciever?: boolean
+    users_messages_recieverTousers?: boolean | UsersArgs
     users_messages_senderTousers?: boolean | UsersArgs
   }
 
 
   export type MessagesInclude = {
-    users_messages_receiverTousers?: boolean | UsersArgs
+    users_messages_recieverTousers?: boolean | UsersArgs
     users_messages_senderTousers?: boolean | UsersArgs
   } 
 
@@ -1120,13 +1120,13 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     S extends { include: any } & (MessagesArgs | MessagesFindManyArgs)
     ? Messages  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'users_messages_receiverTousers' ? UsersGetPayload<S['include'][P]> :
+        P extends 'users_messages_recieverTousers' ? UsersGetPayload<S['include'][P]> :
         P extends 'users_messages_senderTousers' ? UsersGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (MessagesArgs | MessagesFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'users_messages_receiverTousers' ? UsersGetPayload<S['select'][P]> :
+        P extends 'users_messages_recieverTousers' ? UsersGetPayload<S['select'][P]> :
         P extends 'users_messages_senderTousers' ? UsersGetPayload<S['select'][P]> :  P extends keyof Messages ? Messages[P] : never
   } 
       : Messages
@@ -1501,7 +1501,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    users_messages_receiverTousers<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
+    users_messages_recieverTousers<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
 
     users_messages_senderTousers<T extends UsersArgs= {}>(args?: Subset<T, UsersArgs>): Prisma__UsersClient<UsersGetPayload<T> | Null>;
 
@@ -2107,14 +2107,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
   export type UsersSelect = {
     id?: boolean
     created_at?: boolean
-    messages_messages_receiverTousers?: boolean | Users$messages_messages_receiverTousersArgs
+    messages_messages_recieverTousers?: boolean | Users$messages_messages_recieverTousersArgs
     messages_messages_senderTousers?: boolean | Users$messages_messages_senderTousersArgs
     _count?: boolean | UsersCountOutputTypeArgs
   }
 
 
   export type UsersInclude = {
-    messages_messages_receiverTousers?: boolean | Users$messages_messages_receiverTousersArgs
+    messages_messages_recieverTousers?: boolean | Users$messages_messages_recieverTousersArgs
     messages_messages_senderTousers?: boolean | Users$messages_messages_senderTousersArgs
     _count?: boolean | UsersCountOutputTypeArgs
   } 
@@ -2126,14 +2126,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     S extends { include: any } & (UsersArgs | UsersFindManyArgs)
     ? Users  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'messages_messages_receiverTousers' ? Array < MessagesGetPayload<S['include'][P]>>  :
+        P extends 'messages_messages_recieverTousers' ? Array < MessagesGetPayload<S['include'][P]>>  :
         P extends 'messages_messages_senderTousers' ? Array < MessagesGetPayload<S['include'][P]>>  :
         P extends '_count' ? UsersCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (UsersArgs | UsersFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'messages_messages_receiverTousers' ? Array < MessagesGetPayload<S['select'][P]>>  :
+        P extends 'messages_messages_recieverTousers' ? Array < MessagesGetPayload<S['select'][P]>>  :
         P extends 'messages_messages_senderTousers' ? Array < MessagesGetPayload<S['select'][P]>>  :
         P extends '_count' ? UsersCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Users ? Users[P] : never
   } 
@@ -2509,7 +2509,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    messages_messages_receiverTousers<T extends Users$messages_messages_receiverTousersArgs= {}>(args?: Subset<T, Users$messages_messages_receiverTousersArgs>): PrismaPromise<Array<MessagesGetPayload<T>>| Null>;
+    messages_messages_recieverTousers<T extends Users$messages_messages_recieverTousersArgs= {}>(args?: Subset<T, Users$messages_messages_recieverTousersArgs>): PrismaPromise<Array<MessagesGetPayload<T>>| Null>;
 
     messages_messages_senderTousers<T extends Users$messages_messages_senderTousersArgs= {}>(args?: Subset<T, Users$messages_messages_senderTousersArgs>): PrismaPromise<Array<MessagesGetPayload<T>>| Null>;
 
@@ -2917,9 +2917,9 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
 
 
   /**
-   * Users.messages_messages_receiverTousers
+   * Users.messages_messages_recieverTousers
    */
-  export type Users$messages_messages_receiverTousersArgs = {
+  export type Users$messages_messages_recieverTousersArgs = {
     /**
      * Select specific fields to fetch from the Messages
      * 
@@ -3003,7 +3003,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: 'created_at',
     read: 'read',
     sender: 'sender',
-    receiver: 'receiver'
+    reciever: 'reciever'
   };
 
   export type MessagesScalarFieldEnum = (typeof MessagesScalarFieldEnum)[keyof typeof MessagesScalarFieldEnum]
@@ -3121,8 +3121,8 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntFilter<"Messages"> | bigint | number
     read?: BoolFilter<"Messages"> | boolean
     sender?: StringFilter<"Messages"> | string
-    receiver?: StringFilter<"Messages"> | string
-    users_messages_receiverTousers?: XOR<UsersRelationFilter, UsersWhereInput>
+    reciever?: StringFilter<"Messages"> | string
+    users_messages_recieverTousers?: XOR<UsersRelationFilter, UsersWhereInput>
     users_messages_senderTousers?: XOR<UsersRelationFilter, UsersWhereInput>
   }
 
@@ -3132,8 +3132,8 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: SortOrder
     read?: SortOrder
     sender?: SortOrder
-    receiver?: SortOrder
-    users_messages_receiverTousers?: UsersOrderByWithRelationInput
+    reciever?: SortOrder
+    users_messages_recieverTousers?: UsersOrderByWithRelationInput
     users_messages_senderTousers?: UsersOrderByWithRelationInput
   }
 
@@ -3146,8 +3146,8 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntFilter<"Messages"> | bigint | number
     read?: BoolFilter<"Messages"> | boolean
     sender?: StringFilter<"Messages"> | string
-    receiver?: StringFilter<"Messages"> | string
-    users_messages_receiverTousers?: XOR<UsersRelationFilter, UsersWhereInput>
+    reciever?: StringFilter<"Messages"> | string
+    users_messages_recieverTousers?: XOR<UsersRelationFilter, UsersWhereInput>
     users_messages_senderTousers?: XOR<UsersRelationFilter, UsersWhereInput>
   }, "id">
 
@@ -3157,7 +3157,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: SortOrder
     read?: SortOrder
     sender?: SortOrder
-    receiver?: SortOrder
+    reciever?: SortOrder
     _count?: MessagesCountOrderByAggregateInput
     _avg?: MessagesAvgOrderByAggregateInput
     _max?: MessagesMaxOrderByAggregateInput
@@ -3174,7 +3174,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntWithAggregatesFilter<"Messages"> | bigint | number
     read?: BoolWithAggregatesFilter<"Messages"> | boolean
     sender?: StringWithAggregatesFilter<"Messages"> | string
-    receiver?: StringWithAggregatesFilter<"Messages"> | string
+    reciever?: StringWithAggregatesFilter<"Messages"> | string
   }
 
   export type UsersWhereInput = {
@@ -3183,14 +3183,14 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     NOT?: Enumerable<UsersWhereInput>
     id?: StringFilter<"Users"> | string
     created_at?: BigIntNullableFilter<"Users"> | bigint | number | null
-    messages_messages_receiverTousers?: MessagesListRelationFilter
+    messages_messages_recieverTousers?: MessagesListRelationFilter
     messages_messages_senderTousers?: MessagesListRelationFilter
   }
 
   export type UsersOrderByWithRelationInput = {
     id?: SortOrder
     created_at?: SortOrderInput | SortOrder
-    messages_messages_receiverTousers?: MessagesOrderByRelationAggregateInput
+    messages_messages_recieverTousers?: MessagesOrderByRelationAggregateInput
     messages_messages_senderTousers?: MessagesOrderByRelationAggregateInput
   }
 
@@ -3200,7 +3200,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     OR?: Enumerable<UsersWhereInput>
     NOT?: Enumerable<UsersWhereInput>
     created_at?: BigIntNullableFilter<"Users"> | bigint | number | null
-    messages_messages_receiverTousers?: MessagesListRelationFilter
+    messages_messages_recieverTousers?: MessagesListRelationFilter
     messages_messages_senderTousers?: MessagesListRelationFilter
   }, "id">
 
@@ -3227,7 +3227,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text: string
     created_at: bigint | number
     read: boolean
-    users_messages_receiverTousers: UsersCreateNestedOneWithoutMessages_messages_receiverTousersInput
+    users_messages_recieverTousers: UsersCreateNestedOneWithoutMessages_messages_recieverTousersInput
     users_messages_senderTousers: UsersCreateNestedOneWithoutMessages_messages_senderTousersInput
   }
 
@@ -3237,7 +3237,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: bigint | number
     read: boolean
     sender: string
-    receiver: string
+    reciever: string
   }
 
   export type MessagesUpdateInput = {
@@ -3245,7 +3245,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
-    users_messages_receiverTousers?: UsersUpdateOneRequiredWithoutMessages_messages_receiverTousersNestedInput
+    users_messages_recieverTousers?: UsersUpdateOneRequiredWithoutMessages_messages_recieverTousersNestedInput
     users_messages_senderTousers?: UsersUpdateOneRequiredWithoutMessages_messages_senderTousersNestedInput
   }
 
@@ -3255,7 +3255,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
     sender?: StringFieldUpdateOperationsInput | string
-    receiver?: StringFieldUpdateOperationsInput | string
+    reciever?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessagesCreateManyInput = {
@@ -3264,7 +3264,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at: bigint | number
     read: boolean
     sender: string
-    receiver: string
+    reciever: string
   }
 
   export type MessagesUpdateManyMutationInput = {
@@ -3280,34 +3280,34 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
     sender?: StringFieldUpdateOperationsInput | string
-    receiver?: StringFieldUpdateOperationsInput | string
+    reciever?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersCreateInput = {
     id: string
     created_at?: bigint | number | null
-    messages_messages_receiverTousers?: MessagesCreateNestedManyWithoutUsers_messages_receiverTousersInput
+    messages_messages_recieverTousers?: MessagesCreateNestedManyWithoutUsers_messages_recieverTousersInput
     messages_messages_senderTousers?: MessagesCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
   export type UsersUncheckedCreateInput = {
     id: string
     created_at?: bigint | number | null
-    messages_messages_receiverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_receiverTousersInput
+    messages_messages_recieverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_recieverTousersInput
     messages_messages_senderTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
   export type UsersUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    messages_messages_receiverTousers?: MessagesUpdateManyWithoutUsers_messages_receiverTousersNestedInput
+    messages_messages_recieverTousers?: MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput
     messages_messages_senderTousers?: MessagesUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
   export type UsersUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    messages_messages_receiverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_receiverTousersNestedInput
+    messages_messages_recieverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersNestedInput
     messages_messages_senderTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
@@ -3380,7 +3380,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: SortOrder
     read?: SortOrder
     sender?: SortOrder
-    receiver?: SortOrder
+    reciever?: SortOrder
   }
 
   export type MessagesAvgOrderByAggregateInput = {
@@ -3393,7 +3393,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: SortOrder
     read?: SortOrder
     sender?: SortOrder
-    receiver?: SortOrder
+    reciever?: SortOrder
   }
 
   export type MessagesMinOrderByAggregateInput = {
@@ -3402,7 +3402,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: SortOrder
     read?: SortOrder
     sender?: SortOrder
-    receiver?: SortOrder
+    reciever?: SortOrder
   }
 
   export type MessagesSumOrderByAggregateInput = {
@@ -3531,9 +3531,9 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
-  export type UsersCreateNestedOneWithoutMessages_messages_receiverTousersInput = {
-    create?: XOR<UsersCreateWithoutMessages_messages_receiverTousersInput, UsersUncheckedCreateWithoutMessages_messages_receiverTousersInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutMessages_messages_receiverTousersInput
+  export type UsersCreateNestedOneWithoutMessages_messages_recieverTousersInput = {
+    create?: XOR<UsersCreateWithoutMessages_messages_recieverTousersInput, UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutMessages_messages_recieverTousersInput
     connect?: UsersWhereUniqueInput
   }
 
@@ -3559,12 +3559,12 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     set?: boolean
   }
 
-  export type UsersUpdateOneRequiredWithoutMessages_messages_receiverTousersNestedInput = {
-    create?: XOR<UsersCreateWithoutMessages_messages_receiverTousersInput, UsersUncheckedCreateWithoutMessages_messages_receiverTousersInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutMessages_messages_receiverTousersInput
-    upsert?: UsersUpsertWithoutMessages_messages_receiverTousersInput
+  export type UsersUpdateOneRequiredWithoutMessages_messages_recieverTousersNestedInput = {
+    create?: XOR<UsersCreateWithoutMessages_messages_recieverTousersInput, UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutMessages_messages_recieverTousersInput
+    upsert?: UsersUpsertWithoutMessages_messages_recieverTousersInput
     connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMessages_messages_receiverTousersInput, UsersUpdateWithoutMessages_messages_receiverTousersInput>, UsersUncheckedUpdateWithoutMessages_messages_receiverTousersInput>
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMessages_messages_recieverTousersInput, UsersUpdateWithoutMessages_messages_recieverTousersInput>, UsersUncheckedUpdateWithoutMessages_messages_recieverTousersInput>
   }
 
   export type UsersUpdateOneRequiredWithoutMessages_messages_senderTousersNestedInput = {
@@ -3575,10 +3575,10 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMessages_messages_senderTousersInput, UsersUpdateWithoutMessages_messages_senderTousersInput>, UsersUncheckedUpdateWithoutMessages_messages_senderTousersInput>
   }
 
-  export type MessagesCreateNestedManyWithoutUsers_messages_receiverTousersInput = {
-    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_receiverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>>
-    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_receiverTousersInput>
-    createMany?: MessagesCreateManyUsers_messages_receiverTousersInputEnvelope
+  export type MessagesCreateNestedManyWithoutUsers_messages_recieverTousersInput = {
+    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_recieverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>>
+    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_recieverTousersInput>
+    createMany?: MessagesCreateManyUsers_messages_recieverTousersInputEnvelope
     connect?: Enumerable<MessagesWhereUniqueInput>
   }
 
@@ -3589,10 +3589,10 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     connect?: Enumerable<MessagesWhereUniqueInput>
   }
 
-  export type MessagesUncheckedCreateNestedManyWithoutUsers_messages_receiverTousersInput = {
-    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_receiverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>>
-    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_receiverTousersInput>
-    createMany?: MessagesCreateManyUsers_messages_receiverTousersInputEnvelope
+  export type MessagesUncheckedCreateNestedManyWithoutUsers_messages_recieverTousersInput = {
+    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_recieverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>>
+    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_recieverTousersInput>
+    createMany?: MessagesCreateManyUsers_messages_recieverTousersInputEnvelope
     connect?: Enumerable<MessagesWhereUniqueInput>
   }
 
@@ -3611,17 +3611,17 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     divide?: bigint | number
   }
 
-  export type MessagesUpdateManyWithoutUsers_messages_receiverTousersNestedInput = {
-    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_receiverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>>
-    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_receiverTousersInput>
-    upsert?: Enumerable<MessagesUpsertWithWhereUniqueWithoutUsers_messages_receiverTousersInput>
-    createMany?: MessagesCreateManyUsers_messages_receiverTousersInputEnvelope
+  export type MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput = {
+    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_recieverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>>
+    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_recieverTousersInput>
+    upsert?: Enumerable<MessagesUpsertWithWhereUniqueWithoutUsers_messages_recieverTousersInput>
+    createMany?: MessagesCreateManyUsers_messages_recieverTousersInputEnvelope
     set?: Enumerable<MessagesWhereUniqueInput>
     disconnect?: Enumerable<MessagesWhereUniqueInput>
     delete?: Enumerable<MessagesWhereUniqueInput>
     connect?: Enumerable<MessagesWhereUniqueInput>
-    update?: Enumerable<MessagesUpdateWithWhereUniqueWithoutUsers_messages_receiverTousersInput>
-    updateMany?: Enumerable<MessagesUpdateManyWithWhereWithoutUsers_messages_receiverTousersInput>
+    update?: Enumerable<MessagesUpdateWithWhereUniqueWithoutUsers_messages_recieverTousersInput>
+    updateMany?: Enumerable<MessagesUpdateManyWithWhereWithoutUsers_messages_recieverTousersInput>
     deleteMany?: Enumerable<MessagesScalarWhereInput>
   }
 
@@ -3639,17 +3639,17 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     deleteMany?: Enumerable<MessagesScalarWhereInput>
   }
 
-  export type MessagesUncheckedUpdateManyWithoutUsers_messages_receiverTousersNestedInput = {
-    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_receiverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>>
-    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_receiverTousersInput>
-    upsert?: Enumerable<MessagesUpsertWithWhereUniqueWithoutUsers_messages_receiverTousersInput>
-    createMany?: MessagesCreateManyUsers_messages_receiverTousersInputEnvelope
+  export type MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersNestedInput = {
+    create?: XOR<Enumerable<MessagesCreateWithoutUsers_messages_recieverTousersInput>, Enumerable<MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>>
+    connectOrCreate?: Enumerable<MessagesCreateOrConnectWithoutUsers_messages_recieverTousersInput>
+    upsert?: Enumerable<MessagesUpsertWithWhereUniqueWithoutUsers_messages_recieverTousersInput>
+    createMany?: MessagesCreateManyUsers_messages_recieverTousersInputEnvelope
     set?: Enumerable<MessagesWhereUniqueInput>
     disconnect?: Enumerable<MessagesWhereUniqueInput>
     delete?: Enumerable<MessagesWhereUniqueInput>
     connect?: Enumerable<MessagesWhereUniqueInput>
-    update?: Enumerable<MessagesUpdateWithWhereUniqueWithoutUsers_messages_receiverTousersInput>
-    updateMany?: Enumerable<MessagesUpdateManyWithWhereWithoutUsers_messages_receiverTousersInput>
+    update?: Enumerable<MessagesUpdateWithWhereUniqueWithoutUsers_messages_recieverTousersInput>
+    updateMany?: Enumerable<MessagesUpdateManyWithWhereWithoutUsers_messages_recieverTousersInput>
     deleteMany?: Enumerable<MessagesScalarWhereInput>
   }
 
@@ -3834,33 +3834,33 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type UsersCreateWithoutMessages_messages_receiverTousersInput = {
+  export type UsersCreateWithoutMessages_messages_recieverTousersInput = {
     id: string
     created_at?: bigint | number | null
     messages_messages_senderTousers?: MessagesCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
-  export type UsersUncheckedCreateWithoutMessages_messages_receiverTousersInput = {
+  export type UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput = {
     id: string
     created_at?: bigint | number | null
     messages_messages_senderTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_senderTousersInput
   }
 
-  export type UsersCreateOrConnectWithoutMessages_messages_receiverTousersInput = {
+  export type UsersCreateOrConnectWithoutMessages_messages_recieverTousersInput = {
     where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutMessages_messages_receiverTousersInput, UsersUncheckedCreateWithoutMessages_messages_receiverTousersInput>
+    create: XOR<UsersCreateWithoutMessages_messages_recieverTousersInput, UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput>
   }
 
   export type UsersCreateWithoutMessages_messages_senderTousersInput = {
     id: string
     created_at?: bigint | number | null
-    messages_messages_receiverTousers?: MessagesCreateNestedManyWithoutUsers_messages_receiverTousersInput
+    messages_messages_recieverTousers?: MessagesCreateNestedManyWithoutUsers_messages_recieverTousersInput
   }
 
   export type UsersUncheckedCreateWithoutMessages_messages_senderTousersInput = {
     id: string
     created_at?: bigint | number | null
-    messages_messages_receiverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_receiverTousersInput
+    messages_messages_recieverTousers?: MessagesUncheckedCreateNestedManyWithoutUsers_messages_recieverTousersInput
   }
 
   export type UsersCreateOrConnectWithoutMessages_messages_senderTousersInput = {
@@ -3868,24 +3868,24 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     create: XOR<UsersCreateWithoutMessages_messages_senderTousersInput, UsersUncheckedCreateWithoutMessages_messages_senderTousersInput>
   }
 
-  export type UsersUpsertWithoutMessages_messages_receiverTousersInput = {
-    update: XOR<UsersUpdateWithoutMessages_messages_receiverTousersInput, UsersUncheckedUpdateWithoutMessages_messages_receiverTousersInput>
-    create: XOR<UsersCreateWithoutMessages_messages_receiverTousersInput, UsersUncheckedCreateWithoutMessages_messages_receiverTousersInput>
+  export type UsersUpsertWithoutMessages_messages_recieverTousersInput = {
+    update: XOR<UsersUpdateWithoutMessages_messages_recieverTousersInput, UsersUncheckedUpdateWithoutMessages_messages_recieverTousersInput>
+    create: XOR<UsersCreateWithoutMessages_messages_recieverTousersInput, UsersUncheckedCreateWithoutMessages_messages_recieverTousersInput>
     where?: UsersWhereInput
   }
 
-  export type UsersUpdateToOneWithWhereWithoutMessages_messages_receiverTousersInput = {
+  export type UsersUpdateToOneWithWhereWithoutMessages_messages_recieverTousersInput = {
     where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutMessages_messages_receiverTousersInput, UsersUncheckedUpdateWithoutMessages_messages_receiverTousersInput>
+    data: XOR<UsersUpdateWithoutMessages_messages_recieverTousersInput, UsersUncheckedUpdateWithoutMessages_messages_recieverTousersInput>
   }
 
-  export type UsersUpdateWithoutMessages_messages_receiverTousersInput = {
+  export type UsersUpdateWithoutMessages_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     messages_messages_senderTousers?: MessagesUpdateManyWithoutUsers_messages_senderTousersNestedInput
   }
 
-  export type UsersUncheckedUpdateWithoutMessages_messages_receiverTousersInput = {
+  export type UsersUncheckedUpdateWithoutMessages_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     messages_messages_senderTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersNestedInput
@@ -3905,16 +3905,16 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
   export type UsersUpdateWithoutMessages_messages_senderTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    messages_messages_receiverTousers?: MessagesUpdateManyWithoutUsers_messages_receiverTousersNestedInput
+    messages_messages_recieverTousers?: MessagesUpdateManyWithoutUsers_messages_recieverTousersNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutMessages_messages_senderTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    messages_messages_receiverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_receiverTousersNestedInput
+    messages_messages_recieverTousers?: MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersNestedInput
   }
 
-  export type MessagesCreateWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesCreateWithoutUsers_messages_recieverTousersInput = {
     id: string
     text: string
     created_at: bigint | number
@@ -3922,7 +3922,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     users_messages_senderTousers: UsersCreateNestedOneWithoutMessages_messages_senderTousersInput
   }
 
-  export type MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput = {
     id: string
     text: string
     created_at: bigint | number
@@ -3930,13 +3930,13 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     sender: string
   }
 
-  export type MessagesCreateOrConnectWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesCreateOrConnectWithoutUsers_messages_recieverTousersInput = {
     where: MessagesWhereUniqueInput
-    create: XOR<MessagesCreateWithoutUsers_messages_receiverTousersInput, MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>
+    create: XOR<MessagesCreateWithoutUsers_messages_recieverTousersInput, MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>
   }
 
-  export type MessagesCreateManyUsers_messages_receiverTousersInputEnvelope = {
-    data: Enumerable<MessagesCreateManyUsers_messages_receiverTousersInput>
+  export type MessagesCreateManyUsers_messages_recieverTousersInputEnvelope = {
+    data: Enumerable<MessagesCreateManyUsers_messages_recieverTousersInput>
     skipDuplicates?: boolean
   }
 
@@ -3945,7 +3945,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text: string
     created_at: bigint | number
     read: boolean
-    users_messages_receiverTousers: UsersCreateNestedOneWithoutMessages_messages_receiverTousersInput
+    users_messages_recieverTousers: UsersCreateNestedOneWithoutMessages_messages_recieverTousersInput
   }
 
   export type MessagesUncheckedCreateWithoutUsers_messages_senderTousersInput = {
@@ -3953,7 +3953,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text: string
     created_at: bigint | number
     read: boolean
-    receiver: string
+    reciever: string
   }
 
   export type MessagesCreateOrConnectWithoutUsers_messages_senderTousersInput = {
@@ -3966,20 +3966,20 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     skipDuplicates?: boolean
   }
 
-  export type MessagesUpsertWithWhereUniqueWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUpsertWithWhereUniqueWithoutUsers_messages_recieverTousersInput = {
     where: MessagesWhereUniqueInput
-    update: XOR<MessagesUpdateWithoutUsers_messages_receiverTousersInput, MessagesUncheckedUpdateWithoutUsers_messages_receiverTousersInput>
-    create: XOR<MessagesCreateWithoutUsers_messages_receiverTousersInput, MessagesUncheckedCreateWithoutUsers_messages_receiverTousersInput>
+    update: XOR<MessagesUpdateWithoutUsers_messages_recieverTousersInput, MessagesUncheckedUpdateWithoutUsers_messages_recieverTousersInput>
+    create: XOR<MessagesCreateWithoutUsers_messages_recieverTousersInput, MessagesUncheckedCreateWithoutUsers_messages_recieverTousersInput>
   }
 
-  export type MessagesUpdateWithWhereUniqueWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUpdateWithWhereUniqueWithoutUsers_messages_recieverTousersInput = {
     where: MessagesWhereUniqueInput
-    data: XOR<MessagesUpdateWithoutUsers_messages_receiverTousersInput, MessagesUncheckedUpdateWithoutUsers_messages_receiverTousersInput>
+    data: XOR<MessagesUpdateWithoutUsers_messages_recieverTousersInput, MessagesUncheckedUpdateWithoutUsers_messages_recieverTousersInput>
   }
 
-  export type MessagesUpdateManyWithWhereWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUpdateManyWithWhereWithoutUsers_messages_recieverTousersInput = {
     where: MessagesScalarWhereInput
-    data: XOR<MessagesUpdateManyMutationInput, MessagesUncheckedUpdateManyWithoutUsers_messages_receiverTousersInput>
+    data: XOR<MessagesUpdateManyMutationInput, MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersInput>
   }
 
   export type MessagesScalarWhereInput = {
@@ -3991,7 +3991,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     created_at?: BigIntFilter<"Messages"> | bigint | number
     read?: BoolFilter<"Messages"> | boolean
     sender?: StringFilter<"Messages"> | string
-    receiver?: StringFilter<"Messages"> | string
+    reciever?: StringFilter<"Messages"> | string
   }
 
   export type MessagesUpsertWithWhereUniqueWithoutUsers_messages_senderTousersInput = {
@@ -4010,7 +4010,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     data: XOR<MessagesUpdateManyMutationInput, MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersInput>
   }
 
-  export type MessagesCreateManyUsers_messages_receiverTousersInput = {
+  export type MessagesCreateManyUsers_messages_recieverTousersInput = {
     id: string
     text: string
     created_at: bigint | number
@@ -4023,10 +4023,10 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text: string
     created_at: bigint | number
     read: boolean
-    receiver: string
+    reciever: string
   }
 
-  export type MessagesUpdateWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUpdateWithoutUsers_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -4034,7 +4034,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     users_messages_senderTousers?: UsersUpdateOneRequiredWithoutMessages_messages_senderTousersNestedInput
   }
 
-  export type MessagesUncheckedUpdateWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUncheckedUpdateWithoutUsers_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -4042,7 +4042,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     sender?: StringFieldUpdateOperationsInput | string
   }
 
-  export type MessagesUncheckedUpdateManyWithoutUsers_messages_receiverTousersInput = {
+  export type MessagesUncheckedUpdateManyWithoutUsers_messages_recieverTousersInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -4055,7 +4055,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
-    users_messages_receiverTousers?: UsersUpdateOneRequiredWithoutMessages_messages_receiverTousersNestedInput
+    users_messages_recieverTousers?: UsersUpdateOneRequiredWithoutMessages_messages_recieverTousersNestedInput
   }
 
   export type MessagesUncheckedUpdateWithoutUsers_messages_senderTousersInput = {
@@ -4063,7 +4063,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
-    receiver?: StringFieldUpdateOperationsInput | string
+    reciever?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessagesUncheckedUpdateManyWithoutUsers_messages_senderTousersInput = {
@@ -4071,7 +4071,7 @@ export type InputJsonValue = null | string | number | boolean | InputJsonObject 
     text?: StringFieldUpdateOperationsInput | string
     created_at?: BigIntFieldUpdateOperationsInput | bigint | number
     read?: BoolFieldUpdateOperationsInput | boolean
-    receiver?: StringFieldUpdateOperationsInput | string
+    reciever?: StringFieldUpdateOperationsInput | string
   }
 
 

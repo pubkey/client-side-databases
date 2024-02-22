@@ -29,6 +29,7 @@ import {
   where,
 } from 'firebase/firestore';
 
+import async, { any } from 'async';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import {
   sortByNewestFirst,
@@ -41,6 +42,18 @@ export class Logic implements LogicInterface {
   private electric: Electric;
   constructor(private electricService: ElectricService) {
     this.init();
+  }
+  getMessagesForUserPair(userPair$: Observable<UserPair>): Observable<Message[]> {
+    throw new Error('Method not implemented.');
+  }
+  addMessage(message: AddMessage): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
+  addUser(user: User): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
+  hasData(): Promise<boolean> {
+    throw new Error('Method not implemented.');
   }
 
   async init() {
@@ -70,6 +83,12 @@ export class Logic implements LogicInterface {
       )
     );
   }
+
+  /**
+   *
+   * @param search$
+   * @returns
+   */
   getSearchResults(
     search$: Observable<Search>
   ): Observable<UserWithLastMessage[]> {
@@ -129,95 +148,79 @@ export class Logic implements LogicInterface {
       })
     );
   }
-  getUsersWithLastMessages(
-    ownUser$: Observable<User>
-  ): Observable<UserWithLastMessage[]> {
+
+  /**
+   *
+   * @param ownUser$
+   * @returns
+   */
+  getUsersWithLastMessages(ownUser$: Observable<User>): Observable<UserWithLastMessage[]> {
     const usersNotOwn$ = ownUser$.pipe(
-      switchMap((ownUser) => {
-        return collectionData(this.users).pipe(
-          map((users: User[]) => {
-            /**
-             * because firestore does not allow a $ne-query,
-             * we have to filter by hand
-             */
-            return users.filter((user) => user.id !== ownUser.id);
-          }) as any // TODO fix typings
-        );
-      }),
+      switchMap(ownUser =>
+        from(this.electric.db.users.findMany({
+          where: {
+            id: { not: ownUser.id }
+          }
+        })).pipe(
+          map(users => users.map(user => ({
+            id: user.id,
+            createdAt: Number(user.created_at),
+          })) as User[])
+        )
+      ),
       shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
     );
 
-    const usersWithLastMessage$: Observable<Observable<UserWithLastMessage>[]> =
-      combineLatest([ownUser$, usersNotOwn$]).pipe(
-        map(([ownUser, usersNotOwn]) => {
-          return (usersNotOwn as User[]).map((user) => {
-            const pair: UserPair = {
-              user1: ownUser,
-              user2: user,
-            };
-            const ret2 = this.getLastMessageOfUserPair(pair).pipe(
-              map((message) => {
-                return {
-                  user,
-                  message: message ? message : undefined,
-                };
-              }),
-              shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
-            );
-            return ret2;
-          });
-        })
-      );
+    const usersWithLastMessage$: Observable<Observable<UserWithLastMessage>[]> = combineLatest([ownUser$, usersNotOwn$]).pipe(
+      map(([ownUser, usersNotOwn]) => {
+        return usersNotOwn.map(user => {
+          const ret2 = this.getLastMessageOfUserPair(ownUser.id, user.id).pipe(
+            map(message => ({
+              user,
+              message: message ? message : undefined,
+            })),
+            shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
+          );
+          return ret2;
+        });
+      })
+    );
 
     const ret: Observable<UserWithLastMessage[]> = usersWithLastMessage$.pipe(
-      switchMap((usersWithLastMessage) => {
-        return combineLatest(usersWithLastMessage);
-      }),
-      map((usersWithLastMessage) => sortByNewestFirst(usersWithLastMessage))
+      switchMap(usersWithLastMessage => combineLatest(usersWithLastMessage)),
+      map(usersWithLastMessage => sortByNewestFirst(usersWithLastMessage))
     );
+
     return ret;
   }
-  private getLastMessageOfUserPair(
-    userPair: UserPair
-  ): Observable<Message | null> {
-    /**
-     * because firestore does not allow OR-queries,
-     * we have to merge both results and pick the newest message
-     */
-    return combineLatest([
-      collectionData(
-        query(
-          this.messages,
-          where('sender', '==', userPair.user1.id),
-          where('reciever', '==', userPair.user2.id),
-          orderBy('createdAt', 'desc'),
-          limit(1)
-        )
-      ),
-      collectionData(
-        query(
-          this.messages,
-          where('sender', '==', userPair.user2.id),
-          where('reciever', '==', userPair.user1.id),
-          orderBy('createdAt', 'desc'),
-          limit(1)
-        )
-      ),
-    ]).pipe(
-      /**
-       * return the newest of both messages
-       */
-      map(([[r1], [r2]]) => {
-        const messages = [r1, r2] as any;
-        const newest = sortMessagesByDateNewestFirst(
-          messages.filter((m: any) => !!m)
-        );
-        return newest[0];
-      }),
-      distinctUntilChanged((m1, m2) => m1.id === m2.id),
-      shareReplay(RXJS_SHARE_REPLAY_DEFAULTS)
+
+  private getLastMessageOfUserPair(userId1: string, userId2: string): Observable<Message | undefined> {
+    return from(this.electric.db.messages.findFirst({
+      where: {
+        OR: [
+          { sender: userId1, reciever: userId2 },
+          { sender: userId2, reciever: userId1 }
+        ]
+      },
+      orderBy: {
+        created_at: 'desc'
+      },
+      take: 1
+    })).pipe(
+      map(result => result ? {
+        ...result,
+        createdAt: Number(result.created_at), // Convert bigint to Number and rename the property
+        created_at: undefined // Optionally remove the original created_at property
+      } : undefined)
     );
   }
+}
+
+  /**
+   *
+   * @param userPair$
+   * @returns
+   */
   getMessagesForUserPair(
     userPair$: Observable<UserPair>
   ): Observable<Message[]> {
@@ -249,18 +252,33 @@ export class Logic implements LogicInterface {
       })
     );
   }
+
+  /**
+   *
+   * @param message
+   * @returns
+   */
   async addMessage(message: AddMessage): Promise<void> {
     const docRef = doc(this.messages, message.message.id);
     const insert = await setDoc(docRef, message.message);
     return insert;
   }
 
+  /**
+   *
+   * @param user
+   * @returns
+   */
   async addUser(user: User): Promise<any> {
     const docRef = doc(this.users, user.id);
     const insert = await setDoc(docRef, user);
     return insert;
   }
 
+  /**
+   *
+   * @returns
+   */
   async hasData(): Promise<boolean> {
     const docs = await getDocs(query(this.users, limit(1)));
     return docs.size > 0;

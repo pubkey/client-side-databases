@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS messages (
     sender VARCHAR NOT NULL,
     reciever VARCHAR NOT NULL,
     FOREIGN KEY (sender) REFERENCES users(id),
-    FOREIGN KEY (receiver) REFERENCES users(id)
+    FOREIGN KEY (reciever) REFERENCES users(id)
 );
 CREATE INDEX IF NOT EXISTS idx_messages_created_at ON messages(created_at);
 
