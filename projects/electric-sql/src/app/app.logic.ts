@@ -1,13 +1,5 @@
-import { collectionData } from 'rxfire/firestore';
 import { Observable, combineLatest, forkJoin, from } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  mergeMap,
-  shareReplay,
-  switchMap,
-} from 'rxjs/operators';
+import { filter, map, mergeMap, shareReplay, switchMap } from 'rxjs/operators';
 import { LogicInterface } from '../../../../src/app/logic-interface.interface';
 import {
   AddMessage,
@@ -17,8 +9,6 @@ import {
   UserPair,
   UserWithLastMessage,
 } from '../../../../src/shared/types';
-
-import { doc, getDoc, orderBy, query, where } from 'firebase/firestore';
 
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 import { sortByNewestFirst } from 'src/shared/util-server';
@@ -74,53 +64,53 @@ export class Logic implements LogicInterface {
     return search$.pipe(
       mergeMap((search) => {
         const regex = new RegExp(search.searchTerm, 'i');
-        return combineLatest([
-          collectionData(
-            query(
-              this.messages,
-              where('sender', '==', search.ownUser.id),
-              orderBy('createdAt', 'desc')
-            )
-          ),
-          collectionData(
-            query(
-              this.messages,
-              where('reciever', '==', search.ownUser.id),
-              orderBy('createdAt', 'desc')
-            )
-          ),
-        ]).pipe(
-          map(([ar1, ar2]: any) => {
-            const ret: Message[] = ar1.concat(ar2);
-            return ret;
+        return from(
+          Promise.all([
+            this.electric.db.messages.findMany({
+              where: {
+                sender: search.ownUser.id,
+              },
+              orderBy: {
+                created_at: 'desc',
+              },
+            }),
+            this.electric.db.messages.findMany({
+              where: {
+                reciever: search.ownUser.id,
+              },
+              orderBy: {
+                created_at: 'desc',
+              },
+            }),
+          ])
+        ).pipe(
+          map(([messagesFromUser, messagesToUser]) => {
+            // Combine and filter messages based on the search term
+            const combinedMessages = [...messagesFromUser, ...messagesToUser];
+            return combinedMessages.filter((message) =>
+              regex.test(message.text)
+            );
           }),
-          /**
-           * Firebase emits the result of the above collectionData() multiple times,
-           * even if nothing has changed. So we have to filter out
-           * the non-first emits to not trigger the search multiple times.
-           */
-          distinctUntilChanged((prev: any[], curr: any[]) => {
-            return prev.length === curr.length;
-          }),
-          map((messages) =>
-            messages.filter((message) => regex.test(message.text))
-          ),
-          switchMap((messages) => {
-            return Promise.all(
-              messages.map(async (messageDoc) => {
-                let otherUser = messageDoc.sender;
-                if (otherUser === search.ownUser.id) {
-                  otherUser = messageDoc.reciever;
-                }
-                const docRef = doc(this.users, otherUser);
-                const userDoc = await getDoc(docRef);
-                const user: User = userDoc.data() as any;
-                const ret: UserWithLastMessage = {
-                  user,
-                  message: messageDoc,
-                };
-                return ret;
-              })
+          switchMap((filteredMessages) => {
+            // Fetch user details for each message
+            return from(
+              Promise.all(
+                filteredMessages.map(async (message) => {
+                  const otherUserId =
+                    message.sender === search.ownUser.id
+                      ? message.reciever
+                      : message.sender;
+                  const user = await this.electric.db.users.findUnique({
+                    where: {
+                      id: otherUserId,
+                    },
+                  });
+                  return {
+                    user: convertTypeSqlToNosql<User>(user!),
+                    message: convertTypeSqlToNosql<Message>(message),
+                  };
+                })
+              )
             );
           })
         );
