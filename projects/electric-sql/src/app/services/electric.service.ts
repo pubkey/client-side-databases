@@ -4,8 +4,9 @@ import { ElectricDatabase, electrify } from 'electric-sql/wa-sqlite';
 import { authToken } from '../auth';
 
 import { uniqueTabId } from 'electric-sql/util';
-import { environment } from '../environments/environment';
+// import { environment } from '../../environments/environment';
 import { Electric, schema } from '../generated/client';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
