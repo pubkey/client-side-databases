@@ -12,5 +12,9 @@ import { Logic } from './app.logic';
 export class AppComponent {
   title = 'electric';
 
-  public logic: LogicInterface = new Logic();
+  public logic: LogicInterface;
+
+  constructor(logic: Logic) {
+    this.logic = logic;
+  }
 }

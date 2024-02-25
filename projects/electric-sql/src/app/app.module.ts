@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChatModule } from '../../../../src/app/chat.module';
 import { AppComponent } from './app.component';
 import { ElectricService } from './services/electric.service';
+import { Logic } from './app.logic';
 
 export function initializeApp(electricService: ElectricService) {
   return (): Promise<any> => {
@@ -29,6 +30,12 @@ export function initializeApp(electricService: ElectricService) {
       useFactory: initializeApp,
       deps: [ElectricService],
       multi: true,
+    },
+    {
+      provide: Logic,
+      useFactory: (electricService: ElectricService) =>
+        new Logic(electricService),
+      deps: [ElectricService], // Specifies that ElectricService is a dependency of Logic
     },
     { provide: APP_BASE_HREF, useValue: '/' },
     {
