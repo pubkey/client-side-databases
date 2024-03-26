@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { LIB_VERSION } from 'electric-sql/version';
 import { ElectricDatabase, electrify } from 'electric-sql/wa-sqlite';
-import { authToken } from '../auth';
 
 import { uniqueTabId } from 'electric-sql/util';
 // import { environment } from '../../environments/environment';
-import { Electric, schema } from '../generated/client';
 import { environment } from '../../environments/environment.prod';
+import { Electric, schema } from '../generated/client';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +15,6 @@ export class ElectricService {
 
   async initElectricDB() {
     const config = {
-      auth: {
-        token: authToken(),
-      },
       debug: environment.DEV,
       url: environment.ELECTRIC_SERVICE,
     };
