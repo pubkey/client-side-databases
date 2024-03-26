@@ -10,7 +10,7 @@
  */
 
 CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR PRIMARY KEY,
+    id VARCHAR PRIMARY KEY NOT NULL,
     created_at BIGINT NOT NULL
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 ALTER TABLE users ENABLE ELECTRIC;
 
 CREATE TABLE IF NOT EXISTS messages (
-    id UUID PRIMARY KEY,
+    id VARCHAR PRIMARY KEY NOT NULL,
     text TEXT NOT NULL,
     created_at BIGINT NOT NULL,
     read BOOLEAN NOT NULL,
@@ -28,6 +28,5 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (sender) REFERENCES users(id),
     FOREIGN KEY (reciever) REFERENCES users(id)
 );
-CREATE INDEX IF NOT EXISTS idx_messages_created_at ON messages(created_at);
 
 ALTER TABLE messages ENABLE ELECTRIC;
