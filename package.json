@@ -21,9 +21,9 @@
     "build:rxdb-lokijs": "ng build --configuration production --aot --no-progress --project rxdb-lokijs --stats-json",
     "build:rxdb-dexie": "ng build --configuration production --aot --no-progress --project rxdb-dexie --stats-json",
     "build:watermelondb": "ng build --configuration production --aot --no-progress --project watermelondb --stats-json",
+
     "generate-client": "npx electric-sql generate --client-path ./projects/electric-sql/src/app/generated/client --with-migrations \"npx pg-migrations apply --database {{ELECTRIC_PROXY}} --directory ./projects/electric-sql/db/migrations\"",
     "build:electric-sql": "npm run generate-client && npm run build:electric-sql:angular",
-
     "build:electric-sql:angular": "ng build --configuration production --aot --no-progress --project electric-sql --stats-json",
 
     "build:template": "ng build --configuration production --aot --no-progress --stats-json",
@@ -35,7 +35,7 @@
     "generate-feature-table": "ts-node --skip-project ./scripts/generate-feature-table.ts && node --experimental-modules ./scripts/feature-table-to-markdown.mjs",
     "ng": "ng",
     "dev:aws": "npm run client:aws",
-    "dev:electric-sql": "client:electric-sql",
+    "dev:electric-sql": "npm run client:electric-sql",
     "dev:firebase": "concurrently \"npm run server:firebase\" \"npm run client:firebase\"",
     "dev:pouchdb": "concurrently \"npm run server:pouchdb\" \"npm run client:pouchdb\"",
     "dev:rxdb-lokijs": "concurrently \"npm run server:rxdb\" \"npm run client:rxdb-lokijs\"",
