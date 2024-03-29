@@ -8,14 +8,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ChatModule } from '../../../../src/app/chat.module';
 import { AppComponent } from './app.component';
-import { ElectricService } from './services/electric.service';
 import { Logic } from './app.logic';
+import { ElectricService } from './services/electric.service';
 
 export function initializeApp(electricService: ElectricService) {
   return (): Promise<any> => {
     return Promise.all([
       electricService.initElectricDB(),
-      electricService.syncDb(),
+      // electricService.syncDb(),
     ]);
   };
 }

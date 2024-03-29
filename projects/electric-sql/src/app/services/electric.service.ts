@@ -4,7 +4,6 @@ import { ElectricDatabase, electrify } from 'electric-sql/wa-sqlite';
 
 import { uniqueTabId } from 'electric-sql/util';
 // import { environment } from '../../environments/environment';
-import { environment } from '../../environments/environment.prod';
 import { Electric, schema } from '../generated/client';
 
 @Injectable({
@@ -14,16 +13,16 @@ export class ElectricService {
   private electric: Electric;
 
   async initElectricDB() {
-    const config = {
-      debug: environment.DEV,
-      url: environment.ELECTRIC_SERVICE,
-    };
+    // const config = {
+    //   debug: environment.DEV,
+    //   url: environment.ELECTRIC_SERVICE,
+    // };
 
     const { tabId } = uniqueTabId();
     const scopedDbName = `basic-${LIB_VERSION}-${tabId}.db`;
 
-    const conn = await ElectricDatabase.init(scopedDbName);
-    this.electric = await electrify(conn, schema, config);
+    const conn = await ElectricDatabase.init(scopedDbName, '/assets/');
+    this.electric = await electrify(conn, schema);
   }
 
   getDb() {

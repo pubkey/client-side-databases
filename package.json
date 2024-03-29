@@ -4,6 +4,7 @@
   "scripts": {
     "postinstall": "npm-run-all postinstall:*",
     "postinstall:generate-data": "ts-node --skip-project ./scripts/generate-example-data.ts",
+    "postinstall:wa-sqlite": "cp ./node_modules/wa-sqlite/dist/wa-sqlite-async.* ./projects/electric-sql/src/assets/",
     "analyze": "npm-run-all analyze:*",
     "analyze:aws": "webpack-bundle-analyzer ./dist/aws/stats.json",
     "analyze:electric-sql": "webpack-bundle-analyzer ./dist/electric-sql/stats.json",

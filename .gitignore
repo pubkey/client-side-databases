@@ -12,6 +12,9 @@
 example-data.ts
 /metrics
 feature-table.json
+projects/electric-sql/src/app/generated
+projects/electric-sql/src/assets/*.wasm
+projects/electric-sql/src/assets/*.mjs
 
 # dependencies
 /node_modules
