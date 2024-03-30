@@ -23,9 +23,10 @@
     "build:rxdb-dexie": "ng build --configuration production --aot --no-progress --project rxdb-dexie --stats-json",
     "build:watermelondb": "ng build --configuration production --aot --no-progress --project watermelondb --stats-json",
 
+    "pregenerate-client": "docker info > /dev/null 2>&1 || (echo 'Docker is not running. Please start Docker and try again.' && exit 1)",
     "generate-client": "npx electric-sql generate --client-path ./projects/electric-sql/src/app/generated/client --with-migrations \"npx pg-migrations apply --database {{ELECTRIC_PROXY}} --directory ./projects/electric-sql/db/migrations\"",
-    "build:electric-sql": "npm run generate-client && npm run build:electric-sql:angular",
-    "build:electric-sql:angular": "ng build --configuration production --aot --no-progress --project electric-sql --stats-json",
+    "build:electric-sql": "npm run generate-client && ng build --configuration production --aot --no-progress --project electric-sql --stats-json",
+
 
     "build:template": "ng build --configuration production --aot --no-progress --stats-json",
     "lint": "ng lint",
