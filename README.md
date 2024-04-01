@@ -107,7 +107,7 @@ All sub-projects use the same port and so can **not be started in parallel**.
 ### Installation
 
 * You must have [installed Node.js](https://nodejs.org/en/download/)
-* Electric-sql requires you to have [docker](https://docs.docker.com/get-docker/) installed and running on your machine for the project to build.
+* Electric-sql requires you to have [Docker Compose v2](https://docs.docker.com/engine/install/) installed and running on your machine for the project to build.
 * Clone this project
 * In the root folder, run `npm install` to install the dependencies.
 * Start docker if you are going to build the Electric-SQL project.
