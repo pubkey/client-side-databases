@@ -40,6 +40,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 | Bundle size, plain JavaScript           | 1833kb | 952kb    | 791kb   | 1075kb     | 1067kb      | 955kb        |
 | Bundle size, minified+gzip              | 421kb  | 235kb    | 190kb   | 266kb      | 254kb       | 217kb        |
 
+
 ### Metrics Explanation
 
 - Page load time: How long does it take to download and parse the JavaScript bundle.
@@ -66,6 +67,7 @@ WatermelonDB and the RxDB-LokiJS project use the [LokiJS](https://github.com/tec
 - All data must fit into memory.
 - Data can be lost when the JavaScript process is killed ungracefully like when the browser crashes or the power of the PC is terminated.
 - There is no multi-tab-support with plain LokiJS. The data is not shared between multiple browser tabs of the same origin. RxDB handles that by adding [its own](https://rxdb.info/rx-storage-lokijs.html) multi tab handling via the [BroadcastChannel module](https://github.com/pubkey/broadcast-channel).
+
 
 ### Why is Firebase so slow on first render?
 
@@ -97,69 +99,70 @@ AWS Datastore does not save any metadata together with the documents. Instead on
 | Custom Backend           | No                 | No                                           | No      | **Yes**     | **Yes**    | **Yes**                                |
 | Custom Conflict Handling | **Yes**            | No                                           | **Yes** | **Yes**     | **Yes**    | No                                     |
 
+
 ## Starting the projects
 
 All sub-projects use the same port and so can **not be started in parallel**.
 
 ### Installation
 
-- You must have [installed Node.js](https://nodejs.org/en/download/)
-- Electric-sql requires you to have [docker](https://docs.docker.com/get-docker/) installed and running on your machine for the project to build.
-- Clone this project
-- In the root folder, run `npm install` to install the dependencies.
-- Start docker if you are going to build the Electric-SQL project.
-- In the root folder, run `npm run build` to build all projects.
+* You must have [installed Node.js](https://nodejs.org/en/download/)
+* Electric-sql requires you to have [docker](https://docs.docker.com/get-docker/) installed and running on your machine for the project to build.
+* Clone this project
+* In the root folder, run `npm install` to install the dependencies.
+* Start docker if you are going to build the Electric-SQL project.
+* In the root folder, run `npm run build` to build all projects.
 
 ### Firebase Firestore
 
-- Run `npm run start:firebase` to start the mock server and the production build frontend.
-- Or run `npm run dev:firebase` to start the mock server and the development frontend server.
+* Run `npm run start:firebase` to start the mock server and the production build frontend.
+* Or run `npm run dev:firebase` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### AWS Amplify & Datastore
 
 The official AWS mock does [not allow a live replication](https://github.com/aws-amplify/amplify-cli/issues/4155) at this point. So you first have to setup an amplify project in the `./projects/aws` folder by using [this tutorial](https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js/)
 
-- Run `npm run start:aws` to start the mock server and the production build frontend.
-- Or run `npm run dev:aws` to start the mock server and the development frontend server.
+* Run `npm run start:aws` to start the mock server and the production build frontend.
+* Or run `npm run dev:aws` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### PouchDB
 
-- Run `npm run start:pouchdb` to start the mock server and the production build frontend.
-- Or run `npm run dev:pouchdb` to start the mock server and the development frontend server.
+* Run `npm run start:pouchdb` to start the mock server and the production build frontend.
+* Or run `npm run dev:pouchdb` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### RxDB LokiJS
 
-- Run `npm run start:rxdb-lokijs` to start the mock server and the production build frontend.
-- Or run `npm run dev:rxdb-lokijs` to start the mock server and the development frontend server.
+* Run `npm run start:rxdb-lokijs` to start the mock server and the production build frontend.
+* Or run `npm run dev:rxdb-lokijs` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### RxDB Dexie.js
 
-- Run `npm run start:rxdb-dexie` to start the mock server and the production build frontend.
-- Or run `npm run dev:rxdb-dexie` to start the mock server and the development frontend server.
+* Run `npm run start:rxdb-dexie` to start the mock server and the production build frontend.
+* Or run `npm run dev:rxdb-dexie` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### WatermelonDB
 
-- Run `npm run start:watermelondb` to start the mock server and the production build frontend.
-- Or run `npm run dev:watermelondb` to start the mock server and the development frontend server.
+* Run `npm run start:watermelondb` to start the mock server and the production build frontend.
+* Or run `npm run dev:watermelondb` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ### Electric-SQL
 
-- Run `npm run start:electric-sql` to start the mock server and the production build frontend.
-- Or run `npm run dev:electric-sql` to start the mock server and the development frontend server.
+* Run `npm run start:electric-sql` to start the mock server and the production build frontend.
+* Or run `npm run dev:electric-sql` to start the mock server and the development frontend server.
 
-- Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
 ## TODOs
 
