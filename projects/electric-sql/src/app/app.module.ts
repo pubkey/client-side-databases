@@ -12,7 +12,7 @@ import { Logic } from './app.logic';
 import { ElectricService } from './services/electric.service';
 
 export function initializeApp(electricService: ElectricService) {
-  return (): Promise<any> => electricService.initElectricDB();
+  return () => electricService.initElectricDB();
 }
 
 @NgModule({
