@@ -22,10 +22,6 @@ import {
 export class Logic implements LogicInterface {
   private electric: Electric;
   constructor(private electricService: ElectricService) {
-    this.init();
-  }
-
-  async init() {
     this.electric = this.electricService.getDb();
   }
 
