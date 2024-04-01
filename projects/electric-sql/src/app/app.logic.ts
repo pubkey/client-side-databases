@@ -53,11 +53,6 @@ export class Logic implements LogicInterface {
     );
   }
 
-  /**
-   *
-   * @param search$
-   * @returns
-   */
   getSearchResults(
     search$: Observable<Search>
   ): Observable<UserWithLastMessage[]> {
@@ -118,11 +113,6 @@ export class Logic implements LogicInterface {
     );
   }
 
-  /**
-   *
-   * @param ownUser$
-   * @returns
-   */
   getUsersWithLastMessages(
     ownUser$: Observable<User>
   ): Observable<UserWithLastMessage[]> {
@@ -198,11 +188,6 @@ export class Logic implements LogicInterface {
     );
   }
 
-  /**
-   *
-   * @param userPair$
-   * @returns
-   */
   getMessagesForUserPair(
     userPair$: Observable<UserPair>
   ): Observable<Message[]> {
@@ -250,11 +235,6 @@ export class Logic implements LogicInterface {
     );
   }
 
-  /**
-   *
-   * @param message
-   * @returns
-   */
   async addMessage(message: AddMessage): Promise<void> {
     const convertedMessage = convertTypeNosqlToSql<Messages>(message.message);
     await this.electric.db.messages.create({
@@ -262,11 +242,6 @@ export class Logic implements LogicInterface {
     });
   }
 
-  /**
-   *
-   * @param user
-   * @returns
-   */
   async addUser(user: User): Promise<void> {
     const convertedUser = convertTypeNosqlToSql<Users>(user);
     await this.electric.db.users.create({
@@ -274,10 +249,6 @@ export class Logic implements LogicInterface {
     });
   }
 
-  /**
-   *
-   * @returns
-   */
   async hasData(): Promise<boolean> {
     const user = await this.electric.db.users.findFirst();
     return !!user;
