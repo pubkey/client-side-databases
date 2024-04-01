@@ -137,7 +137,7 @@
     "@angular-eslint/eslint-plugin-template": "17.2.1",
     "@angular-eslint/schematics": "17.2.1",
     "@angular-eslint/template-parser": "17.2.1",
-    "@databases/pg-migrations": "^5.0.2",
+    "@databases/pg-migrations": "^5.0.3",
     "@angular/cli": "17.2.0",
     "@angular/compiler-cli": "17.3.0",
     "@angular/language-service": "17.3.0",
