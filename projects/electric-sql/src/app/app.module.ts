@@ -12,12 +12,7 @@ import { Logic } from './app.logic';
 import { ElectricService } from './services/electric.service';
 
 export function initializeApp(electricService: ElectricService) {
-  return (): Promise<any> => {
-    return Promise.all([
-      electricService.initElectricDB(),
-      // electricService.syncDb(),
-    ]);
-  };
+  return (): Promise<any> => electricService.initElectricDB();
 }
 
 @NgModule({
@@ -35,7 +30,7 @@ export function initializeApp(electricService: ElectricService) {
       provide: Logic,
       useFactory: (electricService: ElectricService) =>
         new Logic(electricService),
-      deps: [ElectricService], // Specifies that ElectricService is a dependency of Logic
+      deps: [ElectricService],
     },
     { provide: APP_BASE_HREF, useValue: '/' },
     {
