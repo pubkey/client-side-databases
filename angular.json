@@ -688,6 +688,105 @@
           }
         }
       }
+    },
+    "electric-sql": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/electric-sql",
+      "sourceRoot": "projects/electric-sql/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/electric-sql",
+            "index": "projects/electric-sql/src/index.html",
+            "main": "projects/electric-sql/src/main.ts",
+            "polyfills": "projects/electric-sql/src/polyfills.ts",
+            "tsConfig": "projects/electric-sql/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/electric-sql/src/favicon.ico",
+              "projects/electric-sql/src/assets"
+            ],
+            "styles": [
+              "projects/electric-sql/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/electric-sql/src/environments/environment.ts",
+                  "with": "projects/electric-sql/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "electric-sql:build:production"
+            },
+            "development": {
+              "buildTarget": "electric-sql:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "electric-sql:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/electric-sql/**/*.ts",
+              "projects/electric-sql/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

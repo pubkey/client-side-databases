@@ -8,12 +8,14 @@ You can use it to compare metrics and learn about the differences. The chat app 
 </p>
 
 ## Implemented Databases:
-  - AWS Amplify Datastore
-  - Firebase Firestore
-  - [PouchDB](https://github.com/pouchdb/pouchdb) with IndexedDB adapter & CouchDB replication
-  - [RxDB LokiJS](https://rxdb.info/rx-storage-lokijs.html) with LokiJS Storage & GraphQL replication
-  - [RxDB Dexie.js](https://rxdb.info/rx-storage-dexie.html) with Dexie.js Storage & GraphQL replication
-  - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) with LokiJS adapter (no backend sync atm)
+
+- AWS Amplify Datastore
+- Firebase Firestore
+- [PouchDB](https://github.com/pouchdb/pouchdb) with IndexedDB adapter & CouchDB replication
+- [RxDB LokiJS](https://rxdb.info/rx-storage-lokijs.html) with LokiJS Storage & GraphQL replication
+- [RxDB Dexie.js](https://rxdb.info/rx-storage-dexie.html) with Dexie.js Storage & GraphQL replication
+- [WatermelonDB](https://github.com/Nozbe/WatermelonDB) with LokiJS adapter (no backend sync atm)
+- [Electric-SQL](https://github.com/electric-sql/electric) in "local-only-first" mode (without backend sync)
 
 ## Metrics
 
@@ -39,8 +41,8 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 | Bundle size, minified+gzip              | 421kb  | 235kb    | 190kb   | 266kb      | 254kb       | 217kb        |
 
 
-
 ### Metrics Explanation
+
 - Page load time: How long does it take to download and parse the JavaScript bundle.
 - First angular component render: How long does it take for the first angular component to be rendered.
 - First full render: How long does it take until all relevant data is displayed for the first time.
@@ -105,10 +107,11 @@ All sub-projects use the same port and so can **not be started in parallel**.
 ### Installation
 
 * You must have [installed Node.js](https://nodejs.org/en/download/)
+* Electric-sql requires you to have [Docker Compose v2](https://docs.docker.com/engine/install/) installed and running on your machine for the project to build.
 * Clone this project
 * In the root folder, run `npm install` to install the dependencies.
+* Start docker if you are going to build the Electric-SQL project.
 * In the root folder, run `npm run build` to build all projects.
-
 
 ### Firebase Firestore
 
@@ -147,11 +150,17 @@ The official AWS mock does [not allow a live replication](https://github.com/aws
 
 * Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
-
 ### WatermelonDB
 
 * Run `npm run start:watermelondb` to start the mock server and the production build frontend.
 * Or run `npm run dev:watermelondb` to start the mock server and the development frontend server.
+
+* Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
+
+### Electric-SQL
+
+* Run `npm run start:electric-sql` to start the mock server and the production build frontend.
+* Or run `npm run dev:electric-sql` to start the mock server and the development frontend server.
 
 * Open [http://localhost:3000/](http://localhost:3000/) to browse the frontend.
 
