@@ -10,27 +10,27 @@ import {
   combineLatest
 } from 'rxjs';
 import {
+  first,
   map,
   shareReplay,
-  first,
   tap
 } from 'rxjs/operators';
 
 import {
-  Message,
-  UserWithLastMessage,
-  User,
   AddMessage,
-  UserPair
+  Message,
+  User,
+  UserPair,
+  UserWithLastMessage
 } from '../../../shared/types';
 
+import { wait } from 'async-test-util';
+import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
+import { getExampleDataset } from 'src/shared/data-generator';
+import { addExampleData, logMetricMeasurement, now } from 'src/shared/util-browser';
 import {
   LogicInterface
 } from '../../logic-interface.interface';
-import { addExampleData, logMetricMeasurement, now } from 'src/shared/util-browser';
-import { getExampleDataset } from 'src/shared/data-generator';
-import { wait } from 'async-test-util';
-import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
 
 @Component({
   selector: 'app-chat',
@@ -231,6 +231,17 @@ export class ChatComponent implements OnInit {
       }
       const data = getExampleDataset();
       await Promise.all(
+        data.users.map(async (user) => {
+          try {
+            await this.logic.addUser(user);
+          } catch (err) {
+            console.error('addExampleData() could not add user ' + user.id);
+            console.dir(user);
+            throw err;
+          }
+        })
+      );
+      await Promise.all(
         data.messages.map(message => this.logic.addMessage({
           message: {
             id: now() + '',
@@ -244,17 +255,7 @@ export class ChatComponent implements OnInit {
           sender: message.sender
         }))
       );
-      await Promise.all(
-        data.users.map(async (user) => {
-          try {
-            await this.logic.addUser(user);
-          } catch (err) {
-            console.error('addExampleData() could not add user ' + user.id);
-            console.dir(user);
-            throw err;
-          }
-        })
-      );
+
       console.log('addExampleData() DONE');
     }
   }

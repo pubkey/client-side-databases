@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at BIGINT NOT NULL
 );
 
--- ⚡
--- Electrify the items table
 ALTER TABLE users ENABLE ELECTRIC;
 
 CREATE TABLE IF NOT EXISTS messages (
