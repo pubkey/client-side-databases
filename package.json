@@ -76,7 +76,7 @@
     "@angular/platform-browser-dynamic": "17.3.0",
     "@angular/router": "17.3.0",
     "@aws-amplify/cli": "12.10.1",
-    "@aws-amplify/datastore": "3.12.12",
+    "@aws-amplify/datastore": "5.0.53",
     "@aws-amplify/ui-angular": "5.0.12",
     "@babel/runtime": "7.23.9",
     "@nozbe/watermelondb": "0.24.0",
