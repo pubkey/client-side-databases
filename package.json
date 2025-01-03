@@ -147,7 +147,7 @@
     "pouchdb-debug": "7.2.1",
     "ts-node": "10.9.2",
     "typescript": "5.3.3",
-    "webpack-bundle-analyzer": "4.10.1"
+    "webpack-bundle-analyzer": "4.10.2"
   },
   "browser": {
     "fs": false
