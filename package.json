@@ -142,7 +142,7 @@
     "eslint-plugin-jsdoc": "48.1.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "gzip-size": "6.0.0",
-    "markdown-table": "3.0.3",
+    "markdown-table": "3.0.4",
     "npm-run-all2": "6.1.2",
     "pouchdb-debug": "7.2.1",
     "ts-node": "10.9.2",
