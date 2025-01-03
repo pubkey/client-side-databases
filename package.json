@@ -75,7 +75,7 @@
     "@angular/platform-browser": "17.3.12",
     "@angular/platform-browser-dynamic": "17.3.12",
     "@angular/router": "17.3.12",
-    "@aws-amplify/cli": "12.10.1",
+    "@aws-amplify/cli": "12.14.0",
     "@aws-amplify/datastore": "3.12.12",
     "@aws-amplify/ui-angular": "5.0.34",
     "@babel/runtime": "7.23.9",
