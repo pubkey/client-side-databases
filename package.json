@@ -81,7 +81,7 @@
     "@babel/runtime": "7.23.9",
     "@nozbe/watermelondb": "0.24.0",
     "@types/express": "4.17.21",
-    "@types/express-serve-static-core": "4.17.43",
+    "@types/express-serve-static-core": "4.19.6",
     "aws-amplify": "4.3.46",
     "aws-appsync": "4.1.10",
     "buffer": "6.0.3",
