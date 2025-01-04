@@ -131,7 +131,7 @@
     "@typescript-eslint/eslint-plugin": "7.0.2",
     "@typescript-eslint/eslint-plugin-tslint": "7.0.2",
     "@typescript-eslint/parser": "7.0.2",
-    "async-test-util": "2.4.0",
+    "async-test-util": "2.5.0",
     "@types/lokijs": "1.5.14",
     "@types/pouchdb": "6.4.2",
     "@types/pouchdb-find": "7.3.3",
