@@ -137,7 +137,7 @@
     "@types/pouchdb-find": "7.3.3",
     "@types/ws": "8.5.13",
     "concurrently": "8.2.2",
-    "eslint": "8.56.0",
+    "eslint": "8.57.1",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsdoc": "48.1.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
