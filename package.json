@@ -126,7 +126,7 @@
     "@angular/compiler-cli": "17.3.12",
     "@angular/language-service": "17.3.12",
     "@types/faker": "5.5.9",
-    "@types/jsonwebtoken": "9.0.9",
+    "@types/jsonwebtoken": "9.0.10",
     "@types/node": "20.17.12",
     "@typescript-eslint/eslint-plugin": "7.0.2",
     "@typescript-eslint/eslint-plugin-tslint": "7.0.2",
