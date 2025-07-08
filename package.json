@@ -94,7 +94,7 @@
     "firebase": "10.8.0",
     "firebase-tools": "13.3.0",
     "got": "11.8.6",
-    "graphql": "16.8.1",
+    "graphql": "16.11.0",
     "graphql-subscriptions": "2.0.0",
     "graphql-tag": "2.12.6",
     "horizon": "2.0.0",
