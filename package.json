@@ -138,7 +138,7 @@
     "@types/ws": "8.5.13",
     "concurrently": "8.2.2",
     "eslint": "8.57.1",
-    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsdoc": "48.11.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "gzip-size": "6.0.0",
