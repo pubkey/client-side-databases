@@ -110,7 +110,7 @@
     "rxfire": "6.1.0",
     "rxjs": "7.8.2",
     "subscriptions-transport-ws": "0.11.0",
-    "testcafe": "2.6.2",
+    "testcafe": "3.7.2",
     "tslib": "2.6.2",
     "typeface-roboto": "1.1.13",
     "zone.js": "0.15.1"
