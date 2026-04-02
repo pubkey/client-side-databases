@@ -99,7 +99,7 @@
     "graphql-tag": "2.12.6",
     "horizon": "2.0.0",
     "http-server": "14.1.1",
-    "jsonwebtoken": "9.0.2",
+    "jsonwebtoken": "9.0.3",
     "mock-amplify-auth": "2.2.0",
     "pouchdb-adapter-http": "9.0.0",
     "pouchdb-adapter-idb": "9.0.0",
