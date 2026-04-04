@@ -79,7 +79,7 @@
     "@aws-amplify/datastore": "3.12.12",
     "@aws-amplify/ui-angular": "5.3.2",
     "@babel/runtime": "7.29.2",
-    "@nozbe/watermelondb": "0.24.0",
+    "@nozbe/watermelondb": "0.28.0",
     "@types/express": "4.17.25",
     "@types/express-serve-static-core": "4.19.8",
     "aws-amplify": "4.3.46",
