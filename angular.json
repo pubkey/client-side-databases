@@ -688,6 +688,105 @@
           }
         }
       }
+    },
+    "pglite": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/pglite",
+      "sourceRoot": "projects/pglite/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/pglite",
+            "index": "projects/pglite/src/index.html",
+            "main": "projects/pglite/src/main.ts",
+            "polyfills": "projects/pglite/src/polyfills.ts",
+            "tsConfig": "projects/pglite/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/pglite/src/favicon.ico",
+              "projects/pglite/src/assets"
+            ],
+            "styles": [
+              "projects/pglite/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/pglite/src/environments/environment.ts",
+                  "with": "projects/pglite/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "pglite:build:production"
+            },
+            "development": {
+              "buildTarget": "pglite:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "pglite:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/pglite/**/*.ts",
+              "projects/pglite/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
