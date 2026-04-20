@@ -26,7 +26,6 @@ import {
     createDatabase
 } from './services/database.service';
 import {
-    doesMessageMapUserPair,
     sortByNewestFirst
 } from 'src/shared/util-server';
 import { RXJS_SHARE_REPLAY_DEFAULTS } from 'rxdb';
