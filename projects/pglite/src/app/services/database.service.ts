@@ -18,7 +18,25 @@ export interface DatabaseType {
 export async function createDatabase(): Promise<DatabaseType> {
     logTime('createDatabase()');
 
-    const db = new PGlite('idb://chat-db');
+    /**
+     * Pre-fetch WASM modules and the FS bundle via proper HTTP URLs so that
+     * WebAssembly.compileStreaming receives responses with the correct
+     * "application/wasm" MIME type.  Without this, webpack replaces
+     * import.meta.url with hardcoded file:// paths which Chrome serves with
+     * "application/octet-stream", causing a streaming-compile error that is
+     * caught internally but still logged to console.error (failing the tests).
+     */
+    const [pgliteWasmModule, initdbWasmModule, fsBundleBlob] = await Promise.all([
+        WebAssembly.compileStreaming(fetch('/pglite.wasm')),
+        WebAssembly.compileStreaming(fetch('/initdb.wasm')),
+        fetch('/pglite.data').then(r => r.blob())
+    ]);
+
+    const db = new PGlite('idb://chat-db', {
+        pgliteWasmModule,
+        initdbWasmModule,
+        fsBundle: fsBundleBlob
+    });
     await db.waitReady;
 
     logTime('create tables');
