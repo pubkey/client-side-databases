@@ -1,6 +1,7 @@
 import {
     Observable,
-    combineLatest
+    combineLatest,
+    of
 } from 'rxjs';
 import {
     switchMap,
@@ -8,7 +9,8 @@ import {
     shareReplay,
     startWith,
     mergeMap,
-    filter
+    filter,
+    tap
 } from 'rxjs/operators';
 import {
     LogicInterface
@@ -48,10 +50,20 @@ export class Logic implements LogicInterface {
                 );
             }),
             switchMap(async (userName) => {
-                const result = await this.db.db.query<User>(
+                let result = await this.db.db.query<User>(
                     `SELECT id, "createdAt" FROM users WHERE id = $1 LIMIT 1`,
                     [userName]
                 );
+                if (result.rows.length === 0) {
+                    await this.db.db.query(
+                        `INSERT INTO users (id, "createdAt") VALUES ($1, $2)`,
+                        [userName, new Date().getTime()]
+                    );
+                    result = await this.db.db.query<User>(
+                        `SELECT id, "createdAt" FROM users WHERE id = $1 LIMIT 1`,
+                        [userName]
+                    );
+                }
                 return result.rows[0] ?? null;
             }),
             filter((doc): doc is User => !!doc)
@@ -129,7 +141,7 @@ export class Logic implements LogicInterface {
                     );
                 });
             }),
-            switchMap(streams => combineLatest(streams)),
+            switchMap(streams => streams.length === 0 ? of([]) : combineLatest(streams)),
             map(usersWithLastMessage => sortByNewestFirst(usersWithLastMessage as any))
         );
 

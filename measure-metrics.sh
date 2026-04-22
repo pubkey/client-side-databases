@@ -10,5 +10,6 @@ npm run test:pouchdb
 npm run test:rxdb-lokijs
 npm run test:rxdb-dexie
 npm run test:watermelondb
+npm run test:pglite
 
 npm run aggregate-metrics
