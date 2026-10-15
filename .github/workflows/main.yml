@@ -128,3 +128,13 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: npm run test:watermelondb
+
+      - name: test:pglite
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:pglite
+
+      - name: test:sqlite-wasm
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:sqlite-wasm

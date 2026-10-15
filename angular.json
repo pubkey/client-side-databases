@@ -688,6 +688,215 @@
           }
         }
       }
+    },
+    "pglite": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/pglite",
+      "sourceRoot": "projects/pglite/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/pglite",
+            "index": "projects/pglite/src/index.html",
+            "main": "projects/pglite/src/main.ts",
+            "polyfills": "projects/pglite/src/polyfills.ts",
+            "tsConfig": "projects/pglite/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/pglite/src/favicon.ico",
+              "projects/pglite/src/assets",
+              {
+                "glob": "{pglite.wasm,pglite.data,initdb.wasm}",
+                "input": "node_modules/@electric-sql/pglite/dist",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/pglite/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/pglite/src/environments/environment.ts",
+                  "with": "projects/pglite/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "pglite:build:production"
+            },
+            "development": {
+              "buildTarget": "pglite:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "pglite:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/pglite/**/*.ts",
+              "projects/pglite/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "sqlite-wasm": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/sqlite-wasm",
+      "sourceRoot": "projects/sqlite-wasm/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sqlite-wasm",
+            "index": "projects/sqlite-wasm/src/index.html",
+            "main": "projects/sqlite-wasm/src/main.ts",
+            "polyfills": "projects/sqlite-wasm/src/polyfills.ts",
+            "tsConfig": "projects/sqlite-wasm/tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": [
+              "projects/sqlite-wasm/src/favicon.ico",
+              "projects/sqlite-wasm/src/assets",
+              {
+                "glob": "sqlite3.wasm",
+                "input": "node_modules/@sqlite.org/sqlite-wasm/dist",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/sqlite-wasm/src/styles.less"
+            ],
+            "scripts": [],
+            "webWorkerTsConfig": "projects/sqlite-wasm/tsconfig.worker.json"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/sqlite-wasm/src/environments/environment.ts",
+                  "with": "projects/sqlite-wasm/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "sqlite-wasm:build:production"
+            },
+            "development": {
+              "buildTarget": "sqlite-wasm:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "sqlite-wasm:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/sqlite-wasm/**/*.ts",
+              "projects/sqlite-wasm/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

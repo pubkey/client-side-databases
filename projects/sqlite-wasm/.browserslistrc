@@ -1,0 +1,7 @@
+# only build for chrome and firefox to make the performance results compareable
+last 1 Chrome version
+last 1 Firefox version
+# Safari 14 has no native private class fields, so babel transpiles them.
+# This is required because the testcafe proxy (hammerhead) breaks
+# the private class fields used by @sqlite.org/sqlite-wasm.
+Safari 14
