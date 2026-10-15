@@ -221,7 +221,7 @@ export class Logic implements LogicInterface {
 
     async hasData(): Promise<boolean> {
         await this.dbPromise;
-        const result = this.db.users.findOne().exec();
+        const result = await this.db.users.findOne().exec();
         return !!result;
     }
 }
