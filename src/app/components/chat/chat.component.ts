@@ -91,9 +91,12 @@ export class ChatComponent implements OnInit {
         throw new Error('storageSizeMetric() navigator.storage not here');
       }
       const estimate = await navigator.storage.estimate();
-      // looks like indexedDB: 22377552 bytes
-      const idbSize: number = (estimate as any).usageDetails.indexedDB;
-      const kilobytes = idbSize / 1024;
+      // looks like { indexedDB: 22377552, fileSystem: 99648 } in bytes
+      const usageDetails = (estimate as any).usageDetails;
+      const idbSize: number = usageDetails.indexedDB || 0;
+      // data stored in the Origin Private File System (OPFS), used by sqlite-wasm
+      const opfsSize: number = usageDetails.fileSystem || 0;
+      const kilobytes = (idbSize + opfsSize) / 1024;
       logMetricMeasurement(
         'STORAGE_SIZE',
         kilobytes,
