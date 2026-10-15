@@ -10,7 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/rxdb-lokijs/tsconfig.app.json"
+          "projects/rxdb-localstorage/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },

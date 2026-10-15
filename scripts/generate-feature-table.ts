@@ -65,7 +65,7 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: true,
         customBackend: false
     },
-    'rxdb-lokijs': {
+    'rxdb-localstorage': {
         offlineFirst: true,
         observableQueries: true,
         realtimeReplication: true,

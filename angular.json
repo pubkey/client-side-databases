@@ -491,7 +491,7 @@
         }
       }
     },
-    "rxdb-lokijs": {
+    "rxdb-localstorage": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -501,25 +501,25 @@
           "strict": true
         }
       },
-      "root": "projects/rxdb-lokijs",
-      "sourceRoot": "projects/rxdb-lokijs/src",
+      "root": "projects/rxdb-localstorage",
+      "sourceRoot": "projects/rxdb-localstorage/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rxdb-lokijs",
-            "index": "projects/rxdb-lokijs/src/index.html",
-            "main": "projects/rxdb-lokijs/src/main.ts",
-            "polyfills": "projects/rxdb-lokijs/src/polyfills.ts",
-            "tsConfig": "projects/rxdb-lokijs/tsconfig.app.json",
+            "outputPath": "dist/rxdb-localstorage",
+            "index": "projects/rxdb-localstorage/src/index.html",
+            "main": "projects/rxdb-localstorage/src/main.ts",
+            "polyfills": "projects/rxdb-localstorage/src/polyfills.ts",
+            "tsConfig": "projects/rxdb-localstorage/tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": [
-              "projects/rxdb-lokijs/src/favicon.ico",
-              "projects/rxdb-lokijs/src/assets"
+              "projects/rxdb-localstorage/src/favicon.ico",
+              "projects/rxdb-localstorage/src/assets"
             ],
             "styles": [
-              "projects/rxdb-lokijs/src/styles.less"
+              "projects/rxdb-localstorage/src/styles.less"
             ],
             "scripts": []
           },
@@ -539,8 +539,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/rxdb-lokijs/src/environments/environment.ts",
-                  "with": "projects/rxdb-lokijs/src/environments/environment.prod.ts"
+                  "replace": "projects/rxdb-localstorage/src/environments/environment.ts",
+                  "with": "projects/rxdb-localstorage/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -565,10 +565,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rxdb-lokijs:build:production"
+              "buildTarget": "rxdb-localstorage:build:production"
             },
             "development": {
-              "buildTarget": "rxdb-lokijs:build:development"
+              "buildTarget": "rxdb-localstorage:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -576,15 +576,15 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "rxdb-lokijs:build"
+            "buildTarget": "rxdb-localstorage:build"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/rxdb-lokijs/**/*.ts",
-              "projects/rxdb-lokijs/**/*.html"
+              "projects/rxdb-localstorage/**/*.ts",
+              "projects/rxdb-localstorage/**/*.html"
             ]
           }
         }

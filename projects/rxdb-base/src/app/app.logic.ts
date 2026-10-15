@@ -77,7 +77,8 @@ export class Logic implements LogicInterface {
                             $and: [
                                 {
                                     text: {
-                                        $regex: new RegExp(search.searchTerm, 'i')
+                                        $regex: search.searchTerm,
+                                        $options: 'i'
                                     }
                                 },
                                 {
