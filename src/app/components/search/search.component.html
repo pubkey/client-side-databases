@@ -5,7 +5,7 @@
         placeholder="Search.."
         class="search-input"
         #inputElementRef
-        (keyup)="onKeyUp()"
+        (input)="onInput()"
         (blur)="resetValue()"
         (focus)="focused = true"
     >

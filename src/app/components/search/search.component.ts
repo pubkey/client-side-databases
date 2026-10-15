@@ -45,7 +45,7 @@ export class SearchComponent {
     this.lastValue = '';
   }
 
-  onKeyUp() {
+  onInput() {
     const value = this.getValue();
     if (
       value === this.lastValue
