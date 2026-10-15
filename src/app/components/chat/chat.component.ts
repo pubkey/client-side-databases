@@ -96,7 +96,15 @@ export class ChatComponent implements OnInit {
       const idbSize: number = usageDetails.indexedDB || 0;
       // data stored in the Origin Private File System (OPFS), used by sqlite-wasm
       const opfsSize: number = usageDetails.fileSystem || 0;
-      const kilobytes = (idbSize + opfsSize) / 1024;
+      // localStorage is not part of the estimate, used by rxdb-localstorage
+      let localStorageSize = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i) as string;
+        const value = localStorage.getItem(key) as string;
+        // localStorage stores UTF-16 strings, so each character takes 2 bytes
+        localStorageSize += (key.length + value.length) * 2;
+      }
+      const kilobytes = (idbSize + opfsSize + localStorageSize) / 1024;
       logMetricMeasurement(
         'STORAGE_SIZE',
         kilobytes,
