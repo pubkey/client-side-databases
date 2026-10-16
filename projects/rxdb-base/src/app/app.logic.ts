@@ -77,7 +77,8 @@ export class Logic implements LogicInterface {
                             $and: [
                                 {
                                     text: {
-                                        $regex: new RegExp(search.searchTerm, 'i')
+                                        $regex: search.searchTerm,
+                                        $options: 'i'
                                     }
                                 },
                                 {
@@ -220,7 +221,7 @@ export class Logic implements LogicInterface {
 
     async hasData(): Promise<boolean> {
         await this.dbPromise;
-        const result = this.db.users.findOne().exec();
+        const result = await this.db.users.findOne().exec();
         return !!result;
     }
 }

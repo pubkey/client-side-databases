@@ -181,6 +181,7 @@ function startGraphQLReplication<RxDocType>(
 
     const replicationState: RxGraphQLReplicationState<RxDocType, any> = replicateGraphQL({
         collection,
+        replicationIdentifier: 'graphql-' + collection.name + '-' + GRAPHQL_HTTP_PATH,
         url: {
             http: GRAPHQL_HTTP_PATH,
             ws: GRAPHQL_WS_PATH

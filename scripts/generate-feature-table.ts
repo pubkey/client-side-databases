@@ -65,7 +65,7 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         customConflictHandling: true,
         customBackend: false
     },
-    'rxdb-lokijs': {
+    'rxdb-localstorage': {
         offlineFirst: true,
         observableQueries: true,
         realtimeReplication: true,
@@ -97,6 +97,28 @@ export const FEATURE_TABLE: { [projectKey: string]: FeatureTableRow } = {
         multiTabSupport: 'Partially, relies on online sync',
         customConflictHandling: false,
         customBackend: true
+    },
+    pglite: {
+        offlineFirst: true,
+        observableQueries: true,
+        realtimeReplication: 'Partially, read-path sync with ElectricSQL',
+        clientSideEncryption: false,
+        schema: true,
+        complexQueries: true,
+        multiTabSupport: 'Partially, requires PGliteWorker',
+        customConflictHandling: false,
+        customBackend: false
+    },
+    'sqlite-wasm': {
+        offlineFirst: true,
+        observableQueries: false,
+        realtimeReplication: false,
+        clientSideEncryption: false,
+        schema: true,
+        complexQueries: true,
+        multiTabSupport: false,
+        customConflictHandling: false,
+        customBackend: false
     }
 };
 

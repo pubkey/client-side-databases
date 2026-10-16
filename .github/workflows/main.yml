@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  test-aws:
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     steps:
@@ -51,6 +51,43 @@ jobs:
         with:
           run: npm run test:aws
 
+      - run: npm run measure:size
+      - run: npm run aggregate-metrics
+
+      - name: lint
+        run: npm run lint
+
+
+  test-firebase:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Reuse npm cache folder
+        uses: actions/cache@v5
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          # invalidate cache when any package-lock.json changes
+          key: ${{ runner.os }}-npm-test-x2-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-test-x2-
+
+      - name: install npm dependencies
+        run: |
+          rm -f node_modules/__ngcc_entry_points__.json
+          npm install --legacy-peer-deps --force
+        
+      - run: npm run build
+
       # https://firebase.google.com/docs/emulator-suite/install_and_configure#integrate_with_your_ci_system
       - name: Reuse firebase emulators cache folder
         uses: actions/cache@v5
@@ -71,12 +108,6 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: npm run test:firebase
-
-      - run: npm run measure:size
-      - run: npm run aggregate-metrics
-
-      - name: lint
-        run: npm run lint
 
 
   test-some:
@@ -114,10 +145,10 @@ jobs:
         with:
           run: npm run test:pouchdb
 
-      - name: test:rxdb-lokijs
+      - name: test:rxdb-localstorage
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: npm run test:rxdb-lokijs
+          run: npm run test:rxdb-localstorage
 
       - name: test:rxdb-dexie
         uses: GabrielBB/xvfb-action@v1
@@ -128,3 +159,13 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: npm run test:watermelondb
+
+      - name: test:pglite
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:pglite
+
+      - name: test:sqlite-wasm
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: npm run test:sqlite-wasm

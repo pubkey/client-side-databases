@@ -27,6 +27,8 @@ const metricsFolder = path.join(
 
 
 const METRIC_TITLES = {
+    BUNDLE_SIZE_PLAIN: 'Bundle size, plain JavaScript',
+    BUNDLE_SIZE_GZIP: 'Bundle size (js+wasm), minified+gzip',
     FIRST_ANGULAR_COMPONENT_RENDER: 'First angular component render',
     PAGE_LOAD_TIME: 'Page load time',
     FIRST_FULL_RENDER: 'First full render',
@@ -37,10 +39,27 @@ const METRIC_TITLES = {
     USER_PAIR_CHANGED_TO_MESSAGE_LIST: 'User change to message list change',
     SEARCH_RESULT_TIME: 'Message search query time',
     FIRST_FULL_RENDER_MANY_MESSAGES: 'First full render with many messages',
-    STORAGE_SIZE: 'Storage usage',
-    BUNDLE_SIZE_PLAIN: 'Bundle size, plain JavaScript',
-    BUNDLE_SIZE_GZIP: 'Bundle size, minified+gzip'
+    STORAGE_SIZE: 'Storage usage'
 };
+
+/**
+ * Order of the project columns in the table,
+ * projects that are not listed here are appended at the end.
+ */
+const PROJECT_ORDER = [
+    'rxdb-localstorage',
+    'rxdb-dexie',
+    'pouchdb',
+    'watermelondb',
+    'aws',
+    'firebase',
+    'pglite',
+    'sqlite-wasm'
+];
+function projectOrderIndex(projectKey) {
+    const index = PROJECT_ORDER.indexOf(projectKey);
+    return index === -1 ? PROJECT_ORDER.length : index;
+}
 
 if (!existsSync(metricsFolder)) {
     throw new Error('metrics folder does not exists. You first have to generate via the measure-metrics.sh');
@@ -58,6 +77,7 @@ async function run() {
     const projectMetrics = {};
     metricsFiles
         .filter(fileName => fileName.endsWith('.project.json'))
+        .sort((a, b) => projectOrderIndex(a.split('.')[0]) - projectOrderIndex(b.split('.')[0]))
         .forEach(fileName => {
             const projectKey = fileName.split('.')[0];
             const filePath = path.join(metricsFolder, fileName);
@@ -126,7 +146,11 @@ async function run() {
     });
 
 
-    const tableRows = Object.values(rowByMetric).slice();
+    // sort the rows in the order of METRIC_TITLES
+    const metricOrder = Object.keys(METRIC_TITLES);
+    const tableRows = Object.entries(rowByMetric)
+        .sort(([a], [b]) => metricOrder.indexOf(a) - metricOrder.indexOf(b))
+        .map(([_metricKey, row]) => row);
     tableRows.unshift(firstLine);
 
     const table = markdownTable(tableRows);

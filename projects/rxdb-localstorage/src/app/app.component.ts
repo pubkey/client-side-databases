@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getRxStorageLoki } from 'rxdb/plugins/storage-lokijs';
+import { getRxStorageLocalstorage } from 'rxdb/plugins/storage-localstorage';
 import {
   LogicInterface
 } from '../../../../src/app/logic-interface.interface';
@@ -12,19 +12,7 @@ import {
   createDatabase
 } from '../../../rxdb-base/src/app/services/database.service';
 
-declare const require: any;
-const LokiIncrementalIndexedDBAdapter = require('lokijs/src/incremental-indexeddb-adapter.js');
-// const LokiIndexedDBAdapter = require('lokijs/src/loki-indexed-adapter');
-const useAdapter = new LokiIncrementalIndexedDBAdapter();
-const baseStorage = getRxStorageLoki({
-  adapter: useAdapter,
-  autoloadCallback() {
-    console.log('autoload done!');
-  },
-  autosaveCallback() {
-    console.log('autosave done!');
-  }
-});
+const baseStorage = getRxStorageLocalstorage();
 
 @Component({
   selector: 'app-root',
@@ -33,7 +21,7 @@ const baseStorage = getRxStorageLoki({
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'rxdb-lokijs';
+  title = 'rxdb-localstorage';
 
   public logic: LogicInterface = new Logic(() => createDatabase(baseStorage));
 }
