@@ -91,7 +91,7 @@
     "@aws-amplify/datastore": "3.12.12",
     "@aws-amplify/ui-angular": "5.3.5",
     "@babel/runtime": "7.29.7",
-    "@electric-sql/pglite": "0.5.8",
+    "@electric-sql/pglite": "0.5.10",
     "@nozbe/watermelondb": "0.24.0",
     "@sqlite.org/sqlite-wasm": "3.53.4-build1",
     "@types/express": "4.17.25",
