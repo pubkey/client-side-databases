@@ -13,7 +13,7 @@ export type TableName = 'users' | 'messages';
 export class SQLiteDatabase {
     public readonly changes$ = new Subject<TableName>();
 
-    private worker = new Worker(new URL('./sqlite.worker', import.meta.url), { type: 'module' });
+    private worker = new Worker(new URL('./sqlite.worker', import.meta.url), { type: 'module', name: 'sqlite-worker' });
     private lastRequestId = 0;
     private pending = new Map<number, { resolve: (rows: any[]) => void; reject: (err: Error) => void }>();
 

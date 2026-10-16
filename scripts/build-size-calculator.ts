@@ -41,7 +41,8 @@ async function run() {
             // only use es2015 es files
             .filter(fileName => {
                 const start = fileName.split('.')[0];
-                return useFilesPrefix.includes(start);
+                // named WebWorker chunks like 'sqlite-worker' are also loaded on page load
+                return useFilesPrefix.includes(start) || start.endsWith('-worker');
             })
             // get the full path
             .map(fileName => path.join(
@@ -58,8 +59,9 @@ async function run() {
             .reduce((a, b) => a + b, 0);
 
         // the gzip size also includes the WebAssembly files (pglite, sqlite-wasm)
+        // and the data bundle that PGlite loads together with its wasm
         const wasmFiles: string[] = readdirSync(projectPath)
-            .filter(fileName => fileName.endsWith('.wasm'))
+            .filter(fileName => fileName.endsWith('.wasm') || fileName.endsWith('.data'))
             .map(fileName => path.join(
                 projectPath,
                 fileName
