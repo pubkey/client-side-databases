@@ -39,7 +39,7 @@ const METRIC_TITLES = {
     FIRST_FULL_RENDER_MANY_MESSAGES: 'First full render with many messages',
     STORAGE_SIZE: 'Storage usage',
     BUNDLE_SIZE_PLAIN: 'Bundle size, plain JavaScript',
-    BUNDLE_SIZE_GZIP: 'Bundle size, minified+gzip'
+    BUNDLE_SIZE_GZIP: 'Bundle size (js+wasm), minified+gzip'
 };
 
 if (!existsSync(metricsFolder)) {

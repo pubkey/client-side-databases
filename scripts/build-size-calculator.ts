@@ -57,7 +57,15 @@ async function run() {
             // calculate sum
             .reduce((a, b) => a + b, 0);
 
-        const sizeGzipInBytes = files
+        // the gzip size also includes the WebAssembly files (pglite, sqlite-wasm)
+        const wasmFiles: string[] = readdirSync(projectPath)
+            .filter(fileName => fileName.endsWith('.wasm'))
+            .map(fileName => path.join(
+                projectPath,
+                fileName
+            ));
+
+        const sizeGzipInBytes = files.concat(wasmFiles)
             // get gzip-size of each file
             .map(filePath => fileSync(filePath))
             // calculate sum

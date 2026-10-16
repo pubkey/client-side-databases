@@ -38,7 +38,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 | First full render with many messages    | 278ms  | 690ms    | 1577ms  | 980ms   | 393ms      | 185ms             | 213ms       | 166ms        |
 | Storage usage                           | 105kb  | 884kb    | 15226kb | 1569kb  | 1344kb     | 727kb             | 5286kb      | 1256kb       |
 | Bundle size, plain JavaScript           | 1954kb | 1083kb   | 1393kb  | 911kb   | 1088kb     | 988kb             | 748kb       | 1055kb       |
-| Bundle size, minified+gzip              | 455kb  | 272kb    | 317kb   | 223kb   | 280kb      | 247kb             | 170kb       | 245kb        |
+| Bundle size (js+wasm), minified+gzip    | 455kb  | 272kb    | 3904kb  | 223kb   | 280kb      | 247kb             | 574kb       | 245kb        |
 
 
 
@@ -55,7 +55,7 @@ You can reproduce these values by running `sh measure-metrics.sh` in the root fo
 - First full render with many messages: Time to first full render when many messages exist.
 - Storage usage: Size of the stored IndexedDB database after inserting the full test dataset.
 - Bundle size, plain JavaScript: The full JavaScript bundle size, without minification or gzip.
-- Bundle size, minified+gzip: The full JavaScript bundle size after minification and gzip compression.
+- Bundle size (js+wasm), minified+gzip: The full JavaScript bundle size plus the size of the WebAssembly files, after minification and gzip compression.
 
 ## Investigations
 
