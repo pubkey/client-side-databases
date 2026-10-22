@@ -149,7 +149,7 @@
     "@types/lokijs": "1.5.14",
     "@types/pouchdb": "6.4.2",
     "@types/pouchdb-find": "7.3.3",
-    "@types/ws": "8.18.1",
+    "@types/ws": "8.18.2",
     "concurrently": "8.2.2",
     "eslint": "8.57.1",
     "eslint-plugin-import": "2.32.0",
