@@ -93,7 +93,7 @@
     "@babel/runtime": "7.29.10",
     "@electric-sql/pglite": "0.5.11",
     "@nozbe/watermelondb": "0.24.0",
-    "@sqlite.org/sqlite-wasm": "3.53.4-build1",
+    "@sqlite.org/sqlite-wasm": "3.53.4-build2",
     "@types/express": "4.17.25",
     "@types/express-serve-static-core": "4.19.8",
     "aws-amplify": "4.3.46",
