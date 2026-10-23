@@ -88,7 +88,7 @@
     "@angular/platform-browser-dynamic": "17.3.12",
     "@angular/router": "17.3.12",
     "@aws-amplify/cli": "12.14.4",
-    "@aws-amplify/datastore": "3.12.12",
+    "@aws-amplify/datastore": "5.1.14",
     "@aws-amplify/ui-angular": "5.3.5",
     "@babel/runtime": "7.29.10",
     "@electric-sql/pglite": "0.5.11",
